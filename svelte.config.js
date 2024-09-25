@@ -8,7 +8,9 @@ const config = {
 		paths: {
 			base: '/libri_project'
 		},
-		adapter: adapter()
+		adapter: adapter({
+			fallback: '404.html'
+		})
 	}
 };
 
