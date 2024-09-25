@@ -2,4 +2,14 @@
 	import '../app.css';
 </script>
 
-<slot />
+<div id="app" class="bg-primary text-white">
+	<main>
+		<slot />
+	</main>
+</div>
+
+<style>
+	* {
+		justify-content: space;
+	}
+</style>
