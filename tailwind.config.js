@@ -4,8 +4,10 @@ export default {
 	theme: {
 		colors: {
 			font_color: '#ffffff',
-			secondary: '#25292e',
 			primary: '#212529',
+			secondary: '#25292e',
+			btn_primary: '#2e3338',
+			btn_hover: '#282e33',
 			dark: '#000000',
 			white: '#f3f6f9'
 		},
