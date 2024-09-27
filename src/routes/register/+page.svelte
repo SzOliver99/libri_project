@@ -50,12 +50,14 @@
 				/>
 			</div>
 
-			<button
-				type="submit"
-				class="w-1/3 bg-btn_primary py-2 rounded-lg hover:shadow-lg active:bg-btn_hover focus:shadow-lg duration-200"
-			>
-				Register
-			</button>
+			<div class="text-center">
+				<button
+					type="submit"
+					class="w-1/3 bg-btn_primary py-2 rounded-lg hover:shadow-lg active:bg-btn_hover focus:shadow-lg duration-200"
+				>
+					Register
+				</button>
+			</div>
 		</form>
 	</div>
 </div>
