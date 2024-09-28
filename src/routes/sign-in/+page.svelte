@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import google_img from '../../lib/images/google_img.png';
 	import facebook_img from '../../lib/images/facebook_img.png';
 	import twitter_img from '../../lib/images/twitter_img.png';
@@ -16,7 +17,7 @@
 	<div class="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
 		<div class="flex mb-6 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-700">Login</h1>
-			<a class="w-[60px] py-1 text-center bg-btn_primary rounded font-bold" href="/">&#8617;</a>
+			<a class="w-[60px] py-1 text-center bg-btn_primary rounded font-bold" href={base}>&#8617;</a>
 		</div>
 
 		<!-- Display error messages if any -->
