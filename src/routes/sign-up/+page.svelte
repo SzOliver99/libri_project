@@ -4,7 +4,10 @@
 
 <div class="min-h-screen flex items-center justify-center bg-primary">
 	<div class="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
-		<h1 class="text-2xl font-bold mb-6 text-gray-800">Register</h1>
+		<div class="flex mb-6 justify-between items-center">
+			<h1 class="text-2xl font-bold text-gray-800">Register</h1>
+			<a class="w-[60px] py-1 text-center bg-btn_primary rounded font-bold" href="/">&#8617;</a>
+		</div>
 
 		<!-- Display error messages if any -->
 		{#if form?.missing}

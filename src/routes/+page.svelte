@@ -2,8 +2,8 @@
 	let categories = [
 		{ name: 'Best Sellers', link: '#' },
 		{ name: 'New Arrivals', link: '#' },
-		{ name: 'Fiction', link: '#' },
-		{ name: 'Non-Fiction', link: '#' }
+		// { name: 'Fiction', link: '#' },
+		// { name: 'Non-Fiction', link: '#' }
 	];
 
 	let products = [
@@ -81,7 +81,7 @@
 	<header>
 		<div class="container mx-auto px-4 py-6 flex justify-between items-center">
 			<div class="text-2xl font-bold">My Book Store</div>
-			<nav class="space-x-4">
+			<nav class="space-x-3">
 				{#each categories as category}
 					<a href={category.link}>
 						{category.name}
@@ -89,7 +89,9 @@
 				{/each}
 			</nav>
 			<div>
-				<a href="asd">Sign In</a>
+				<a class="font-bold hover:underline" href="sign-in">Sign In</a>
+				/
+				<a class="underline hover:no-underline" href="sign-up">Sign Up</a>
 			</div>
 		</div>
 	</header>

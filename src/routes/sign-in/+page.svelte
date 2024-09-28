@@ -14,7 +14,10 @@
 
 <div class="min-h-screen bg-primary flex items-center justify-center">
 	<div class="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
-		<h1 class="text-2xl font-bold mb-6 text-gray-700">Login</h1>
+		<div class="flex mb-6 justify-between items-center">
+			<h1 class="text-2xl font-bold text-gray-700">Login</h1>
+			<a class="w-[60px] py-1 text-center bg-btn_primary rounded font-bold" href="/">&#8617;</a>
+		</div>
 
 		<!-- Display error messages if any -->
 		{#if form?.missing}
