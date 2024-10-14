@@ -20,19 +20,7 @@
 		{/if}
 
 		<!-- Registration form -->
-		<form>
-			<div class="mb-4">
-				<label for="name" class="block text-gray-700">Name</label>
-				<input
-					name="name"
-					id="name"
-					type="text"
-					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
-					value={form?.name ?? ''}
-					autocomplete="off"
-				/>
-			</div>
-
+		<form method="POST" action="/api/sign-up">
 			<div class="mb-4">
 				<label for="email" class="block text-gray-700">Email</label>
 				<input
@@ -41,6 +29,18 @@
 					type="email"
 					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
 					value={form?.email ?? ''}
+					autocomplete="off"
+				/>
+			</div>
+
+			<div class="mb-4">
+				<label for="username" class="block text-gray-700">Username</label>
+				<input
+					name="username"
+					id="username"
+					type="text"
+					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
+					value={form?.username ?? ''}
 					autocomplete="off"
 				/>
 			</div>
