@@ -1,6 +1,5 @@
 <script>
 	import { base } from '$app/paths';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	let token = $page.url.searchParams.get('token');
