@@ -4,13 +4,14 @@
 	import facebook_img from '$lib/images/facebook_img.png';
 	import twitter_img from '$lib/images/twitter_img.png';
 
-	export let form;
-
 	let different_methods = [
 		{ name: 'Google', img: google_img, method: 'google', disabled: false },
 		{ name: 'Facebook', img: facebook_img, method: 'facebook', disabled: true },
 		{ name: 'Twitter', img: twitter_img, method: 'twitter', disabled: true }
 	];
+
+	export let form;
+	async function signInWithGoogle() {}
 </script>
 
 <div class="min-h-screen bg-primary-500 flex items-center justify-center">
@@ -20,25 +21,23 @@
 			<a class="w-[60px] py-1 text-center bg-btn_primary rounded font-bold" href={base}>&#8617;</a>
 		</div>
 
-		<!-- Display error messages if any -->
-		{#if form?.missing}
-			<p class="text-red-500 mb-4">The email field is required</p>
-		{/if}
-		{#if form?.incorrect}
-			<p class="text-red-500 mb-4">Invalid credentials!</p>
+		<!-- Display error messages -->
+		{#if form?.error}
+			<p class="text-red-500 mb-4">{form?.error}</p>
 		{/if}
 
 		<!-- Login form -->
-		<form>
+		<form method="POST" action="/api/sign-in">
 			<div class="mb-4">
-				<label for="email" class="block text-white">Email</label>
+				<label for="username" class="block text-white">Username</label>
 				<input
-					name="email"
-					id="email"
-					type="email"
+					name="username"
+					id="username"
+					type="text"
 					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
-					value={form?.email ?? ''}
+					value={form?.username ?? ''}
 					autocomplete="off"
+					required
 				/>
 			</div>
 
@@ -49,6 +48,8 @@
 					id="password"
 					type="password"
 					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
+					value={form?.password ?? ''}
+					required
 				/>
 			</div>
 
