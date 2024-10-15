@@ -54,7 +54,7 @@
 			</div>
 
 			<div class="text-center mt-6 mb-2">
-				<a href="#" class="text-white">Forgot Password?</a>
+				<a href="{base}/forgot-password" class="text-white">Forgot Password?</a>
 			</div>
 
 			<div class="text-center">
