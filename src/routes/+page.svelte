@@ -1,7 +1,7 @@
 <script>
 	let categories = [
 		{ name: 'Best Sellers', link: '#' },
-		{ name: 'New Arrivals', link: '#' },
+		{ name: 'New Arrivals', link: '#' }
 		// { name: 'Fiction', link: '#' },
 		// { name: 'Non-Fiction', link: '#' }
 	];
@@ -76,7 +76,7 @@
 	}
 </script>
 
-<div class="w-[65%] m-auto bg-secondary shadow-md">
+<div class="w-[65%] m-auto bg-secondary-500 shadow-md">
 	<!-- Header -->
 	<header>
 		<div class="container mx-auto px-4 py-6 flex justify-between items-center">
