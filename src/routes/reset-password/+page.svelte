@@ -4,14 +4,6 @@
 	import { page } from '$app/stores';
 
 	let token = $page.url.searchParams.get('token');
-	async function handleSubmit() {
-		if (!token) {
-			console.error('No token provided in URL');
-			// You might want to handle this case, perhaps by redirecting the user
-			goto(`${base}/forgot-password`);
-			return;
-		}
-	}
 </script>
 
 <div class="min-h-screen bg-primary-500 flex items-center justify-center">
