@@ -4,11 +4,12 @@
 	export let form;
 </script>
 
-<div class="min-h-screen flex items-center justify-center bg-primary">
-	<div class="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
+<section class="flex items-center justify-center sm:mt-8">
+	<div
+		class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all"
+	>
 		<div class="flex mb-6 justify-between items-center">
-			<h1 class="text-2xl font-bold text-gray-800">Register</h1>
-			<a class="w-[60px] py-1 text-center bg-btn_primary rounded font-bold" href={base}>&#8617;</a>
+			<h1 class="text-2xl font-bold text-gray-700">Register</h1>
 		</div>
 
 		<!-- Display error messages if any -->
@@ -27,7 +28,7 @@
 					name="email"
 					id="email"
 					type="email"
-					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
+					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
 					value={form?.email ?? ''}
 					autocomplete="off"
 				/>
@@ -39,7 +40,7 @@
 					name="username"
 					id="username"
 					type="text"
-					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
+					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
 					value={form?.username ?? ''}
 					autocomplete="off"
 				/>
@@ -51,18 +52,18 @@
 					name="password"
 					id="password"
 					type="password"
-					class="w-full bg-btn_primary px-4 py-2 rounded-lg focus:outline-none focus:shadow-lg"
+					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
 				/>
 			</div>
 
 			<div class="text-center">
 				<button
 					type="submit"
-					class="w-1/3 bg-btn_primary py-2 rounded-lg hover:shadow-lg active:bg-btn_hover focus:shadow-lg duration-200"
+					class="bg-primary-800 text-white px-8 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
 				>
-					Register
+					Sign Up
 				</button>
 			</div>
 		</form>
 	</div>
-</div>
+</section>
