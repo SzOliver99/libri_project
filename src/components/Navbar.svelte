@@ -5,10 +5,10 @@
 	import { BookOpen, HouseIcon, Info, ShoppingCart, UserIcon } from 'lucide-svelte';
 
 	const navLinks = [
-		{ href: `${base}/`, title: 'Kezdőlap', icon: HouseIcon },
-		{ href: `${base}/products`, title: 'Könyvek', icon: BookOpen },
-		{ href: `${base}/about-us`, title: 'Rólunk', icon: Info },
-		{ href: `${base}/cart`, title: 'Kosár', icon: ShoppingCart }
+		{ href: `${base}/`, title: 'Homepage', icon: HouseIcon },
+		{ href: `${base}/products`, title: 'Books', icon: BookOpen },
+		{ href: `${base}/about-us`, title: 'About Us', icon: Info },
+		{ href: `${base}/cart`, title: 'Cart', icon: ShoppingCart }
 	];
 </script>
 
