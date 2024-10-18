@@ -1,49 +1,4 @@
 <script>
-	const products = [
-		{
-			id: 1,
-			title: 'Book Title 1',
-			image: 'https://via.placeholder.com/150',
-			price: '$19.99'
-		},
-		{
-			id: 1,
-			title: 'Book Title 1',
-			image: 'https://via.placeholder.com/150',
-			price: '$19.99'
-		},
-		{
-			id: 1,
-			title: 'Book Title 1',
-			image: 'https://via.placeholder.com/150',
-			price: '$19.99'
-		},
-		{
-			id: 1,
-			title: 'Book Title 1',
-			image: 'https://via.placeholder.com/150',
-			price: '$19.99'
-		},
-		{
-			id: 1,
-			title: 'Book Title 1',
-			image: 'https://via.placeholder.com/150',
-			price: '$19.99'
-		},
-		{
-			id: 1,
-			title: 'Book Title 1',
-			image: 'https://via.placeholder.com/150',
-			price: '$19.99'
-		},
-		{
-			id: 2,
-			title: 'Book Title 2',
-			image: 'https://via.placeholder.com/150',
-			price: '$15.99'
-		}
-	];
-
 	// let currentIndex = 0;
 	// let slides = [
 	// 	{
