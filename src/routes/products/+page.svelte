@@ -13,10 +13,9 @@
 	onMount(async () => {
 		products = await fetch(`/api/books`).then((res) => res.json());
 	});
-	console.log(products);
 </script>
 
-<section class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+<section class="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 	{#each products as product}
 		<div
 			class="group relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all"
@@ -32,16 +31,16 @@
 				</div>
 				<div class="mt-4 mb-2 break-word overflow-hidden">
 					<h3 class="text-slate-900 font-bold text-lg">{product.title}</h3>
-					<p class="text-sm text-slate-500 mb-1">
+					<!-- <p class="text-sm text-slate-500 mb-1">
 						asdasdasdasdasdaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaa
-					</p>
+					</p> -->
 					<p class="text-sm text-slate-700">{product.author}</p>
 				</div>
 			</a>
 			<div class="flex justify-between items-center">
 				<p class="font-bold text-slate-900 text-xl">{product.price} Ft</p>
 				<form on:submit={handleSubmit}>
-					<input type="hidden" value={product.id} title="productId" />
+					<input type="hidden" value={product.id} name="productId" />
 					<button
 						type="submit"
 						class="flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
