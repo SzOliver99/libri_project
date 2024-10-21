@@ -21,7 +21,7 @@
 		{/if}
 
 		<!-- Registration form -->
-		<form method="POST" action="/api/sign-up">
+		<form method="POST" action="/api/user/sign-up">
 			<div class="mb-4">
 				<label for="email" class="block text-gray-700">Email</label>
 				<input

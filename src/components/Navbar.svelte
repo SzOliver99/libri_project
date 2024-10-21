@@ -3,13 +3,28 @@
 	import { base } from '$app/paths';
 	import { BookOpen, HouseIcon, Info, ShoppingCart, UserIcon } from 'lucide-svelte';
 	import NavMarker from './NavMarker.svelte';
+	import { onMount } from 'svelte';
 
 	const navLinks = [
-		{ href: `${base}/`, title: 'Homepage', icon: HouseIcon },
+		{ href: `${base}/`, title: 'Home', icon: HouseIcon },
 		{ href: `${base}/products`, title: 'Books', icon: BookOpen },
 		{ href: `${base}/about-us`, title: 'About Us', icon: Info },
-		{ href: `${base}/cart`, title: 'Cart', icon: ShoppingCart }
+		{ href: `${base}/profile`, title: 'Profile', icon: UserIcon }
 	];
+
+	const handleOpenUserMenu = () => {
+		console.log('open user menu');
+	};
+
+	const handleSignOut = () => {
+		localStorage.removeItem('AuthorizationToken');
+		window.location.href = `${base}`;
+	};
+
+	let loggedIn;
+	onMount(async () => {
+		loggedIn = localStorage.getItem('AuthorizationToken') ? true : false;
+	});
 
 	let navContainer;
 </script>
@@ -17,48 +32,99 @@
 <nav class="w-full text-slate-900 shadow">
 	<div class="max-w-5xl justify-center items-center gap-4 p-3 mx-auto hidden md:flex">
 		{#each navLinks as link}
-			<a
-				href={link.href}
-				class="flex px-3 py-2 rounded-lg hover:text-primary-700 duration-300 transition-all {$page
-					.url.pathname === link.href
-					? 'text-primary-700'
-					: 'text-primary-900'}"
-			>
-				<svelte:component this={link.icon} class="mx-auto md:me-2" stroke-width={1.5} />
-				<p>{link.title}</p>
-			</a>
+			{#if link.title !== 'Profile'}
+				<a
+					href={link.href}
+					class="flex px-3 py-2 rounded-lg hover:text-primary-700 duration-300 transition-all {$page
+						.url.pathname === link.href
+						? 'text-primary-700'
+						: 'text-primary-900'}"
+				>
+					<svelte:component this={link.icon} class="mx-auto md:me-2" stroke-width={1.5} />
+					<p>{link.title}</p>
+				</a>
+			{/if}
 		{/each}
 		<div class="ml-0 lg:ml-16">
 			<div class="flex items-center duration-300 transition-all">
-				<UserIcon stroke-width={1.5} class="mx-auto md:me-2" />
-				<p>
-					<a
-						href={`${base}/sign-in`}
-						class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-						`${base}/sign-in`
-							? 'text-primary-700'
-							: 'text-slate-900'}">Login</a
-					>
-					/
-					<a
-						href={`${base}/sign-up`}
-						class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-						`${base}/sign-up`
-							? 'text-primary-700'
-							: 'text-slate-900'}">Register</a
-					>
-				</p>
+				{#if loggedIn === true}
+					<button on:click={handleOpenUserMenu} class="flex items-center">
+						<UserIcon stroke-width={1.5} class="md:me-2" />
+						<p
+							class="flex py-2 text-slate-900 duration-300 transition-all {$page.url.pathname ===
+							`${base}`
+								? 'text-primary-700'
+								: 'text-slate-900'}"
+						>
+							Profile
+						</p>
+					</button>
+					<!-- <p>
+						<button
+							on:click={handleSignOut}
+							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
+							`${base}`
+								? 'text-primary-700'
+								: 'text-slate-900'}">Sign Out</button
+						>
+					</p> -->
+				{:else}
+					<p>
+						<a
+							href={`${base}/sign-in`}
+							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
+							`${base}/sign-in`
+								? 'text-primary-700'
+								: 'text-slate-900'}">Login</a
+						>
+						/
+						<a
+							href={`${base}/sign-up`}
+							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
+							`${base}/sign-up`
+								? 'text-primary-700'
+								: 'text-slate-900'}">Register</a
+						>
+					</p>
+				{/if}
 			</div>
 		</div>
 	</div>
-	<div class="md:hidden flex justify-end">
-		<a
-			href={`${base}/sign-in`}
-			class="flex px-3 py-3 text-slate-900 font-bold duration-300 transition-all"
-		>
-			<UserIcon stroke-width={1.5} />
-			<p>Login / Register</p>
-		</a>
+	<div class="md:hidden flex {loggedIn ? 'justify-between' : 'justify-end'} items-center">
+		{#if loggedIn === true}
+			<button on:click={handleOpenUserMenu} class="flex items-center mx-2">
+				<UserIcon stroke-width={1.5} class="me-2" />
+				<p class="flex py-2 text-slate-900 font-bold duration-300 transition-all">Profile</p>
+			</button>
+			<button
+				on:click={handleSignOut}
+				class="flex px-3 py-3 text-slate-900 font-bold duration-300 transition-all"
+			>
+				<p>Sign Out</p>
+			</button>
+		{:else}
+			<a
+				href={`${base}/sign-in`}
+				class="flex px-3 py-3 text-slate-900 font-bold duration-300 transition-all"
+			>
+				<UserIcon stroke-width={1.5} />
+				<a
+					href={`${base}/sign-in`}
+					class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
+					`${base}/sign-in`
+						? 'text-primary-700'
+						: 'text-slate-900'}">Login</a
+				>
+				/
+				<a
+					href={`${base}/sign-up`}
+					class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
+					`${base}/sign-up`
+						? 'text-primary-700'
+						: 'text-slate-900'}">Register</a
+				>
+			</a>
+		{/if}
 	</div>
 	<div
 		bind:this={navContainer}

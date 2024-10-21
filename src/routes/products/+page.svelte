@@ -2,16 +2,87 @@
 	import { base } from '$app/paths';
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
+	import { itemCount, cartItems } from '$lib/store';
+
+	const getUserId = async () => {
+		try {
+			const token = localStorage.getItem('AuthorizationToken');
+			const user = await fetch(`/api/user/protected`, {
+				headers: {
+					Authorization: `${token}`
+				}
+			}).then((res) => res.json());
+			return user.id;
+		} catch {
+			return null;
+		}
+	};
+
+	const createCart = async () => {
+		await fetch(`/api/cart/${await getUserId()}`, {
+			method: 'POST'
+		});
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const formData = new FormData(e.currentTarget);
-		console.log(formData.get('productId'));
+		let userId = await getUserId();
+
+		if (userId) {
+			const formData = new FormData(e.currentTarget);
+			let response = await fetch(`/api/cart/${userId}/book/${formData.get('productId')}`, {
+				method: 'POST'
+			});
+
+			if (response.ok) {
+				// Increment the cart count
+				$itemCount += 1;
+				// Refresh the cart items
+				await refreshCartItems();
+			}
+		} else {
+			console.error('Please login to add to cart');
+		}
+	};
+
+	const refreshCartItems = async () => {
+		const userId = await getUserId();
+		try {
+			const res = await fetch(`/api/cart/${userId}`);
+			if (res.ok) {
+				const data = await res.json();
+				// Update the cartItems in the CartButton component
+				// We should use a store to communicate with the CartButton component
+				$cartItems = data.books.map((book) => ({
+					id: book.id,
+					title: book.title,
+					price: book.price,
+					quantity: book.quantity || 1
+				}));
+				// Update the itemCount as well
+				$itemCount = data.books.reduce((total, book) => total + (book.quantity || 1), 0);
+			}
+		} catch (error) {
+			console.error('Error refreshing cart items:', error);
+		}
 	};
 
 	let products = [];
 	onMount(async () => {
-		products = await fetch(`/api/books`).then((res) => res.json());
+		let userId = await getUserId();
+
+		if (userId) {
+			// Check if cart exists, if not create it
+			let cartResponse = await fetch(`/api/cart/${userId}`);
+
+			if (!cartResponse.ok) {
+				await createCart();
+			} else {
+				// If cart exists, get the current count
+				await refreshCartItems();
+			}
+		}
+		products = await fetch(`/api/books/`).then((res) => res.json());
 	});
 </script>
 

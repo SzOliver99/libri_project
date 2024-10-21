@@ -3,6 +3,7 @@
 	import google_img from '$lib/images/google_img.png';
 	import facebook_img from '$lib/images/facebook_img.png';
 	import twitter_img from '$lib/images/twitter_img.png';
+	import { redirect } from '@sveltejs/kit';
 
 	let different_methods = [
 		{ name: 'Google', img: google_img, method: 'google', disabled: false },
@@ -11,6 +12,30 @@
 	];
 
 	export let form;
+
+	const handleSubmit = async (e) => {
+		const formData = new FormData(e.currentTarget);
+		const { username, password } = Object.fromEntries(formData.entries());
+		const res = await fetch(`/api/user/sign-in`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ username, password })
+		}).then((res) => res.json());
+
+		localStorage.setItem('AuthorizationToken', `${res.token}`, {
+			httpOnly: true,
+			path: '/',
+			secure: true,
+			sameSite: 'strict',
+			maxAge: 60 * 60 // 1 hour
+		});
+		if (res.token) {
+			window.location.href = `${base}/`;
+		}
+	};
+
 	async function signInWithGoogle() {}
 </script>
 
@@ -28,7 +53,7 @@
 		{/if}
 
 		<!-- Login form -->
-		<form method="POST" action="/api/sign-in">
+		<form on:submit|preventDefault={handleSubmit}>
 			<div class="mb-4">
 				<label for="username">Username</label>
 				<input
