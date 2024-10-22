@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
@@ -62,20 +62,26 @@
 	};
 
 	export let data;
-	let product = [];
-	onMount(async () => {
-		// Check if cart exists, if not create it
-		let cartResponse = await fetch(`/api/cart/${await getUserId()}`);
+	let product = [{
+		id: 1,
+		title: 'Book 1',
+		price: 1000,
+		image_src: 'https://via.placeholder.com/150'
+	}];
+	// let product = [];
+	// onMount(async () => {
+	// 	// Check if cart exists, if not create it
+	// 	let cartResponse = await fetch(`/api/cart/${await getUserId()}`);
 
-		if (!cartResponse.ok) {
-			await createCart();
-		} else {
-			// If cart exists, get the current count
-			await refreshCartItems();
-		}
+	// 	if (!cartResponse.ok) {
+	// 		await createCart();
+	// 	} else {
+	// 		// If cart exists, get the current count
+	// 		await refreshCartItems();
+	// 	}
 
-		product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
-	});
+	// 	product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
+	// });
 </script>
 
 <section
@@ -112,4 +118,13 @@
 			</form>
 		</div>
 	</div>
-</section>
+</section> -->
+
+<script>
+	export let data;
+	console.log(data.product);
+</script>
+
+<dir>
+	{data}
+</dir>
