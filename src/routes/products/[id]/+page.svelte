@@ -62,28 +62,20 @@
 	};
 
 	export let data;
-	let product = [
-		{
-			id: 1,
-			title: 'Book 1',
-			price: 1000,
-			image_src: 'https://via.placeholder.com/150'
+	let product = [];
+	onMount(async () => {
+		// Check if cart exists, if not create it
+		let cartResponse = await fetch(`/api/cart/${await getUserId()}`);
+
+		if (!cartResponse.ok) {
+			await createCart();
+		} else {
+			// If cart exists, get the current count
+			await refreshCartItems();
 		}
-	];
-	// let product = [];
-	// onMount(async () => {
-	// 	// Check if cart exists, if not create it
-	// 	let cartResponse = await fetch(`/api/cart/${await getUserId()}`);
 
-	// 	if (!cartResponse.ok) {
-	// 		await createCart();
-	// 	} else {
-	// 		// If cart exists, get the current count
-	// 		await refreshCartItems();
-	// 	}
-
-	// 	product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
-	// });
+		product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
+	});
 </script>
 
 <section
