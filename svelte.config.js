@@ -9,7 +9,10 @@ const config = {
 	kit: {
 		paths: {
 			base: dev ? '' : '/libri_project'
-		}
+		},
+		adapter: adapter({
+			fallback: '404.html'
+		})
 	}
 };
 
