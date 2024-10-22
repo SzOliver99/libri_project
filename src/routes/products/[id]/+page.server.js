@@ -1,8 +1,8 @@
 export async function load({ params }) {
-	const productSlug = params.slug;
+	const productId = params.id;
 
 	return {
-		productSlug
+		productId
 	};
 }
 
