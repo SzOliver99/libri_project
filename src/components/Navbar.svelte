@@ -69,7 +69,8 @@
 						>
 					</p> -->
 				{:else}
-					<p>
+					<p class="flex items-center">
+						<UserIcon stroke-width={1.5} class="md:me-2" />
 						<a
 							href={`${base}/sign-in`}
 							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===

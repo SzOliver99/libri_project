@@ -29,8 +29,9 @@
 		let userId = await getUserId();
 
 		if (userId) {
-			const formData = new FormData(e.currentTarget);
-			let response = await fetch(`/api/cart/${userId}/book/${formData.get('productId')}`, {
+			const form = e.target.closest('form');
+			const productId = form.querySelector('input[name="productId"]').value;
+			let response = await fetch(`/api/cart/${userId}/book/${productId}`, {
 				method: 'POST'
 			});
 
