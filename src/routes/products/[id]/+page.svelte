@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
@@ -62,12 +62,14 @@
 	};
 
 	export let data;
-	let product = [{
-		id: 1,
-		title: 'Book 1',
-		price: 1000,
-		image_src: 'https://via.placeholder.com/150'
-	}];
+	let product = [
+		{
+			id: 1,
+			title: 'Book 1',
+			price: 1000,
+			image_src: 'https://via.placeholder.com/150'
+		}
+	];
 	// let product = [];
 	// onMount(async () => {
 	// 	// Check if cart exists, if not create it
@@ -118,13 +120,4 @@
 			</form>
 		</div>
 	</div>
-</section> -->
-
-<script>
-	export let data;
-	console.log(data.product);
-</script>
-
-<dir>
-	{data}
-</dir>
+</section>
