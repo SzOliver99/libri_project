@@ -6,10 +6,10 @@
 	import { onMount } from 'svelte';
 
 	const navLinks = [
-		{ href: `${base}/`, title: 'Home', icon: HouseIcon },
-		{ href: `${base}/products`, title: 'Books', icon: BookOpen },
-		{ href: `${base}/about-us`, title: 'About Us', icon: Info },
-		{ href: `${base}/profile`, title: 'Profile', icon: UserIcon }
+		{ href: `/`, title: 'Home', icon: HouseIcon },
+		{ href: `/products`, title: 'Books', icon: BookOpen },
+		{ href: `/about-us`, title: 'About Us', icon: Info },
+		{ href: `/profile`, title: 'Profile', icon: UserIcon }
 	];
 
 	const handleOpenUserMenu = () => {
@@ -18,7 +18,7 @@
 
 	const handleSignOut = () => {
 		localStorage.removeItem('AuthorizationToken');
-		window.location.href = `${base}`;
+		window.location.href = ``;
 	};
 
 	let loggedIn;
@@ -52,7 +52,7 @@
 						<UserIcon stroke-width={1.5} class="md:me-2" />
 						<p
 							class="flex py-2 text-slate-900 duration-300 transition-all {$page.url.pathname ===
-							`${base}`
+							`/`
 								? 'text-primary-700'
 								: 'text-slate-900'}"
 						>
@@ -63,7 +63,7 @@
 						<button
 							on:click={handleSignOut}
 							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-							`${base}`
+							``
 								? 'text-primary-700'
 								: 'text-slate-900'}">Sign Out</button
 						>
@@ -72,17 +72,17 @@
 					<p class="flex items-center">
 						<UserIcon stroke-width={1.5} class="md:me-2" />
 						<a
-							href={`${base}/sign-in`}
+							href={`/sign-in`}
 							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-							`${base}/sign-in`
+							`/sign-in`
 								? 'text-primary-700'
 								: 'text-slate-900'}">Login</a
 						>
 						/
 						<a
-							href={`${base}/sign-up`}
+							href={`/sign-up`}
 							class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-							`${base}/sign-up`
+							`/sign-up`
 								? 'text-primary-700'
 								: 'text-slate-900'}">Register</a
 						>
@@ -105,22 +105,22 @@
 			</button>
 		{:else}
 			<a
-				href={`${base}/sign-in`}
+				href={`/sign-in`}
 				class="flex px-3 py-3 text-slate-900 font-bold duration-300 transition-all"
 			>
 				<UserIcon stroke-width={1.5} />
 				<a
-					href={`${base}/sign-in`}
+					href={`/sign-in`}
 					class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-					`${base}/sign-in`
+					`/sign-in`
 						? 'text-primary-700'
 						: 'text-slate-900'}">Login</a
 				>
 				/
 				<a
-					href={`${base}/sign-up`}
+					href={`/sign-up`}
 					class="hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-					`${base}/sign-up`
+					`/sign-up`
 						? 'text-primary-700'
 						: 'text-slate-900'}">Register</a
 				>

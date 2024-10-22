@@ -7,9 +7,6 @@ const dev = process.env.NODE_ENV === 'development';
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
-		paths: {
-			base: dev ? '' : '/libri_project'
-		},
 		adapter: adapter({
 			fallback: '404.html'
 		})
