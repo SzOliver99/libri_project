@@ -16,7 +16,7 @@
 	const handleSubmit = async (e) => {
 		const formData = new FormData(e.currentTarget);
 		const { username, password } = Object.fromEntries(formData.entries());
-		const res = await fetch(`/api/user/sign-in`, {
+		const res = await fetch(`https://libri-backend.fly.dev/user/sign-in`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
