@@ -2,7 +2,6 @@
 	import google_img from '$lib/images/google_img.png';
 	import facebook_img from '$lib/images/facebook_img.png';
 	import twitter_img from '$lib/images/twitter_img.png';
-	import { goto } from '$app/navigation';
 
 	let different_methods = [
 		{ name: 'Google', img: google_img, method: 'google', disabled: false },
@@ -25,7 +24,7 @@
 
 		const data = await res.json();
 		localStorage.setItem('AuthorizationToken', `${data.token}`);
-		goto('/');
+		window.location.href = '/';
 	};
 
 	async function signInWithGoogle() {}
