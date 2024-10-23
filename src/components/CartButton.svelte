@@ -5,21 +5,6 @@
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserId, fetchCartItems, updateCartItem } from '$lib/api';
 
-	onMount(async () => {
-		const userId = await getUserId();
-		if (userId) {
-			const cartData = await fetchCartItems(userId);
-			if (cartData) {
-				$cartItems = cartData.books.map((book) => ({
-					id: book.id,
-					title: book.title,
-					price: book.price,
-					quantity: book.quantity || 1
-				}));
-			}
-		}
-	});
-
 	let showModal = false;
 	function toggleModal() {
 		showModal = !showModal;
@@ -46,6 +31,21 @@
 			console.error('Error updating quantity:', error);
 		}
 	}
+
+	onMount(async () => {
+		const userId = await getUserId();
+		if (userId) {
+			const cartData = await fetchCartItems(userId);
+			if (cartData) {
+				$cartItems = cartData.books.map((book) => ({
+					id: book.id,
+					title: book.title,
+					price: book.price,
+					quantity: book.quantity || 1
+				}));
+			}
+		}
+	});
 
 	$: $itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);
 </script>
