@@ -1,8 +1,8 @@
 <script>
-	import { base } from '$app/paths';
 	import google_img from '$lib/images/google_img.png';
 	import facebook_img from '$lib/images/facebook_img.png';
 	import twitter_img from '$lib/images/twitter_img.png';
+	import { goto } from '$app/navigation';
 
 	let different_methods = [
 		{ name: 'Google', img: google_img, method: 'google', disabled: false },
@@ -19,12 +19,15 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ username, password })
-		}).then((res) => res.json());
+		});
 
-		localStorage.setItem('AuthorizationToken', `${res.token}`);
-		if (res.token) {
-			window.location.href = `/`;
+		if (!res.ok) {
+			throw new Error(`HTTP error! status: ${res.status}`);
 		}
+
+		const data = await res.json();
+		localStorage.setItem('AuthorizationToken', `${data.token}`);
+		goto('/');
 	};
 
 	async function signInWithGoogle() {}
@@ -64,7 +67,7 @@
 			</div>
 
 			<div class="text-center mt-6 mb-2">
-				<a href="{base}/forgot-password">Forgot Password?</a>
+				<a href="/forgot-password">Forgot Password?</a>
 			</div>
 
 			<div class="text-center">

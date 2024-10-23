@@ -3,87 +3,50 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
+	import { getUserId, createCart, addToCart, fetchCartItems, fetchProducts } from '$lib/api';
 
-	const getUserId = async () => {
-		try {
-			const token = localStorage.getItem('AuthorizationToken');
-			const user = await fetch(`/api/user/protected`, {
-				headers: {
-					Authorization: `${token}`
-				}
-			}).then((res) => res.json());
-			return user.id;
-		} catch {
-			return null;
-		}
-	};
+	let products = [];
 
-	const createCart = async () => {
-		await fetch(`/api/cart/${await getUserId()}`, {
-			method: 'POST'
-		});
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		let userId = await getUserId();
-
-		if (userId) {
-			const form = e.target.closest('form');
-			const productId = form.querySelector('input[name="productId"]').value;
-			let response = await fetch(`/api/cart/${userId}/book/${productId}`, {
-				method: 'POST'
-			});
-
-			if (response.ok) {
-				// Increment the cart count
-				$itemCount += 1;
-				// Refresh the cart items
-				await refreshCartItems();
-			}
-		} else {
-			console.error('Please login to add to cart');
-		}
-	};
-
-	const refreshCartItems = async () => {
+	const handleAddToCart = async (productId) => {
 		const userId = await getUserId();
+		if (!userId) {
+			console.error('Please login to add to cart');
+			return;
+		}
+
+		const success = await addToCart(userId, productId);
+		if (success) {
+			$itemCount += 1;
+			await refreshCartItems(userId);
+		}
+	};
+
+	const refreshCartItems = async (userId) => {
 		try {
-			const res = await fetch(`/api/cart/${userId}`);
-			if (res.ok) {
-				const data = await res.json();
-				// Update the cartItems in the CartButton component
-				// We should use a store to communicate with the CartButton component
-				$cartItems = data.books.map((book) => ({
-					id: book.id,
-					title: book.title,
-					price: book.price,
-					quantity: book.quantity || 1
-				}));
-				// Update the itemCount as well
-				$itemCount = data.books.reduce((total, book) => total + (book.quantity || 1), 0);
-			}
+			const cartData = await fetchCartItems(userId);
+			$cartItems = cartData.books.map((book) => ({
+				id: book.id,
+				title: book.title,
+				price: book.price,
+				quantity: book.quantity || 1
+			}));
+			$itemCount = cartData.books.reduce((total, book) => total + (book.quantity || 1), 0);
 		} catch (error) {
 			console.error('Error refreshing cart items:', error);
 		}
 	};
 
-	let products = [];
 	onMount(async () => {
-		let userId = await getUserId();
-
+		const userId = await getUserId();
 		if (userId) {
-			// Check if cart exists, if not create it
-			let cartResponse = await fetch(`/api/cart/${userId}`);
-
-			if (!cartResponse.ok) {
-				await createCart();
+			const cartExists = await fetchCartItems(userId);
+			if (!cartExists) {
+				await createCart(userId);
 			} else {
-				// If cart exists, get the current count
-				await refreshCartItems();
+				await refreshCartItems(userId);
 			}
 		}
-		products = await fetch(`/api/books/`).then((res) => res.json());
+		products = await fetchProducts();
 	});
 </script>
 
@@ -111,7 +74,7 @@
 			</a>
 			<div class="flex justify-between items-center">
 				<p class="font-bold text-slate-900 text-lg md:text-xl">{product.price} Ft</p>
-				<form on:submit={handleSubmit}>
+				<form on:submit={handleAddToCart}>
 					<input type="hidden" value={product.id} name="productId" />
 					<button
 						type="submit"
