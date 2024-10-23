@@ -5,7 +5,7 @@
 		const formData = new FormData(e.currentTarget);
 		const { email, username, password } = Object.fromEntries(formData.entries());
 
-		const res = await fetch(`/user/sign-up`, {
+		const res = await fetch(`/api/user/sign-up`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
