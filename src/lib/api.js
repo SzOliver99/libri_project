@@ -17,20 +17,20 @@ export const getUserId = async () => {
 	}
 };
 
-export const addToCart = async (userId, productId) => {
+export const updateCartItem = async (userId, productId, change) => {
 	try {
-		const response = await fetch('/api/cart/book', {
-			method: 'POST',
+		const method = change > 0 ? 'PUT' : 'DELETE';
+		const response = await fetch(`/api/cart/book`, {
+			method: method,
 			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${localStorage.getItem('AuthorizationToken')}`
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ userId, productId })
 		});
-		if (!response.ok) throw new Error('Failed to add item to cart');
+		if (!response.ok) throw new Error('Failed to update cart item');
 		return true;
 	} catch (error) {
-		console.error('Error adding item to cart:', error);
+		console.error('Error updating cart item:', error);
 		return false;
 	}
 };

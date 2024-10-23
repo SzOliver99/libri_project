@@ -3,12 +3,12 @@
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserId, getCartItems, updateCartItem } from '$lib/api';
+	import { getUserId, fetchCartItems, updateCartItem } from '$lib/api';
 
 	onMount(async () => {
 		const userId = await getUserId();
 		if (userId) {
-			const items = await getCartItems(userId);
+			const items = await fetchCartItems(userId);
 			if (items) {
 				$cartItems = items.map((book) => ({
 					id: book.id,
