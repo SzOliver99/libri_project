@@ -3,15 +3,12 @@
 	import google_img from '$lib/images/google_img.png';
 	import facebook_img from '$lib/images/facebook_img.png';
 	import twitter_img from '$lib/images/twitter_img.png';
-	import { redirect } from '@sveltejs/kit';
 
 	let different_methods = [
 		{ name: 'Google', img: google_img, method: 'google', disabled: false },
 		{ name: 'Facebook', img: facebook_img, method: 'facebook', disabled: true },
 		{ name: 'Twitter', img: twitter_img, method: 'twitter', disabled: true }
 	];
-
-	export let form;
 
 	const handleSubmit = async (e) => {
 		const formData = new FormData(e.currentTarget);
@@ -24,15 +21,9 @@
 			body: JSON.stringify({ username, password })
 		}).then((res) => res.json());
 
-		localStorage.setItem('AuthorizationToken', `${res.token}`, {
-			httpOnly: true,
-			path: '/',
-			secure: true,
-			sameSite: 'strict',
-			maxAge: 60 * 60 // 1 hour
-		});
+		localStorage.setItem('AuthorizationToken', `${res.token}`);
 		if (res.token) {
-			await redirect(302, `${base}/`);
+			window.location.href = `/`;
 		}
 	};
 
@@ -56,7 +47,6 @@
 					id="username"
 					type="text"
 					class="w-full px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
-					value={form?.username ?? ''}
 					autocomplete="off"
 					required
 				/>
@@ -69,7 +59,6 @@
 					id="password"
 					type="password"
 					class="w-full px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
-					value={form?.password ?? ''}
 					required
 				/>
 			</div>
