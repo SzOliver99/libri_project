@@ -27,7 +27,10 @@ export const updateCartItem = async (userId, productId, change) => {
 			},
 			body: JSON.stringify({ userId, productId })
 		});
-		if (!response.ok) throw new Error('Failed to update cart item');
+		if (!response.ok) {
+			console.error('Failed to update cart item:', response.json());
+			return false;
+		}
 		return true;
 	} catch (error) {
 		console.error('Error updating cart item:', error);

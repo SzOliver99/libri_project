@@ -24,7 +24,6 @@
 	const refreshCartItems = async (userId) => {
 		try {
 			const cartData = await fetchCartItems(userId);
-			console.log(cartData);
 			$cartItems = cartData.books.map((book) => ({
 				id: book.id,
 				title: book.title,
