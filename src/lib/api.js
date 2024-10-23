@@ -63,7 +63,7 @@ export const fetchCartItems = async (userId) => {
 
 export const fetchProducts = async () => {
 	try {
-		const response = await fetch('/api/books');
+		const response = await fetch('/api/books/');
 		if (!response.ok) throw new Error('Failed to fetch products');
 		return await response.json();
 	} catch (error) {
