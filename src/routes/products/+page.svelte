@@ -7,8 +7,12 @@
 
 	let products = [];
 
-	const handleAddToCart = async (productId) => {
+	const handleAddToCart = async (e) => {
+		e.preventDefault();
+		const formData = new FormData(e.currentTarget);
+
 		const userId = await getUserId();
+		const productId = formData.get('productId');
 		if (!userId) {
 			console.error('Please login to add to cart');
 			return;
