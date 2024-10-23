@@ -21,9 +21,7 @@
 			body: JSON.stringify({ username, password })
 		});
 
-		if (!res.ok) {
-			throw new Error(`HTTP error! status: ${res.status}`);
-		}
+		if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
 		const data = await res.json();
 		localStorage.setItem('AuthorizationToken', `${data.token}`);

@@ -19,14 +19,7 @@ export const getUserId = async () => {
 
 export const createCart = async (userId) => {
 	try {
-		const response = await fetch('/api/cart', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${localStorage.getItem('AuthorizationToken')}`
-			},
-			body: JSON.stringify({ userId })
-		});
+		const response = await fetch(`/api/cart/${userId}`);
 		if (!response.ok) throw new Error('Failed to create cart');
 		return true;
 	} catch (error) {
