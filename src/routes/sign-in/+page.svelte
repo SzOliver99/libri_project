@@ -32,7 +32,7 @@
 			maxAge: 60 * 60 // 1 hour
 		});
 		if (res.token) {
-			window.location.href = `${base}/`;
+			redirect(302, `${base}/`);
 		}
 	};
 
