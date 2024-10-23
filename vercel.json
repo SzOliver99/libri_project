@@ -3,7 +3,10 @@
 	"outputDirectory": ".svelte-kit/output/client",
 	"framework": "sveltekit",
 	"rewrites": [
-		{ "source": "/user/:path(.*)", "destination": "http://libri-backend.fly.dev/user/:path" },
+		{
+			"source": "/api/(.*)",
+			"destination": "http://libri-backend.fly.dev/$1"
+		},
 		{
 			"source": "/(.*)",
 			"destination": "/index.html"
