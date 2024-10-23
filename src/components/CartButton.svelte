@@ -8,9 +8,9 @@
 	onMount(async () => {
 		const userId = await getUserId();
 		if (userId) {
-			const items = await fetchCartItems(userId);
-			if (items) {
-				$cartItems = items.map((book) => ({
+			const cartData = await fetchCartItems(userId);
+			if (cartData) {
+				$cartItems = cartData.books.map((book) => ({
 					id: book.id,
 					title: book.title,
 					price: book.price,
