@@ -5,8 +5,8 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
 		proxy: {
-			'^/api': {
-				target: 'http://libri-backend.fly.dev',
+			'/api': {
+				target: 'https://libri-backend.fly.dev',
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/api/, '')
 			}
