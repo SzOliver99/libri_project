@@ -25,7 +25,7 @@ export const updateCartItem = async (userId, productId, change) => {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ userId, productId })
+			body: JSON.stringify({ user_id: userId, book_id: productId })
 		});
 		console.log(userId, productId, method, change);
 
