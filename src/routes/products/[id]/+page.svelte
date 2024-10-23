@@ -7,10 +7,9 @@
 	const handleAddToCart = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
+		const productId = +formData.get('productId');
 
 		const userId = await getUserId();
-		const productId = formData.get('productId');
-
 		if (!userId) {
 			console.error('Please login to add to cart');
 			return;
