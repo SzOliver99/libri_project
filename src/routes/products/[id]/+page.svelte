@@ -2,59 +2,37 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
+	import { getUserId, addToCart, fetchCartItems } from '$lib/api';
 
-	const getUserId = async () => {
-		try {
-			const token = localStorage.getItem('AuthorizationToken');
-			const user = await fetch(`/api/user/protected`, {
-				headers: {
-					Authorization: `${token}`
-				}
-			}).then((res) => res.json());
-			return user.id;
-		} catch (error) {
-			return null;
-		}
-	};
-
-	const createCart = async () => {
-		await fetch(`/api/cart/${await getUserId()}`, {
-			method: 'POST'
-		});
-	};
-
-	const handleSubmit = async (e) => {
+	const handleAddToCart = async (e) => {
 		e.preventDefault();
-
 		const formData = new FormData(e.currentTarget);
-		let response = await fetch(`/api/cart/${await getUserId()}/book/${formData.get('productId')}`, {
-			method: 'POST'
-		});
+		const productId = formData.get('productId');
+		const userId = await getUserId();
 
-		if (response.ok) {
-			// Increment the cart count
+		if (!userId) {
+			console.error('Please login to add to cart');
+			return;
+		}
+
+		const success = await addToCart(userId, productId);
+		if (success) {
 			$itemCount += 1;
-			// Refresh the cart items
-			await refreshCartItems();
+			await refreshCartItems(userId);
 		}
 	};
 
-	const refreshCartItems = async () => {
-		const userId = await getUserId();
+	const refreshCartItems = async (userId) => {
 		try {
-			const res = await fetch(`/api/cart/${userId}`);
-			if (res.ok) {
-				const data = await res.json();
-				// Update the cartItems in the CartButton component
-				// We should use a store to communicate with the CartButton component
-				$cartItems = data.books.map((book) => ({
+			const cartData = await fetchCartItems(userId);
+			if (cartData) {
+				$cartItems = cartData.books.map((book) => ({
 					id: book.id,
 					title: book.title,
 					price: book.price,
 					quantity: book.quantity || 1
 				}));
-				// Update the itemCount as well
-				$itemCount = data.books.reduce((total, book) => total + (book.quantity || 1), 0);
+				$itemCount = cartData.books.reduce((total, book) => total + (book.quantity || 1), 0);
 			}
 		} catch (error) {
 			console.error('Error refreshing cart items:', error);
@@ -63,15 +41,11 @@
 
 	export let data;
 	let product = [];
-	onMount(async () => {
-		// Check if cart exists, if not create it
-		let cartResponse = await fetch(`/api/cart/${await getUserId()}`);
 
-		if (!cartResponse.ok) {
-			await createCart();
-		} else {
-			// If cart exists, get the current count
-			await refreshCartItems();
+	onMount(async () => {
+		const userId = await getUserId();
+		if (userId) {
+			await refreshCartItems(userId);
 		}
 
 		product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
@@ -102,7 +76,7 @@
 			<p class="font-bold text-slate-900 text-xl mt-4 ml-2">
 				{product.price} Ft
 			</p>
-			<form on:submit={handleSubmit} class="w-full">
+			<form on:submit={handleAddToCart} class="w-full">
 				<input type="hidden" value={data.productId} name="productId" />
 				<button
 					type="submit"
