@@ -17,20 +17,9 @@ export const getUserId = async () => {
 	}
 };
 
-export const createCart = async (userId) => {
-	try {
-		const response = await fetch(`/api/cart/${userId}`);
-		if (!response.ok) throw new Error('Failed to create cart');
-		return true;
-	} catch (error) {
-		console.error('Error creating cart:', error);
-		return false;
-	}
-};
-
 export const addToCart = async (userId, productId) => {
 	try {
-		const response = await fetch('/api/cart/add', {
+		const response = await fetch('/api/cart/book', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -48,7 +37,7 @@ export const addToCart = async (userId, productId) => {
 
 export const fetchCartItems = async (userId) => {
 	try {
-		const response = await fetch(`/api/cart/${userId}`, {
+		const response = await fetch(`/api/user/${userId}/cart`, {
 			headers: {
 				Authorization: `${localStorage.getItem('AuthorizationToken')}`
 			}
@@ -65,6 +54,7 @@ export const fetchProducts = async () => {
 	try {
 		const response = await fetch('/api/books/');
 		if (!response.ok) throw new Error('Failed to fetch products');
+
 		return await response.json();
 	} catch (error) {
 		console.error('Error fetching products:', error);

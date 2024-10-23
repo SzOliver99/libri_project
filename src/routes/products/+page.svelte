@@ -3,7 +3,7 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserId, createCart, addToCart, fetchCartItems, fetchProducts } from '$lib/api';
+	import { getUserId, addToCart, fetchCartItems, fetchProducts } from '$lib/api';
 
 	let products = [];
 

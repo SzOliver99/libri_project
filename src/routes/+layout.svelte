@@ -8,8 +8,7 @@
 
 	onMount(async () => {
 		loggedIn = localStorage.getItem('AuthorizationToken') ? true : false;
-		console.log(loggedIn);
-		if (loggedIn === false) {
+		if (!loggedIn) {
 			localStorage.removeItem('cartItems');
 			localStorage.removeItem('itemCount');
 		}
