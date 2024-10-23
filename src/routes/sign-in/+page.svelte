@@ -47,11 +47,6 @@
 			<h1 class="text-2xl font-bold text-gray-700">Login</h1>
 		</div>
 
-		<!-- Display error messages -->
-		{#if form?.error}
-			<p class="text-red-500 mb-4">{form?.error}</p>
-		{/if}
-
 		<!-- Login form -->
 		<form on:submit|preventDefault={handleSubmit}>
 			<div class="mb-4">

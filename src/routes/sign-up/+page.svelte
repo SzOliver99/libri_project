@@ -1,7 +1,20 @@
 <script>
 	import { base } from '$app/paths';
+	import { redirect } from '@sveltejs/kit';
 
-	export let form;
+	const handleSubmit = async (e) => {
+		const formData = new FormData(e.currentTarget);
+		const { email, username, password } = Object.fromEntries(formData.entries());
+
+		const res = await fetch(`/api/user/sign-up`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email, username, password })
+		}).then((res) => res.json());
+		redirect(302, `/sign-in`);
+	};
 </script>
 
 <section class="flex items-center justify-center sm:mt-8">
@@ -12,14 +25,6 @@
 			<h1 class="text-2xl font-bold text-gray-700">Register</h1>
 		</div>
 
-		<!-- Display error messages if any -->
-		{#if form?.missing}
-			<p class="text-red-500 mb-4">All fields are required</p>
-		{/if}
-		{#if form?.emailTaken}
-			<p class="text-red-500 mb-4">This email is already registered!</p>
-		{/if}
-
 		<!-- Registration form -->
 		<form method="POST" action="/api/user/sign-up">
 			<div class="mb-4">
@@ -29,7 +34,6 @@
 					id="email"
 					type="email"
 					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
-					value={form?.email ?? ''}
 					autocomplete="off"
 				/>
 			</div>
@@ -41,7 +45,6 @@
 					id="username"
 					type="text"
 					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
-					value={form?.username ?? ''}
 					autocomplete="off"
 				/>
 			</div>
