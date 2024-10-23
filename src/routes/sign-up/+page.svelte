@@ -1,19 +1,18 @@
 <script>
 	import { base } from '$app/paths';
-	import { redirect } from '@sveltejs/kit';
 
 	const handleSubmit = async (e) => {
 		const formData = new FormData(e.currentTarget);
 		const { email, username, password } = Object.fromEntries(formData.entries());
 
-		const res = await fetch(`/api/user/sign-up`, {
+		const res = await fetch(`/user/sign-up`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ email, username, password })
 		}).then((res) => res.json());
-		redirect(302, `/sign-in`);
+		window.location.href = `${base}/sign-in`;
 	};
 </script>
 
