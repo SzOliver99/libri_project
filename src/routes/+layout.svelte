@@ -5,8 +5,10 @@
 	import { onMount } from 'svelte';
 
 	let loggedIn;
+
 	onMount(async () => {
 		loggedIn = localStorage.getItem('AuthorizationToken') ? true : false;
+		console.log(loggedIn);
 		if (loggedIn === false) {
 			localStorage.removeItem('cartItems');
 			localStorage.removeItem('itemCount');
