@@ -39,12 +39,7 @@
 	onMount(async () => {
 		const userId = await getUserId();
 		if (userId) {
-			const cartExists = await fetchCartItems(userId);
-			if (!cartExists) {
-				await createCart(userId);
-			} else {
-				await refreshCartItems(userId);
-			}
+			await refreshCartItems(userId);
 		}
 		products = await fetchProducts();
 	});
