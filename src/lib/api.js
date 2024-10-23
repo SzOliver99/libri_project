@@ -18,6 +18,7 @@ export const getUserId = async () => {
 };
 
 export const updateCartItem = async (userId, productId, change) => {
+	console.log(userId, productId, change);
 	try {
 		const method = change > 0 ? 'PUT' : 'DELETE';
 		const response = await fetch(`/api/cart/book`, {
