@@ -2,7 +2,7 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserId, addToCart, fetchCartItems } from '$lib/api';
+	import { getUserId, updateCartItem, fetchCartItems } from '$lib/api';
 
 	const handleAddToCart = async (e) => {
 		e.preventDefault();
@@ -15,7 +15,7 @@
 			return;
 		}
 
-		const success = await addToCart(userId, productId);
+		const success = await updateCartItem(userId, productId, 1);
 		if (success) {
 			$itemCount += 1;
 			await refreshCartItems(userId);

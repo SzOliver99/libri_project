@@ -3,7 +3,7 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserId, addToCart, fetchCartItems, fetchProducts } from '$lib/api';
+	import { getUserId, updateCartItem, fetchCartItems, fetchProducts } from '$lib/api';
 
 	let products = [];
 
@@ -14,7 +14,7 @@
 			return;
 		}
 
-		const success = await addToCart(userId, productId);
+		const success = await updateCartItem(userId, productId, 1);
 		if (success) {
 			$itemCount += 1;
 			await refreshCartItems(userId);
