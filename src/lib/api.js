@@ -3,7 +3,7 @@ export const getUserId = async () => {
 	if (!token) return null;
 
 	try {
-		const response = await fetch('/api/user/me', {
+		const response = await fetch('/api/user/protected', {
 			headers: {
 				Authorization: `${token}`
 			}
@@ -70,7 +70,7 @@ export const fetchCartItems = async (userId) => {
 
 export const fetchProducts = async () => {
 	try {
-		const response = await fetch('/api/products');
+		const response = await fetch('/api/books');
 		if (!response.ok) throw new Error('Failed to fetch products');
 		return await response.json();
 	} catch (error) {
