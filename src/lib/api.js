@@ -20,15 +20,15 @@ export const getUserId = async () => {
 export const updateCartItem = async (userId, productId, change) => {
 	try {
 		const method = change > 0 ? 'PUT' : 'DELETE';
-		const response = await fetch(`/api/cart/book`, {
+		const response = await fetch(`/api/cart/book/`, {
 			method: method,
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ user_id: userId, book_id: productId })
 		});
-
 		if (!response.ok) throw new Error('Failed to update cart item');
+
 		return true;
 	} catch (error) {
 		console.error('Error updating cart item:', error);

@@ -30,7 +30,7 @@
 		if (!userId) return;
 
 		const item = $cartItems[index];
-		console.log($cartItems[index], item);
+		console.log($cartItems, item);
 
 		const newQuantity = Math.max(0, item.quantity + change);
 
