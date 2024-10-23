@@ -3,58 +3,27 @@
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
+	import { getUserId, getCartItems, updateCartItem } from '$lib/api';
 
-	let showModal = false;
-
-	const getUserId = async () => {
-		const token = localStorage.getItem('AuthorizationToken');
-		try {
-			const response = await fetch(`/api/user/protected`, {
-				headers: {
-					Authorization: `${token}`
-				}
-			});
-			if (!response.ok) throw new Error('Failed to get user');
-			const user = await response.json();
-			return user.id;
-		} catch (error) {
-			console.error('Error getting user ID:', error);
-			return null;
-		}
-	};
-
-	const createCart = async (userId) => {
-		try {
-			const response = await fetch(`/api/cart/${userId}`, {
-				method: 'POST'
-			});
-			if (!response.ok) throw new Error('Failed to create cart');
-		} catch (error) {
-			console.error('Error creating cart:', error);
-		}
-	};
-
-	const getCartItems = async () => {
+	onMount(async () => {
 		const userId = await getUserId();
-		if (!userId) return;
-
-		try {
-			const res = await fetch(`/api/cart/${userId}`);
-			if (res.ok) {
-				const data = await res.json();
-				$cartItems = data.books.map((book) => ({
+		if (userId) {
+			const items = await getCartItems(userId);
+			if (items) {
+				$cartItems = items.map((book) => ({
 					id: book.id,
 					title: book.title,
 					price: book.price,
 					quantity: book.quantity || 1
 				}));
-			} else {
-				await createCart(userId);
 			}
-		} catch (error) {
-			console.error('Error fetching cart items:', error);
 		}
-	};
+	});
+
+	let showModal = false;
+	function toggleModal() {
+		showModal = !showModal;
+	}
 
 	async function updateQuantity(index, change) {
 		const userId = await getUserId();
@@ -64,40 +33,19 @@
 		const newQuantity = Math.max(0, item.quantity + change);
 
 		try {
-			let response;
-			if (change > 0) {
-				response = await fetch(`/api/cart/${userId}/book/${item.id}`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ quantity: 1 })
-				});
-			} else {
-				response = await fetch(`/api/cart/${userId}/book/${item.id}`, {
-					method: 'DELETE'
-				});
-			}
+			const success = await updateCartItem(userId, item.id, change > 0 ? 1 : -1);
 
-			if (!response.ok) throw new Error('Failed to update quantity');
-
-			if (newQuantity === 0) {
-				$cartItems = $cartItems.filter((_, i) => i !== index);
-			} else {
-				item.quantity = newQuantity;
-				$cartItems = [...$cartItems];
+			if (success) {
+				if (newQuantity === 0) {
+					$cartItems = $cartItems.filter((_, i) => i !== index);
+				} else {
+					item.quantity = newQuantity;
+					$cartItems = [...$cartItems];
+				}
 			}
 		} catch (error) {
 			console.error('Error updating quantity:', error);
 		}
-	}
-
-	onMount(async () => {
-		await getCartItems();
-	});
-
-	function toggleModal() {
-		showModal = !showModal;
 	}
 
 	$: $itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);

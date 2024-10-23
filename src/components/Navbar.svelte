@@ -1,7 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import { base } from '$app/paths';
-	import { BookOpen, HouseIcon, Info, ShoppingCart, UserIcon } from 'lucide-svelte';
+	import { BookOpen, HouseIcon, Info, UserIcon } from 'lucide-svelte';
 	import NavMarker from './NavMarker.svelte';
 	import { onMount } from 'svelte';
 
