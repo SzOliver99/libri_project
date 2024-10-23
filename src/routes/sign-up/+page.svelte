@@ -26,7 +26,7 @@
 		</div>
 
 		<!-- Registration form -->
-		<form method="POST" action="/api/user/sign-up">
+		<form on:submit|preventDefault={handleSubmit}>
 			<div class="mb-4">
 				<label for="email" class="block text-gray-700">Email</label>
 				<input
