@@ -30,14 +30,11 @@
 		if (!userId) return;
 
 		const item = $cartItems[index];
-		console.log($cartItems, item);
-
-		const newQuantity = Math.max(0, item.quantity + change);
-
 		try {
 			const success = await updateCartItem(userId, item.id, change > 0 ? 1 : -1);
 
 			if (success) {
+				const newQuantity = Math.max(0, item.quantity + change);
 				if (newQuantity === 0) {
 					$cartItems = $cartItems.filter((_, i) => i !== index);
 				} else {
