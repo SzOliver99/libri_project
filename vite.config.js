@@ -6,7 +6,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'^/api': {
-				target: 'https://libri-backend.fly.dev',
+				target: 'http://libri-backend.fly.dev',
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/api/, '')
 			}
