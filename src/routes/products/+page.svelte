@@ -40,17 +40,26 @@
 		}
 	};
 
+	const getObjectQuantitys = (title) => {
+		for (const [key, value] of Object.entries($cartItems)) {
+			if (value.title == title) {
+				return value.quantity;
+			}
+		}
+	};
+
 	onMount(async () => {
 		const userId = await getUserId();
 		if (userId) {
 			await refreshCartItems(userId);
 		}
+
 		products = await fetchProducts();
 	});
 </script>
 
 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-	{#each products as product}
+	{#each products as product, index}
 		<div
 			class="group relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all"
 			data-sveltekit-preload-data="tap"
@@ -75,16 +84,31 @@
 				<p class="font-bold text-slate-900 text-lg md:text-xl">{product.price} Ft</p>
 				<form on:submit={handleAddToCart}>
 					<input type="hidden" value={product.id} name="productId" />
-					<button
-						type="submit"
-						class="hidden md:flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
-						><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
-					>
-					<button
-						type="submit"
-						class="flex md:hidden px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
-						><ShoppingBasketIcon stroke-width={1.5} /></button
-					>
+					{#if !$cartItems.some((item) => item.title === product.title)}
+						<button
+							type="submit"
+							class="hidden md:flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
+							><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
+						>
+						<button
+							type="submit"
+							class="flex md:hidden px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
+							><ShoppingBasketIcon stroke-width={1.5} /></button
+						>
+					{:else}
+						<button
+							class="px-2 py-1 bg-gray-200 rounded-l-lg hover:bg-gray-300 transition-colors duration-200"
+						>
+							-
+						</button>
+						<span class="px-3 py-1 bg-gray-100">{getObjectQuantitys(product.title)}</span>
+						<button
+							class="px-2 py-1 bg-gray-200 rounded-r-lg hover:bg-gray-300 transition-colors duration-200"
+						>
+							+
+						</button>
+						<span class="ml-4 text-primary-800"> Ft</span>
+					{/if}
 				</form>
 			</div>
 		</div>
