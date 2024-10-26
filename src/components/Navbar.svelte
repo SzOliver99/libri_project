@@ -27,7 +27,7 @@
 </script>
 
 <nav class="w-full text-slate-900 bg-white shadow sticky top-0 z-50">
-	<div class="max-w-5xl justify-center items-center gap-4 p-2 mx-auto hidden md:flex">
+	<div class="max-w-5xl justify-center items-center gap-4 p-3 mx-auto hidden md:flex">
 		{#each navLinks as link}
 			{#if link.title !== 'Profile'}
 				<a
