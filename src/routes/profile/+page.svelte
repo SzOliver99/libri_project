@@ -27,7 +27,7 @@
 <section>
 	{#if loggedIn === true}
 		<div class="hidden md:flex w-full h-[calc(100vh-7rem)] bg-slate-200 rounded-lg p-6">
-			<div class="flex flex-col w-1/5">
+			<div class="flex flex-col w-50">
                 <h1 class="text-2xl font-bold mb-4">Profile</h1>
                 <div class="flex flex-col gap-4 h-full">
                     {#each Object.keys(list) as key}
@@ -38,7 +38,7 @@
                 </div>
             </div>
 			<div class="border-l-2 border-gray-300 h-full mx-4"></div>
-			<div class="w-4/5">
+			<div>
 				<h1 class="text-2xl font-bold mb-4">Residential Address</h1>
                 <p>asdas</p>
 			</div>
