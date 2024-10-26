@@ -3,6 +3,30 @@
 	import { page } from '$app/stores';
 
 	let token = $page.url.searchParams.get('token');
+
+	async function handleSubmit(e) {
+		const formData = new FormData(e.currentTarget);
+		const password = formData.get('password');
+		if (password !== formData.get('repeat_password')) {
+			alert('Passwords do not match');
+			return;
+		}
+
+		let res = await fetch(`/api/user/reset-password?token=${token}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ password })
+		});
+		
+		if (res.ok) {
+			alert('Password reset successful');
+			window.location.href = `/sign-in`;
+		} else {
+			alert('Password reset failed');
+		}
+	};
 </script>
 
 <section class="flex items-center justify-center sm:mt-8">
@@ -13,7 +37,7 @@
 			<h1 class="text-2xl font-bold text-gray-700">Reset Password</h1>
 		</div>
 
-		<form method="POST" action="/api/reset-password?token={token}">
+		<form on:submit={handleSubmit}>
 			<div class="mb-4">
 				<label for="password">Password</label>
 				<input

@@ -12,7 +12,12 @@
 			},
 			body: JSON.stringify({ email, username, password })
 		}).then((res) => res.json());
-		window.location.href = `${base}/sign-in`;
+
+		if (res.ok) {
+			window.location.href = `${base}/sign-in`;
+		} else {
+			alert('Failed to sign up');
+		}
 	};
 </script>
 

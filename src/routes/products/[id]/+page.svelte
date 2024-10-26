@@ -2,29 +2,29 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserId, updateCartItem, fetchCartItems } from '$lib/api';
+	import { getUserToken, updateCartItem, fetchCartItems } from '$lib/api';
 
 	const handleAddToCart = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		const productId = +formData.get('productId');
 
-		const userId = await getUserId();
-		if (!userId) {
+		const userToken = getUserToken();
+		if (!userToken) {
 			console.error('Please login to add to cart');
 			return;
 		}
 
-		const success = await updateCartItem(userId, productId, 1);
+		const success = await updateCartItem(userToken, productId, 1);
 		if (success) {
 			$itemCount += 1;
-			await refreshCartItems(userId);
+			await refreshCartItems(userToken);
 		}
 	};
 
-	const refreshCartItems = async (userId) => {
+	const refreshCartItems = async (userToken) => {
 		try {
-			const cartData = await fetchCartItems(userId);
+			const cartData = await fetchCartItems(userToken);
 			if (cartData) {
 				$cartItems = cartData.books.map((book) => ({
 					id: book.id,
@@ -43,9 +43,9 @@
 	let product = [];
 
 	onMount(async () => {
-		const userId = await getUserId();
-		if (userId) {
-			await refreshCartItems(userId);
+		const userToken = getUserToken();
+		if (userToken) {
+			await refreshCartItems(userToken);
 		}
 
 		product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());

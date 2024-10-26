@@ -1,11 +1,22 @@
 <script>
-	import { base } from '$app/paths';
-
-	let email = '';
-
-	function handleSubmit() {
+	async function handleSubmit(e) {
 		// Implement password reset logic here
-		console.log('Password reset requested for:', email);
+		const formData = new FormData(e.currentTarget);
+		const email = formData.get('email');
+
+		let res = await fetch(`/api/user/forgot-password`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email })
+		});
+		if (res.ok) {
+			alert('Password reset email sent');
+			// window.location.href = `/sign-in`;
+		} else {
+			alert('Failed to send password reset email');
+		}
 	}
 </script>
 
@@ -17,7 +28,7 @@
 			<h1 class="text-2xl font-bold text-gray-700">Forgot Password</h1>
 		</div>
 
-		<form method="POST" action="/api/forgot-password">
+		<form on:submit={handleSubmit}>
 			<div class="mb-4">
 				<label for="email">Email</label>
 				<input
@@ -25,7 +36,6 @@
 					id="email"
 					type="email"
 					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
-					bind:value={email}
 					required
 				/>
 			</div>

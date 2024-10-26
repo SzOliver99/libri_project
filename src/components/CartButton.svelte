@@ -3,20 +3,28 @@
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserId, fetchCartItems, updateCartItem } from '$lib/api';
+	import { getUserToken, fetchCartItems, updateCartItem } from '$lib/api';
 
 	let showModal = false;
 	function toggleModal() {
 		showModal = !showModal;
 	}
 
+	async function incrementQuantity(index) {
+		await updateQuantity(index, 1);
+	}
+
+	async function decrementQuantity(index) {
+		await updateQuantity(index, -1);
+	}
+
 	async function updateQuantity(index, change) {
-		const userId = await getUserId();
-		if (!userId) return;
+		const userToken = getUserToken();
+		if (!userToken) return;
 
 		const item = $cartItems[index];
 		try {
-			const success = await updateCartItem(userId, item.id, change > 0 ? 1 : -1);
+			const success = await updateCartItem(userToken, item.id, change);
 
 			if (success) {
 				const newQuantity = Math.max(0, item.quantity + change);
@@ -33,9 +41,9 @@
 	}
 
 	onMount(async () => {
-		const userId = await getUserId();
-		if (userId) {
-			const cartData = await fetchCartItems(userId);
+		const userToken = getUserToken();
+		if (userToken) {
+			const cartData = await fetchCartItems(userToken);
 			if (cartData) {
 				$cartItems = cartData.books.map((book) => ({
 					id: book.id,
@@ -81,14 +89,14 @@
 							<span class="font-medium">{item.title}</span>
 							<div class="flex items-center">
 								<button
-									on:click={() => updateQuantity(index, -1)}
+									on:click={() => decrementQuantity(index)}
 									class="px-2 py-1 bg-gray-200 rounded-l-lg hover:bg-gray-300 transition-colors duration-200"
 								>
 									-
 								</button>
 								<span class="px-3 py-1 bg-gray-100">{item.quantity}</span>
 								<button
-									on:click={() => updateQuantity(index, 1)}
+									on:click={() => incrementQuantity(index)}
 									class="px-2 py-1 bg-gray-200 rounded-r-lg hover:bg-gray-300 transition-colors duration-200"
 								>
 									+

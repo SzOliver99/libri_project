@@ -20,7 +20,10 @@
 			body: JSON.stringify({ username, password })
 		});
 
-		if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+		if (!res.ok) {
+			alert('Invalid username or password');
+			return;
+		}
 
 		const data = await res.json();
 		localStorage.setItem('AuthorizationToken', `${data.token}`);

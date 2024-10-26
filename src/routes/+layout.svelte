@@ -19,7 +19,7 @@
 
 <div id="app">
 	<Navbar />
-	<main class="max-w-7xl mx-auto px-6 pt-6 pb-24 md:pb-0">
+	<main class="max-w-7xl mx-auto px-6 pt-6 pb-24 md:pb-6">
 		<slot />
 		{#if loggedIn === true}
 			<CartButton />
