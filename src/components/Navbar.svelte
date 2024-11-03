@@ -4,7 +4,7 @@
 	import NavMarker from './NavMarker.svelte';
 	import { onMount } from 'svelte';
 	import { getUserToken } from '$lib/api';
-	
+
 	let navContainer;
 
 	const navLinks = [
@@ -23,7 +23,6 @@
 	onMount(async () => {
 		loggedIn = getUserToken() ? true : false;
 	});
-
 </script>
 
 <nav class="w-full text-slate-900 bg-white shadow sticky top-0 z-50">
@@ -47,8 +46,8 @@
 				{#if loggedIn === true}
 					<a
 						href="/profile"
-						class="flex py-2 rounded-lg hover:text-primary-700 duration-300 transition-all {$page.url.pathname ===
-						`/profile`
+						class="flex py-2 rounded-lg hover:text-primary-700 duration-300 transition-all {$page
+							.url.pathname === `/profile`
 							? 'text-primary-700'
 							: 'text-slate-900'}"
 					>
@@ -131,7 +130,7 @@
 			>
 				<svelte:component this={link.icon} class="mx-auto md:me-2" stroke-width={1.5} />
 				<p class="text-xs whitespace-nowrap">{link.title}</p>
-				</a>
+			</a>
 		{/each}
 	</div>
 </nav>

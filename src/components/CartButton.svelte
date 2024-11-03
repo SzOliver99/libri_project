@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, fetchCartItems, updateCartItem } from '$lib/api';
+	import { page } from '$app/stores';
 
 	let showModal = false;
 	function toggleModal() {
@@ -58,19 +59,7 @@
 	$: $itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);
 </script>
 
-<button
-	on:click={toggleModal}
-	class="fixed bottom-24 md:bottom-4 right-4 z-50 bg-primary-800 text-white rounded-2xl p-3 flex items-center justify-center shadow-lg hover:bg-primary-700 transition-colors duration-200"
->
-	<ShoppingCartIcon size={24} />
-	<span
-		class="absolute -bottom-1 -right-1 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
-	>
-		{$itemCount}
-	</span>
-</button>
-
-{#if showModal}
+{#if showModal && $page.route.id !== '/profile'}
 	<div
 		transition:fade={{ duration: 200 }}
 		class="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center"
