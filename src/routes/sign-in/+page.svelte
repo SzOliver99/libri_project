@@ -33,7 +33,7 @@
 	async function signInWithGoogle() {}
 </script>
 
-<section class="flex items-center justify-center sm:mt-8">
+<section class="flex h-[calc(100vh-7rem)] items-center justify-center">
 	<div
 		class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all"
 	>

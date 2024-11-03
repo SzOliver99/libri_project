@@ -4,6 +4,7 @@
 	const handleSubmit = async (e) => {
 		const formData = new FormData(e.currentTarget);
 		const { email, username, password } = Object.fromEntries(formData.entries());
+		
 
 		const res = await fetch(`/api/user/sign-up`, {
 			method: 'POST',
