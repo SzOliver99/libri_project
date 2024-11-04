@@ -25,9 +25,9 @@
 <section>
 	{#if loggedIn === true}
 		<div
-			class="hidden md:flex w-full h-[calc(100vh-7rem)] overflow-hidden bg-slate-200 rounded-lg p-6"
+			class="hidden md:flex w-5/6 mx-auto h-[calc(100vh-7rem)] overflow-hidden bg-slate-200 rounded-lg p-6"
 		>
-			<div class="flex flex-col w-50">
+			<div class="flex flex-col min-w-52">
 				<h1 class="text-2xl font-bold mb-4">Profile</h1>
 				<div class="flex flex-col gap-4 h-full">
 					{#each list as item}
