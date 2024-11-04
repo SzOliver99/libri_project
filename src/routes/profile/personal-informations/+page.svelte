@@ -1,28 +1,28 @@
 <script>
 	const handleUpdateInfo = async (e) => {
 		e.preventDefault();
-        isEditing = false;
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.disabled = true;
-        });
+		isEditing = false;
+		const inputs = document.querySelectorAll('input');
+		inputs.forEach((input) => {
+			input.disabled = true;
+		});
 	};
 
-    const handleEditInfo = () => {
-        isEditing = true;
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.disabled = false;
-        });
-    };
+	const handleEditInfo = () => {
+		isEditing = true;
+		const inputs = document.querySelectorAll('input');
+		inputs.forEach((input) => {
+			input.disabled = false;
+		});
+	};
 
-    const getUserInfo = async () => {
-        const response = await fetch('/api/user/info');
-        const data = await response.json();
-        return data;
-    };
+	const getUserInfo = async () => {
+		const response = await fetch('/api/user/info');
+		const data = await response.json();
+		return data;
+	};
 
-    let isEditing = false;
+	let isEditing = false;
 </script>
 
 <div class="w-full max-w-2xl px-4">
@@ -37,7 +37,7 @@
 					type="text"
 					id="firstName"
 					placeholder="John"
-                    disabled
+					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
@@ -49,7 +49,7 @@
 					type="text"
 					id="lastName"
 					placeholder="Doe"
-                    disabled
+					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
@@ -61,8 +61,8 @@
 					type="email"
 					id="email"
 					placeholder="example@email.com"
-                    autocomplete="off"
-                    disabled
+					autocomplete="off"
+					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
@@ -74,7 +74,7 @@
 					type="tel"
 					id="phone"
 					placeholder="+36 30 123 4567"
-                    disabled
+					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
@@ -86,28 +86,31 @@
 					type="text"
 					id="username"
 					placeholder="johndoe123"
-                    disabled
+					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
 		</div>
 
 		<!-- Submit Button -->
-        <div class="flex justify-end">
-		    {#if isEditing}
-                <button type="submit" class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all">
-                    Save Changes
-                </button>
-		    {:else}
-                <button
-                    type="button"
-                    class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
-                    on:click={() => handleEditInfo()}
-                >
-                    Edit Information
-                </button>
-            {/if}
-        </div>
+		<div class="flex justify-end">
+			{#if isEditing}
+				<button
+					type="submit"
+					class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
+				>
+					Save Changes
+				</button>
+			{:else}
+				<button
+					type="button"
+					class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
+					on:click={() => handleEditInfo()}
+				>
+					Edit Information
+				</button>
+			{/if}
+		</div>
 	</form>
 
 	<!-- Change Password Section -->
@@ -118,12 +121,60 @@
 				<p class="font-medium">Password</p>
 				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
 			</div>
-			<a
-				href="/profile/change-password"
+			<button
 				class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
+				popovertarget="change-password"
 			>
 				Change Password
-			</a>
+			</button>
+		</div>
+	</div>
+	<div popover id="change-password" class="p-5 rounded-lg">
+		<h3 class="popover-title">Change Password</h3>
+		<div class="popover-content">
+			<form>
+				<div class="mb-3">
+					<label for="old-password" class="block text-sm font-medium text-gray-700"
+						>Old Password</label
+					>
+					<input
+						type="password"
+						id="old-password"
+						name="old-password"
+						required
+						class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="new-password" class="block text-sm font-medium text-gray-700"
+						>New Password</label
+					>
+					<input
+						type="password"
+						id="new-password"
+						name="new-password"
+						required
+						class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="confirm-password" class="block text-sm font-medium text-gray-700"
+						>Confirm New Password</label
+					>
+					<input
+						type="password"
+						id="confirm-password"
+						name="confirm-password"
+						required
+						class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+					/>
+				</div>
+				<button
+					type="submit"
+					class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+					>Change Password</button
+				>
+			</form>
 		</div>
 	</div>
 </div>

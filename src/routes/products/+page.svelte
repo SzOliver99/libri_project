@@ -4,8 +4,8 @@
 	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems, fetchProducts } from '$lib/api';
+	import SearchBar from '../../components/SearchBar.svelte';
 
-	
 	const refreshCartItems = async (userToken) => {
 		try {
 			const cartData = await fetchCartItems(userToken);
@@ -15,16 +15,16 @@
 				price: book.price,
 				quantity: book.quantity
 			}));
-			$itemCount = cartData.books.reduce((total, book) => total + (book.quantity), 0);
+			$itemCount = cartData.books.reduce((total, book) => total + book.quantity, 0);
 		} catch (error) {
 			console.error('Error refreshing cart items:', error);
 		}
 	};
-	
+
 	const getObjectByTitle = (title) => {
-		return $cartItems.find(item => item.title === title);
+		return $cartItems.find((item) => item.title === title);
 	};
-	
+
 	async function incrementQuantity(product) {
 		await updateQuantity(product, 1);
 	}
@@ -32,11 +32,11 @@
 	async function decrementQuantity(product) {
 		await updateQuantity(product, -1);
 	}
-	
+
 	async function updateQuantity(product, change) {
 		const userToken = getUserToken();
 		if (!userToken) return;
-		
+
 		const item = getObjectByTitle(product.title) || product;
 		try {
 			const success = await updateCartItem(userToken, item.id, change);
@@ -49,7 +49,7 @@
 			console.error('Error updating quantity:', error);
 		}
 	}
-	
+
 	let products = [];
 	onMount(async () => {
 		const userToken = getUserToken();
@@ -60,6 +60,8 @@
 		products = await fetchProducts();
 	});
 </script>
+
+<SearchBar />
 
 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
 	{#each products as product}
@@ -88,11 +90,13 @@
 						<button
 							type="submit"
 							class="hidden md:flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
-						><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button>
+							><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
+						>
 						<button
 							type="submit"
 							class="md:hidden flex justify-center w-full px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
-						><ShoppingBasketIcon stroke-width={1.5} /></button>
+							><ShoppingBasketIcon stroke-width={1.5} /></button
+						>
 					{:else}
 						<div class="flex items-center w-full">
 							<button

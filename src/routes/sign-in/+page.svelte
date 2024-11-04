@@ -33,7 +33,7 @@
 	async function signInWithGoogle() {}
 </script>
 
-<section class="flex h-[calc(100vh-7rem)] items-center justify-center">
+<section class="flex h-[calc(100vh-8rem)] sm:h-[calc(100vh-7rem)] items-center justify-center">
 	<div
 		class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all"
 	>
@@ -49,7 +49,7 @@
 					name="username"
 					id="username"
 					type="text"
-					class="w-full px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
+					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
 					autocomplete="off"
 					required
 				/>
@@ -61,7 +61,7 @@
 					name="password"
 					id="password"
 					type="password"
-					class="w-full px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
+					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
 					required
 				/>
 			</div>

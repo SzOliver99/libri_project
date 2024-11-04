@@ -4,7 +4,6 @@
 	const handleSubmit = async (e) => {
 		const formData = new FormData(e.currentTarget);
 		const { email, username, password } = Object.fromEntries(formData.entries());
-		
 
 		const res = await fetch(`/api/user/sign-up`, {
 			method: 'POST',
@@ -22,7 +21,7 @@
 	};
 </script>
 
-<section class="flex items-center justify-center sm:mt-8">
+<section class="flex h-[calc(100vh-8rem)] sm:h-[calc(100vh-7rem)] items-center justify-center">
 	<div
 		class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all"
 	>
@@ -38,7 +37,7 @@
 					name="email"
 					id="email"
 					type="email"
-					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
+					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
 					autocomplete="off"
 				/>
 			</div>
@@ -49,7 +48,7 @@
 					name="username"
 					id="username"
 					type="text"
-					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
+					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
 					autocomplete="off"
 				/>
 			</div>
@@ -60,7 +59,7 @@
 					name="password"
 					id="password"
 					type="password"
-					class="w-full bg-btn_primary px-3 py-2 rounded-lg shadow-inner focus:outline-none focus:shadow-lg"
+					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
 				/>
 			</div>
 

@@ -66,9 +66,9 @@
 	{#if purchases.length === 0}
 		<p class="text-gray-500 text-center py-8">No purchase history available</p>
 	{:else}
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		<div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
 			{#each purchases as purchase}
-				<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+				<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 h-full">
 					<div class="flex justify-between items-center mb-4">
 						<div>
 							<p class="text-sm text-gray-500">Order #{purchase.id}</p>
@@ -83,7 +83,7 @@
 						</span>
 					</div>
 
-					<div class="border-t border-gray-200 py-4">
+					<div class="border-y border-gray-200 py-4">
 						{#each purchase.items as item}
 							<div class="flex justify-between items-center py-2">
 								<div>
@@ -95,7 +95,7 @@
 						{/each}
 					</div>
 
-					<div class="border-t border-gray-200 pt-4 flex justify-between items-center">
+					<div class="border-gray-200 pt-4 flex justify-between items-center mt-auto">
 						<p class="font-medium">Total</p>
 						<p class="font-bold text-lg">${purchase.total}</p>
 					</div>
