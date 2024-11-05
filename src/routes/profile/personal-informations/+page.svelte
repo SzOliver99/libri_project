@@ -1,4 +1,6 @@
 <script>
+	import { onMount } from 'svelte';
+
 	const handleUpdateInfo = async (e) => {
 		e.preventDefault();
 		isEditing = false;
@@ -8,13 +10,19 @@
 		});
 	};
 
-	const handleEditInfo = () => {
+	function handleEditInfo() {
 		isEditing = true;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
 			input.disabled = false;
 		});
-	};
+	}
+
+	async function handleChangePassword() {
+		const response = await fetch('/api/user/change-password', { method: 'POST' });
+		const data = await response.json();
+		console.log(data);
+	}
 
 	const getUserInfo = async () => {
 		const response = await fetch('/api/user/info');
@@ -23,6 +31,10 @@
 	};
 
 	let isEditing = false;
+	onMount(async () => {
+		const userInfo = await getUserInfo();
+		console.log(userInfo);
+	});
 </script>
 
 <div class="w-full max-w-2xl px-4">
@@ -132,7 +144,7 @@
 	<div popover id="change-password" class="p-5 rounded-lg">
 		<h3 class="popover-title">Change Password</h3>
 		<div class="popover-content">
-			<form>
+			<form on:submit|preventDefault={handleChangePassword}>
 				<div class="mb-3">
 					<label for="old-password" class="block text-sm font-medium text-gray-700"
 						>Old Password</label
