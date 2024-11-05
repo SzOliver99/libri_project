@@ -1,8 +1,6 @@
 <script>
 	import { getUserToken } from '$lib/api';
 	import { onMount } from 'svelte';
-	import { UserIcon } from 'lucide-svelte';
-	import { page } from '$app/stores';
 
 	const handleSignOut = () => {
 		localStorage.clear();
