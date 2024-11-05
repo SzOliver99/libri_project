@@ -128,7 +128,7 @@
 	<!-- Change Password Section -->
 	<div class="mt-10">
 		<h3 class="text-xl font-semibold mb-4">Security</h3>
-		<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+		<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
 			<div>
 				<p class="font-medium">Password</p>
 				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
