@@ -21,10 +21,8 @@
 	};
 </script>
 
-<section class="flex h-[calc(100vh-8rem)] sm:h-[calc(100vh-7rem)] items-center justify-center">
-	<div
-		class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all"
-	>
+<section class="flex h-[calc(100vh-8rem)] sm:h-auto sm:mt-8 items-center justify-center">
+	<div class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all">
 		<div class="flex mb-6 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-700">Register</h1>
 		</div>
@@ -64,12 +62,7 @@
 			</div>
 
 			<div class="text-center">
-				<button
-					type="submit"
-					class="bg-primary-800 text-white px-8 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
-				>
-					Sign Up
-				</button>
+				<button type="submit" class="bg-primary-800 text-white px-8 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"> Sign Up </button>
 			</div>
 		</form>
 	</div>

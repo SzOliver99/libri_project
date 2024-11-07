@@ -20,7 +20,7 @@
 	}
 </script>
 
-<section class="flex items-center justify-center sm:mt-8">
+<section class="flex h-[calc(100vh-8rem)] sm:h-auto sm:mt-8 items-center justify-center">
 	<div class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all">
 		<div class="flex mb-6 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-700">Forgot Password</h1>

@@ -3,11 +3,11 @@
 	import facebook_img from '$lib/images/facebook_img.png';
 	import twitter_img from '$lib/images/twitter_img.png';
 
-	let different_methods = [
-		{ name: 'Google', img: google_img, method: 'google', disabled: false },
-		{ name: 'Facebook', img: facebook_img, method: 'facebook', disabled: true },
-		{ name: 'Twitter', img: twitter_img, method: 'twitter', disabled: true }
-	];
+	// let different_methods = [
+	// 	{ name: 'Google', img: google_img, method: 'google', disabled: false },
+	// 	{ name: 'Facebook', img: facebook_img, method: 'facebook', disabled: true },
+	// 	{ name: 'Twitter', img: twitter_img, method: 'twitter', disabled: true }
+	// ];
 
 	const handleSubmit = async (e) => {
 		const formData = new FormData(e.currentTarget);
@@ -33,7 +33,7 @@
 	async function signInWithGoogle() {}
 </script>
 
-<section class="flex h-[calc(100vh-8rem)] sm:h-[calc(100vh-7rem)] items-center justify-center">
+<section class="flex h-[calc(100vh-8rem)] sm:h-auto sm:mt-8 items-center justify-center">
 	<div class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all">
 		<div class="flex mb-6 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-700">Login</h1>
