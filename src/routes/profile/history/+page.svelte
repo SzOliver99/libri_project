@@ -56,6 +56,58 @@
 			],
 			total: 79.99,
 			status: 'Processing'
+		},
+		{
+			id: 2,
+			date: '2023-12-20',
+			items: [
+				{
+					name: 'Product 3',
+					quantity: 1,
+					price: 79.99
+				}
+			],
+			total: 79.99,
+			status: 'Processing'
+		},
+		{
+			id: 2,
+			date: '2023-12-20',
+			items: [
+				{
+					name: 'Product 3',
+					quantity: 1,
+					price: 79.99
+				}
+			],
+			total: 79.99,
+			status: 'Processing'
+		},
+		{
+			id: 2,
+			date: '2023-12-20',
+			items: [
+				{
+					name: 'Product 3',
+					quantity: 1,
+					price: 79.99
+				}
+			],
+			total: 79.99,
+			status: 'Processing'
+		},
+		{
+			id: 2,
+			date: '2023-12-20',
+			items: [
+				{
+					name: 'Product 3',
+					quantity: 1,
+					price: 79.99
+				}
+			],
+			total: 79.99,
+			status: 'Processing'
 		}
 	];
 </script>
@@ -74,11 +126,7 @@
 							<p class="text-sm text-gray-500">Order #{purchase.id}</p>
 							<p class="text-sm text-gray-500">{purchase.date}</p>
 						</div>
-						<span
-							class="px-3 py-1 text-sm rounded-full {purchase.status === 'Delivered'
-								? 'bg-green-100 text-green-800'
-								: 'bg-yellow-100 text-yellow-800'}"
-						>
+						<span class="px-3 py-1 text-sm rounded-full {purchase.status === 'Delivered' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
 							{purchase.status}
 						</span>
 					</div>

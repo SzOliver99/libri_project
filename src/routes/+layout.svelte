@@ -33,9 +33,9 @@
 
 <div id="app">
 	<Navbar />
-	<main class="max-w-7xl mx-auto px-6 pt-6 pb-24 md:pb-6">
+	<main class="max-w-7xl mx-auto px-6 pb-24 md:pb-6" class:mt-6={!$page.url.pathname.includes('/profile')} class:md:pb-0={$page.url.pathname.includes('/profile')}>
 		<slot />
-		{#if loggedIn === true && !$page.route.id.includes('/profile')}
+		{#if loggedIn === true && !$page.url.pathname.includes('/profile')}
 			<CartButton />
 		{/if}
 	</main>
