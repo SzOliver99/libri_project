@@ -23,6 +23,7 @@
 
 					console.log('Your session expired please relogin');
 					// TODO: Implement relogin
+					window.location.href = '/';
 				}
 			});
 	});

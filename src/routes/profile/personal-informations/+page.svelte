@@ -1,22 +1,20 @@
 <script>
-	import { onMount } from 'svelte';
-	import { getUserToken } from '$lib/api';
-	import { applyAction } from '$app/forms';
-
-	const handleUpdateInfo = async (e) => {
-		e.preventDefault();
-		isEditing = false;
-		const inputs = document.querySelectorAll('input');
-		inputs.forEach((input) => {
-			input.disabled = true;
-		});
-	};
+	import { beforeUpdate } from 'svelte';
+	import { getUserToken, getUserInfo } from '$lib/api';
 
 	function handleEditInfo() {
 		isEditing = true;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
 			input.disabled = false;
+		});
+	}
+
+	async function handleUpdateInfo(event) {
+		isEditing = false;
+		const inputs = document.querySelectorAll('input');
+		inputs.forEach((input) => {
+			input.disabled = true;
 		});
 	}
 
@@ -46,16 +44,12 @@
 		}
 	}
 
-	const getUserInfo = async () => {
-		const response = await fetch('/api/user/info');
-		const data = await response.json();
-		return data;
-	};
-
 	let isEditing = false;
-	onMount(async () => {
+	let { first_name, last_name, phone_number } = '';
+	beforeUpdate(async () => {
 		const userInfo = await getUserInfo();
-		console.log(userInfo);
+
+		({ first_name, last_name, phone_number } = userInfo);
 	});
 </script>
 
@@ -66,11 +60,13 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			<!-- First Name -->
 			<div>
-				<label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+				<label for="firstName" class="block text-sm font-medium text-gray-700">First Name*</label>
 				<input
 					type="text"
 					id="firstName"
 					placeholder="John"
+					value={first_name || ''}
+					required
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -78,24 +74,13 @@
 
 			<!-- Last Name -->
 			<div>
-				<label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+				<label for="lastName" class="block text-sm font-medium text-gray-700">Last Name*</label>
 				<input
 					type="text"
 					id="lastName"
 					placeholder="Doe"
-					disabled
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-				/>
-			</div>
-
-			<!-- Email -->
-			<div>
-				<label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-				<input
-					type="email"
-					id="email"
-					placeholder="example@email.com"
-					autocomplete="off"
+					value={last_name || ''}
+					required
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -103,23 +88,13 @@
 
 			<!-- Phone Number -->
 			<div>
-				<label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+				<label for="phone" class="block text-sm font-medium text-gray-700">Phone Number*</label>
 				<input
 					type="tel"
 					id="phone"
 					placeholder="+36 30 123 4567"
-					disabled
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-				/>
-			</div>
-
-			<!-- Username -->
-			<div>
-				<label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-				<input
-					type="text"
-					id="username"
-					placeholder="johndoe123"
+					value={phone_number || ''}
+					required
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -139,6 +114,20 @@
 	<!-- Change Password Section -->
 	<div class="mt-10">
 		<h3 class="text-xl font-semibold mb-4">Security</h3>
+		<div class="flex mb-5 items-center justify-between p-3 bg-gray-50 rounded-lg">
+			<div>
+				<p class="font-medium">Username</p>
+				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
+			</div>
+			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-password"> Change Username </button>
+		</div>
+		<div class="flex mb-5 items-center justify-between p-3 bg-gray-50 rounded-lg">
+			<div>
+				<p class="font-medium">Email</p>
+				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
+			</div>
+			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-password"> Change Email </button>
+		</div>
 		<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
 			<div>
 				<p class="font-medium">Password</p>

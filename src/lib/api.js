@@ -2,6 +2,20 @@ export const getUserToken = () => {
 	return localStorage.getItem('AuthorizationToken');
 };
 
+export async function getUserInfo() {
+	try {
+		const response = await fetch('/api/user/info', {
+			headers: {
+				Authorization: `${getUserToken()}`
+			}
+		});
+		const data = await response.json();
+		return data;
+	} catch {
+		console.log('asd');
+	}
+}
+
 export const updateCartItem = async (userToken, productId, change) => {
 	try {
 		const response = await fetch(`/api/cart/book/`, {

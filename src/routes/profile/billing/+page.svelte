@@ -1,4 +1,7 @@
 <script>
+	import { onMount } from 'svelte';
+	import { getUserInfo } from '$lib/api';
+
 	const handleUpdateInfo = async (e) => {
 		e.preventDefault();
 		isEditing = false;
@@ -17,6 +20,12 @@
 	};
 
 	let isEditing = false;
+	let { billing_address, city, state_province, postal_code } = '';
+	onMount(async () => {
+		const userInfo = await getUserInfo();
+
+		({ billing_address, city, state_province, postal_code } = userInfo);
+	});
 </script>
 
 <div class="w-full max-w-2xl px-4">
@@ -26,11 +35,13 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			<!-- Billing Address -->
 			<div>
-				<label for="address" class="block text-sm font-medium text-gray-700">Billing Address</label>
+				<label for="address" class="block text-sm font-medium text-gray-700">Billing Address*</label>
 				<input
 					type="text"
 					id="address"
 					placeholder="1234 Main St"
+					value={billing_address || ''}
+					required
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -38,11 +49,13 @@
 
 			<!-- City -->
 			<div>
-				<label for="city" class="block text-sm font-medium text-gray-700">City</label>
+				<label for="city" class="block text-sm font-medium text-gray-700">City*</label>
 				<input
 					type="text"
 					id="city"
 					placeholder="New York"
+					value={city || ''}
+					required
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -55,6 +68,7 @@
 					type="text"
 					id="state"
 					placeholder="NY"
+					value={state_province || ''}
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -62,11 +76,13 @@
 
 			<!-- Postal Code -->
 			<div>
-				<label for="postalCode" class="block text-sm font-medium text-gray-700">Postal Code</label>
+				<label for="postalCode" class="block text-sm font-medium text-gray-700">Postal Code*</label>
 				<input
 					type="text"
 					id="postalCode"
 					placeholder="10001"
+					value={postal_code || ''}
+					required
 					disabled
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
@@ -76,20 +92,9 @@
 		<!-- Submit Button -->
 		<div class="flex justify-end">
 			{#if isEditing}
-				<button
-					type="submit"
-					class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
-				>
-					Save Changes
-				</button>
+				<button type="submit" class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"> Save Changes </button>
 			{:else}
-				<button
-					type="button"
-					class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"
-					on:click={() => handleEditInfo()}
-				>
-					Edit Information
-				</button>
+				<button type="button" class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" on:click={() => handleEditInfo()}> Edit Information </button>
 			{/if}
 		</div>
 	</form>
