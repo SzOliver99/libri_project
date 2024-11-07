@@ -9,7 +9,7 @@
 	<input
 		type="search"
 		on:keyup|preventDefault={(e) => searchHandle(e)}
-		class="w-full p-2 pl-10 text-sm text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+		class="mt-1 block w-full px-3 py-3 pl-6 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
 		placeholder="Search products..."
 	/>
 </div>
