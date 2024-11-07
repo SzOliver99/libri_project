@@ -65,17 +65,10 @@
 
 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
 	{#each products as product}
-		<div
-			class="relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all"
-			data-sveltekit-preload-data="tap"
-		>
+		<div class="relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all" data-sveltekit-preload-data="tap">
 			<a href={`${base}/products/${product.id}`}>
 				<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
-					<img
-						src={product.image_src}
-						alt={product.title}
-						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
-					/>
+					<img src={product.image_src} alt={product.title} class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
 				</div>
 				<div class="mt-4 mb-2 break-word overflow-hidden">
 					<h3 class="text-slate-900 font-bold text-base md:text-lg">{product.title}</h3>
@@ -87,14 +80,10 @@
 				<form on:submit|preventDefault={() => incrementQuantity(product)}>
 					<input type="hidden" value={product.id} name="productId" />
 					{#if !$cartItems.some((item) => item.title === product.title)}
-						<button
-							type="submit"
-							class="hidden md:flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
+						<button type="submit" class="hidden md:flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
 							><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 						>
-						<button
-							type="submit"
-							class="md:hidden flex justify-center w-full px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
+						<button type="submit" class="md:hidden flex justify-center w-full px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
 							><ShoppingBasketIcon stroke-width={1.5} /></button
 						>
 					{:else}

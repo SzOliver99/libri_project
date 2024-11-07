@@ -52,24 +52,16 @@
 	});
 </script>
 
-<section
-	class="grid grid-cols-1 md:grid-cols-2 group relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all gap-6"
->
+<section class="grid grid-cols-1 md:grid-cols-2 group relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all gap-6">
 	<div class="aspect-square w-1/2 md:w-full overflow-hidden rounded-lg bg-gray-200">
-		<img
-			class="h-full w-full object-cover object-center lg:h-full lg:w-full"
-			src={product.image_src}
-			alt={product.title}
-		/>
+		<img class="h-full w-full object-cover object-center lg:h-full lg:w-full" src={product.image_src} alt={product.title} />
 	</div>
 	<div>
 		<div class="mt-4 break-all">
 			<h3 class="text-slate-900 text-2xl font-bold">{product.title}</h3>
 			<div class="ml-2">
 				<p class="text-sm text-slate-800 mb-2">{product.author}</p>
-				<p class="text-sm text-slate-800">
-					asdasdasdasdasdaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-				</p>
+				<p class="text-sm text-slate-800">asdasdasdasdasdaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 			</div>
 		</div>
 		<div>
@@ -78,9 +70,7 @@
 			</p>
 			<form on:submit={handleAddToCart} class="w-full">
 				<input type="hidden" value={data.productId} name="productId" />
-				<button
-					type="submit"
-					class="flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all w-full justify-center"
+				<button type="submit" class="flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all w-full justify-center"
 					><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 				>
 			</form>

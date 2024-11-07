@@ -1,6 +1,7 @@
 <script>
 	import { beforeUpdate } from 'svelte';
-	import { getUserToken, getUserInfo } from '$lib/api';
+	import { getUserInfo } from '$lib/api';
+	import ChangePopover from './ChangePopover.svelte';
 
 	function handleEditInfo() {
 		isEditing = true;
@@ -16,32 +17,6 @@
 		inputs.forEach((input) => {
 			input.disabled = true;
 		});
-	}
-
-	async function handleChangePassword(e) {
-		const formData = new FormData(e.currentTarget);
-		const { oldPassword, newPassword, confirmPassword } = Object.fromEntries(formData.entries());
-
-		if (newPassword !== confirmPassword) {
-			alert('New passwords do not match!');
-			return;
-		}
-
-		const response = await fetch('/api/user/change-password', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
-			},
-			body: JSON.stringify({ old_password: oldPassword, new_password: newPassword })
-		});
-		const data = await response.json();
-		if (response.ok) {
-			console.log('Password changed successfully!');
-			e.target.hidePopover();
-		} else {
-			console.log();
-		}
 	}
 
 	let isEditing = false;
@@ -119,14 +94,14 @@
 				<p class="font-medium">Username</p>
 				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
 			</div>
-			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-password"> Change Username </button>
+			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-username"> Change Username </button>
 		</div>
 		<div class="flex mb-5 items-center justify-between p-3 bg-gray-50 rounded-lg">
 			<div>
 				<p class="font-medium">Email</p>
 				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
 			</div>
-			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-password"> Change Email </button>
+			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-email"> Change Email </button>
 		</div>
 		<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
 			<div>
@@ -136,44 +111,5 @@
 			<button class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all" popovertarget="change-password"> Change Password </button>
 		</div>
 	</div>
-	<form on:submit|preventDefault={handleChangePassword} popover id="change-password" class="p-10 shadow-lg rounded-lg">
-		<h3 class="pb-3 font-bold">Change Password</h3>
-		<div class="popover-content">
-			<div class="mb-3">
-				<label for="old-password" class="block text-sm font-medium text-gray-700">Old Password</label>
-				<input
-					type="password"
-					id="old-password"
-					name="oldPassword"
-					required
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-				/>
-			</div>
-			<div class="mb-3">
-				<label for="new-password" class="block text-sm font-medium text-gray-700">New Password</label>
-				<input
-					type="password"
-					id="new-password"
-					name="newPassword"
-					required
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-				/>
-			</div>
-			<div class="mb-3">
-				<label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
-				<input
-					type="password"
-					id="confirm-password"
-					name="confirmPassword"
-					required
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-				/>
-			</div>
-			<button
-				type="submit"
-				class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-				popovertargetaction="hide">Change Password</button
-			>
-		</div>
-	</form>
+	<ChangePopover />
 </div>
