@@ -1,8 +1,21 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
+	$: filteredList = [];
 	async function searchHandle(event) {
 		// TODO: Implement searchBar
 		console.log(event.target.value);
+		const res = await fetch('/api/books/filter-by', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ content: event.target.value })
+		});
+		filteredList = await res.json();
 	}
+	$: dispatch('update', { list: filteredList });
 </script>
 
 <div class="flex justify-center mb-6">

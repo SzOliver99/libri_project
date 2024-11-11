@@ -50,6 +50,10 @@
 		}
 	}
 
+	function handleUpdate(event) {
+		products = event.detail.list;
+	}
+
 	let products = [];
 	onMount(async () => {
 		const userToken = getUserToken();
@@ -61,7 +65,7 @@
 	});
 </script>
 
-<SearchBar />
+<SearchBar on:update={handleUpdate} />
 
 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
 	{#each products as product}
