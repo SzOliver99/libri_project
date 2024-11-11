@@ -23,6 +23,6 @@
 		type="search"
 		on:keyup|preventDefault={(e) => searchHandle(e)}
 		class="mt-1 block w-full px-3 py-3 pl-6 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-		placeholder="Search products..."
+		placeholder="Search products or authors..."
 	/>
 </div>

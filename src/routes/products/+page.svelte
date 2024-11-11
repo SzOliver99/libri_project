@@ -72,7 +72,7 @@
 		<div class="relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all" data-sveltekit-preload-data="tap">
 			<a href={`${base}/products/${product.id}`}>
 				<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
-					<img src={product.image_src} alt={product.title} class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+					<img src={product.image_src} alt={product.title} class="h-full w-full object-cover object-center lg:h-full lg:w-full	" />
 				</div>
 				<div class="mt-4 mb-2 break-word overflow-hidden">
 					<h3 class="text-slate-900 font-bold text-base md:text-lg">{product.title}</h3>
