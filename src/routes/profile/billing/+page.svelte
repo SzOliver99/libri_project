@@ -1,14 +1,23 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getUserInfo } from '$lib/api';
+	import { getUserInfo, getUserToken } from '$lib/api';
 
-	const handleUpdateInfo = async (e) => {
-		e.preventDefault();
+	const handleUpdateInfo = async (event) => {
 		isEditing = false;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
 			input.disabled = true;
 		});
+
+		const response = await fetch('/api/user/change-info', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${getUserToken()}`
+			},
+			body: JSON.stringify({ billing_address: billingAddress.value, city: cityAddress.value, state_province: state.value, postal_code: postalCode.value })
+		});
+		console.log(await response.json());
 	};
 
 	const handleEditInfo = () => {
@@ -35,10 +44,10 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			<!-- Billing Address -->
 			<div>
-				<label for="address" class="block text-sm font-medium text-gray-700">Billing Address*</label>
+				<label for="billingAddress" class="block text-sm font-medium text-gray-700">Billing Address*</label>
 				<input
 					type="text"
-					id="address"
+					id="billingAddress"
 					placeholder="1234 Main St"
 					value={billing_address || ''}
 					required
@@ -49,10 +58,10 @@
 
 			<!-- City -->
 			<div>
-				<label for="city" class="block text-sm font-medium text-gray-700">City*</label>
+				<label for="cityAddress" class="block text-sm font-medium text-gray-700">City*</label>
 				<input
 					type="text"
-					id="city"
+					id="cityAddress"
 					placeholder="New York"
 					value={city || ''}
 					required

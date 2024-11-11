@@ -1,6 +1,6 @@
 <script>
-	import { beforeUpdate } from 'svelte';
-	import { getUserInfo } from '$lib/api';
+	import { getUserInfo, getUserToken } from '$lib/api';
+	import { onMount } from 'svelte';
 	import ChangePopover from './ChangePopover.svelte';
 
 	function handleEditInfo() {
@@ -17,11 +17,21 @@
 		inputs.forEach((input) => {
 			input.disabled = true;
 		});
+
+		const response = await fetch('/api/user/change-info', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${getUserToken()}`
+			},
+			body: JSON.stringify({ first_name: firstName.value, last_name: lastName.value, phone_number: phone.value })
+		});
+		console.log(await response.json());
 	}
 
 	let isEditing = false;
 	let { first_name, last_name, phone_number } = '';
-	beforeUpdate(async () => {
+	onMount(async () => {
 		const userInfo = await getUserInfo();
 
 		({ first_name, last_name, phone_number } = userInfo);
@@ -33,12 +43,12 @@
 
 	<form on:submit|preventDefault={handleUpdateInfo} class="space-y-6">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-			<!-- First Name -->
 			<div>
 				<label for="firstName" class="block text-sm font-medium text-gray-700">First Name*</label>
 				<input
 					type="text"
 					id="firstName"
+					name="firstName"
 					placeholder="John"
 					value={first_name || ''}
 					required
@@ -46,13 +56,12 @@
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
-
-			<!-- Last Name -->
 			<div>
 				<label for="lastName" class="block text-sm font-medium text-gray-700">Last Name*</label>
 				<input
 					type="text"
 					id="lastName"
+					name="lastName"
 					placeholder="Doe"
 					value={last_name || ''}
 					required
@@ -60,13 +69,12 @@
 					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
 				/>
 			</div>
-
-			<!-- Phone Number -->
 			<div>
 				<label for="phone" class="block text-sm font-medium text-gray-700">Phone Number*</label>
 				<input
 					type="tel"
 					id="phone"
+					name="phone_number"
 					placeholder="+36 30 123 4567"
 					value={phone_number || ''}
 					required
