@@ -1,15 +1,16 @@
 <script>
 	import { page } from '$app/stores';
-	import { afterUpdate, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
-	export let navLinks;
-	export let navContainer;
+	// export let navLinks;
+	// export let navContainer;
+	const { navLinks, navContainer } = $props();
 	let marker;
-	let activeIndex = -1;
+	let activeIndex = $state(-1);
 
-	$: {
+	$effect(() => {
 		activeIndex = navLinks.findIndex((link) => $page.url.pathname === link.href);
-	}
+	});
 
 	function updateMarkerPosition() {
 		if (navContainer) {
@@ -37,24 +38,22 @@
 		};
 	});
 
-	afterUpdate(() => {
+	$effect(() => {
 		updateMarkerPosition();
 	});
 
-	$: if (activeIndex !== -1) {
-		setTimeout(updateMarkerPosition, 0);
-	}
+	$effect(() => {
+		if (activeIndex !== -1) {
+			setTimeout(updateMarkerPosition, 0);
+		}
+	});
 </script>
 
 <svelte:window on:resize={handleResize} />
 
-<div
-	bind:this={marker}
-	id="marker"
-	class="absolute top-0 h-1 bg-primary-700 rounded-b-lg"
-></div>
+<div bind:this={marker} id="marker" class="bg-primary-700 absolute top-0 h-1 rounded-b-lg"></div>
 
-<style>
+<style lang="postcss">
 	#marker {
 		left: var(--marker-left, 0);
 		width: var(--marker-width, 0);

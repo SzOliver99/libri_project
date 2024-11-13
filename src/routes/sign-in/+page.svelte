@@ -33,9 +33,11 @@
 	async function signInWithGoogle() {}
 </script>
 
-<section class="flex h-[calc(100vh-8rem)] sm:h-auto sm:mt-8 items-center justify-center">
-	<div class="p-6 rounded-lg shadow-lg max-w-md w-full hover:-translate-y-1 duration-300 transition-all">
-		<div class="flex mb-6 justify-between items-center">
+<section class="flex h-[calc(100vh-8rem)] items-center justify-center sm:mt-8 sm:h-auto">
+	<div
+		class="w-full max-w-md rounded-lg p-6 shadow-lg transition-all duration-300 hover:-translate-y-1"
+	>
+		<div class="mb-6 flex items-center justify-between">
 			<h1 class="text-2xl font-bold text-gray-700">Login</h1>
 		</div>
 
@@ -47,7 +49,7 @@
 					name="username"
 					id="username"
 					type="text"
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+					class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
 					autocomplete="off"
 					required
 				/>
@@ -59,17 +61,22 @@
 					name="password"
 					id="password"
 					type="password"
-					class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+					class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
 					required
 				/>
 			</div>
 
-			<div class="text-center mt-6 mb-2">
+			<div class="mb-2 mt-6 text-center">
 				<a href="/forgot-password">Forgot Password?</a>
 			</div>
 
 			<div class="text-center">
-				<button type="submit" class="bg-primary-800 text-white px-8 py-2 rounded-lg hover:bg-primary-700 duration-300 transition-all"> Sign in </button>
+				<button
+					type="submit"
+					class="bg-primary-800 hover:bg-primary-700 rounded-lg px-8 py-2 text-white transition-all duration-300"
+				>
+					Sign in
+				</button>
 			</div>
 
 			<!-- <div class="text-center mt-5 mb-2">
@@ -96,7 +103,7 @@
 	</div>
 </section>
 
-<style lang="postcss">
+<!-- <style lang="postcss">
 	#different_auths img {
 		width: 30px;
 	}
@@ -104,4 +111,4 @@
 	#different_auths img.grayscale {
 		cursor: default;
 	}
-</style>
+</style> -->

@@ -1,7 +1,4 @@
 <script>
 </script>
 
-<div>MainPage</div>
-
-<style>
-</style>
+<section>Main Page</section>

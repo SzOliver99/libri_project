@@ -1,6 +1,5 @@
 <script>
 	import { ShoppingBasketIcon } from 'lucide-svelte';
-	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems } from '$lib/api';
 
@@ -39,38 +38,50 @@
 		}
 	};
 
-	export let data;
-	let product = [];
+	let { data } = $props();
+	let product = $state([]);
 
-	onMount(async () => {
+	$effect(async () => {
 		const userToken = getUserToken();
 		if (userToken) {
 			await refreshCartItems(userToken);
 		}
+	});
 
+	$effect(async () => {
 		product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
 	});
 </script>
 
-<section class="grid grid-cols-1 md:grid-cols-2 group relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all gap-6">
-	<div class="aspect-square w-1/2 md:w-full overflow-hidden rounded-lg bg-gray-200">
-		<img class="h-full w-full object-cover object-center lg:h-full lg:w-full" src={product.image_src} alt={product.title} />
+<section
+	class="group relative grid grid-cols-1 gap-6 rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1 md:grid-cols-2"
+>
+	<div class="aspect-square w-1/2 overflow-hidden rounded-lg bg-gray-200 md:w-full">
+		<img
+			class="h-full w-full object-contain lg:h-full lg:w-full"
+			src={product.image_src}
+			alt={product.title}
+		/>
 	</div>
-	<div>
+	<div class="flex h-[calc(100%-2rem)] flex-col">
 		<div class="mt-4 break-all">
-			<h3 class="text-slate-900 text-2xl font-bold">{product.title}</h3>
+			<h3 class="text-2xl font-bold text-slate-900">{product.title}</h3>
 			<div class="ml-2">
-				<p class="text-sm text-slate-800 mb-2">{product.author}</p>
-				<p class="text-sm text-slate-800">asdasdasdasdasdaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+				<p class="mb-2 text-sm text-slate-800">{product.author}</p>
+				<p class="text-sm text-slate-800">
+					asdasdasdasdasdaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+				</p>
 			</div>
 		</div>
-		<div>
-			<p class="font-bold text-slate-900 text-xl mt-4 ml-2">
+		<div class="mt-auto">
+			<p class="ml-2 mt-4 text-xl font-bold text-slate-900">
 				{product.price} Ft
 			</p>
 			<form on:submit={handleAddToCart} class="w-full">
 				<input type="hidden" value={data.productId} name="productId" />
-				<button type="submit" class="flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all w-full justify-center"
+				<button
+					type="submit"
+					class="bg-primary-800 hover:bg-primary-700 flex w-full justify-center gap-2 rounded-lg px-3 py-2 text-white transition-all duration-300"
 					><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 				>
 			</form>

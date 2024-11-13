@@ -1,7 +1,6 @@
 <script>
 	import { base } from '$app/paths';
 	import { ShoppingBasketIcon } from 'lucide-svelte';
-	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems, fetchProducts } from '$lib/api';
 	import SearchBar from '../../components/SearchBar.svelte';
@@ -54,8 +53,8 @@
 		products = event.detail.list;
 	}
 
-	let products = [];
-	onMount(async () => {
+	let products = $state([]);
+	$effect(async () => {
 		const userToken = getUserToken();
 		if (userToken) {
 			await refreshCartItems(userToken);
@@ -66,48 +65,58 @@
 </script>
 
 <SearchBar on:update={handleUpdate} />
-
 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
 	{#each products as product}
-		<div class="relative shadow p-3 rounded-2xl hover:-translate-y-1 duration-300 transition-all" data-sveltekit-preload-data="tap">
+		<div
+			class="flex h-full flex-col rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1"
+			data-sveltekit-preload-data="tap"
+		>
 			<a href={`${base}/products/${product.id}`}>
 				<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
-					<img src={product.image_src} alt={product.title} class="h-full w-full object-cover object-center lg:h-full lg:w-full	" />
+					<img
+						src={product.image_src}
+						alt={product.title}
+						class="object h-full w-full object-contain lg:h-full lg:w-full"
+					/>
 				</div>
-				<div class="mt-4 mb-2 break-word overflow-hidden">
-					<h3 class="text-slate-900 font-bold text-base md:text-lg">{product.title}</h3>
-					<p class="text-xs md:text-sm text-slate-700">{product.author}</p>
+				<div class="break-word mb-2 mt-4 overflow-hidden">
+					<h3 class="text-base font-bold text-slate-900 md:text-lg">{product.title}</h3>
+					<p class="text-xs text-slate-700 md:text-sm">{product.author}</p>
 				</div>
 			</a>
-			<div class="flex flex-col md:flex-row md:items-center justify-between">
-				<p class="font-bold text-slate-900 text-lg md:text-xl">{product.price} Ft</p>
-				<form on:submit|preventDefault={() => incrementQuantity(product)}>
+			<div class="mt-auto flex flex-col justify-between md:flex-row md:items-center">
+				<p class="text-lg font-bold text-slate-900 md:text-xl">{product.price} Ft</p>
+				<form onsubmit={() => incrementQuantity(product)}>
 					<input type="hidden" value={product.id} name="productId" />
 					{#if !$cartItems.some((item) => item.title === product.title)}
-						<button type="submit" class="hidden md:flex px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
+						<button
+							type="submit"
+							class="hidden gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700 md:flex"
 							><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 						>
-						<button type="submit" class="md:hidden flex justify-center w-full px-3 py-2 bg-primary-800 rounded-lg text-white gap-2 hover:bg-primary-700 duration-300 transition-all"
+						<button
+							type="submit"
+							class="flex w-full justify-center gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700 md:hidden"
 							><ShoppingBasketIcon stroke-width={1.5} /></button
 						>
 					{:else}
-						<div class="flex items-center w-full">
+						<div class="flex w-full items-center">
 							<button
-								class="px-3 py-2 bg-slate-300 rounded-l-lg font-semibold hover:bg-slate-400 active:bg-slate-200 transition-colors duration-200"
+								class="rounded-l-lg bg-slate-300 px-3 py-2 font-semibold transition-colors duration-200 hover:bg-slate-400 active:bg-slate-200"
 								type="button"
-								on:click={() => decrementQuantity(product)}
+								onclick={() => decrementQuantity(product)}
 							>
 								-
 							</button>
-							<span class="flex justify-center w-full md:px-4 py-2 font-semibold bg-slate-200">
+							<span class="flex w-full justify-center bg-slate-200 py-2 font-semibold md:px-4">
 								{#key $cartItems}
 									{getObjectByTitle(product.title)?.quantity}
 								{/key}
 							</span>
 							<button
-								class="px-3 py-2 bg-slate-300 rounded-r-lg font-semibold hover:bg-slate-400 active:bg-slate-200 transition-colors duration-200"
+								class="rounded-r-lg bg-slate-300 px-3 py-2 font-semibold transition-colors duration-200 hover:bg-slate-400 active:bg-slate-200"
 								type="button"
-								on:click={() => incrementQuantity(product)}
+								onclick={() => incrementQuantity(product)}
 							>
 								+
 							</button>

@@ -1,11 +1,10 @@
 <script>
 	import { ShoppingCartIcon } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, fetchCartItems, updateCartItem } from '$lib/api';
 
-	let showModal = false;
+	let showModal = $state(false);
 	function toggleModal() {
 		showModal = !showModal;
 	}
@@ -40,7 +39,7 @@
 		}
 	}
 
-	onMount(async () => {
+	$effect(async () => {
 		const userToken = getUserToken();
 		if (userToken) {
 			const cartData = await fetchCartItems(userToken);
@@ -55,16 +54,18 @@
 		}
 	});
 
-	$: $itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);
+	$effect(() => {
+		$itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);
+	});
 </script>
 
 <button
-	on:click={toggleModal}
-	class="fixed bottom-24 md:bottom-4 right-4 z-50 bg-primary-800 text-white rounded-2xl p-3 flex items-center justify-center shadow-lg hover:bg-primary-700 transition-colors duration-200"
+	onclick={toggleModal}
+	class="fixed bottom-24 right-4 z-50 flex items-center justify-center rounded-2xl bg-primary-800 p-3 text-white shadow-lg transition-colors duration-200 hover:bg-primary-700 md:bottom-4"
 >
 	<ShoppingCartIcon size={24} />
 	<span
-		class="absolute -bottom-1 -right-1 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
+		class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-500 text-xs font-bold"
 	>
 		{$itemCount}
 	</span>
@@ -73,31 +74,31 @@
 {#if showModal}
 	<div
 		transition:fade={{ duration: 200 }}
-		class="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center"
+		class="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50"
 	>
 		<div
 			transition:fade={{ duration: 200 }}
-			class="relative bg-white p-4 rounded-lg sm:rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto"
+			class="relative max-h-[80vh] w-full max-w-md overflow-y-auto rounded-lg bg-white p-4 sm:rounded-lg"
 		>
-			<h2 class="text-xl font-bold mb-3">Your Cart</h2>
+			<h2 class="mb-3 text-xl font-bold">Your Cart</h2>
 			{#if $cartItems.length === 0}
 				<p class="text-gray-500">Your cart is empty.</p>
 			{:else}
 				<ul class="divide-y divide-gray-200">
 					{#each $cartItems as item, index}
-						<li class="py-2 flex justify-between items-center">
+						<li class="flex items-center justify-between py-2">
 							<span class="font-medium">{item.title}</span>
 							<div class="flex items-center">
 								<button
-									on:click={() => decrementQuantity(index)}
-									class="px-2 py-1 bg-gray-200 rounded-l-lg hover:bg-gray-300 transition-colors duration-200"
+									onclick={() => decrementQuantity(index)}
+									class="rounded-l-lg bg-gray-200 px-2 py-1 transition-colors duration-200 hover:bg-gray-300"
 								>
 									-
 								</button>
-								<span class="px-3 py-1 bg-gray-100">{item.quantity}</span>
+								<span class="bg-gray-100 px-3 py-1">{item.quantity}</span>
 								<button
-									on:click={() => incrementQuantity(index)}
-									class="px-2 py-1 bg-gray-200 rounded-r-lg hover:bg-gray-300 transition-colors duration-200"
+									onclick={() => incrementQuantity(index)}
+									class="rounded-r-lg bg-gray-200 px-2 py-1 transition-colors duration-200 hover:bg-gray-300"
 								>
 									+
 								</button>
@@ -108,7 +109,7 @@
 						</li>
 					{/each}
 				</ul>
-				<div class="mt-4 pt-2 border-t border-gray-200 font-bold flex justify-between">
+				<div class="mt-4 flex justify-between border-t border-gray-200 pt-2 font-bold">
 					<span>Total:</span>
 					<span>
 						{$cartItems
@@ -119,13 +120,13 @@
 			{/if}
 			<div class="mt-4 flex justify-end">
 				<button
-					on:click={toggleModal}
-					class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg mr-2 hover:bg-gray-300 transition-colors duration-200"
+					onclick={toggleModal}
+					class="mr-2 rounded-lg bg-gray-200 px-4 py-2 text-gray-800 transition-colors duration-200 hover:bg-gray-300"
 				>
 					Close
 				</button>
 				<button
-					class="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200"
+					class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-colors duration-200 hover:bg-primary-700"
 				>
 					Checkout
 				</button>

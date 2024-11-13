@@ -112,28 +112,32 @@
 	];
 </script>
 
-<div class="w-full max-w-7xl px-4">
-	<h2 class="text-2xl font-bold mb-6">Purchase History</h2>
+<section class="w-full max-w-7xl px-4">
+	<h2 class="mb-6 text-2xl font-bold">Purchase History</h2>
 
 	{#if purchases.length === 0}
-		<p class="text-gray-500 text-center py-8">No purchase history available</p>
+		<p class="py-8 text-center text-gray-500">No purchase history available</p>
 	{:else}
-		<div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+		<div class="grid grid-cols-2 gap-6 lg:grid-cols-3">
 			{#each purchases as purchase}
-				<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 h-full">
-					<div class="flex justify-between items-center mb-4">
+				<div class="h-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+					<div class="mb-4 flex items-center justify-between">
 						<div>
 							<p class="text-sm text-gray-500">Order #{purchase.id}</p>
 							<p class="text-sm text-gray-500">{purchase.date}</p>
 						</div>
-						<span class="px-3 py-1 text-sm rounded-full {purchase.status === 'Delivered' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+						<span
+							class="rounded-full px-3 py-1 text-sm {purchase.status === 'Delivered'
+								? 'bg-green-100 text-green-800'
+								: 'bg-yellow-100 text-yellow-800'}"
+						>
 							{purchase.status}
 						</span>
 					</div>
 
 					<div class="border-y border-gray-200 py-4">
 						{#each purchase.items as item}
-							<div class="flex justify-between items-center py-2">
+							<div class="flex items-center justify-between py-2">
 								<div>
 									<p class="font-medium">{item.name}</p>
 									<p class="text-sm text-gray-500">Quantity: {item.quantity}</p>
@@ -143,12 +147,12 @@
 						{/each}
 					</div>
 
-					<div class="border-gray-200 pt-4 flex justify-between items-center mt-auto">
+					<div class="mt-auto flex items-center justify-between border-gray-200 pt-4">
 						<p class="font-medium">Total</p>
-						<p class="font-bold text-lg">${purchase.total}</p>
+						<p class="text-lg font-bold">${purchase.total}</p>
 					</div>
 				</div>
 			{/each}
 		</div>
 	{/if}
-</div>
+</section>

@@ -2,10 +2,11 @@
 	import '../app.css';
 	import Navbar from '../components/Navbar/Navbar.svelte';
 	import CartButton from '../components/CartButton.svelte';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
-	onMount(async () => {
+	const { children } = $props();
+	let loggedIn = $state(false);
+	$effect(async () => {
 		const token = localStorage.getItem('AuthorizationToken');
 		if (token !== null)
 			await fetch('/api/user/protected', {
@@ -27,15 +28,18 @@
 				}
 			});
 	});
-
-	let loggedIn;
-	$: loggedIn;
 </script>
 
 <div id="app">
 	<Navbar />
-	<main class="max-w-7xl mx-auto px-6 pb-24 {$page.url.pathname.includes('/profile') ? 'md:pb-0' : 'md:pb-6'}" class:mt-6={!$page.url.pathname.includes('/profile')}>
-		<slot />
+	<main
+		class="mx-auto max-w-7xl px-6 pb-24 {$page.url.pathname.includes('/profile')
+			? 'md:pb-0'
+			: 'md:pb-6'}"
+		class:mt-6={!$page.url.pathname.includes('/profile')}
+	>
+		<!-- <slot /> -->
+		{@render children()}
 		{#if loggedIn === true && !$page.url.pathname.includes('/profile')}
 			<CartButton />
 		{/if}

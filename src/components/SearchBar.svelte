@@ -2,10 +2,8 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	$: filteredList = [];
+	let filteredList = $state([]);
 	async function searchHandle(event) {
-		// TODO: Implement searchBar
-		console.log(event.target.value);
 		const res = await fetch('/api/books/filter-by', {
 			method: 'POST',
 			headers: {
@@ -15,14 +13,16 @@
 		});
 		filteredList = await res.json();
 	}
-	$: dispatch('update', { list: filteredList });
+	$effect(() => {
+		dispatch('update', { list: filteredList });
+	});
 </script>
 
-<div class="flex justify-center mb-6">
+<div class="mb-6 flex justify-center">
 	<input
 		type="search"
-		on:keyup|preventDefault={(e) => searchHandle(e)}
-		class="mt-1 block w-full px-3 py-3 pl-6 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+		onkeyup={searchHandle}
+		class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-3 pl-6 shadow-sm focus:outline-none sm:text-sm"
 		placeholder="Search products or authors..."
 	/>
 </div>
