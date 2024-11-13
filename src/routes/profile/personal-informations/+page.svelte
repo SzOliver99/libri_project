@@ -9,7 +9,7 @@
 		isEditing = true;
 		const inputs = document.querySelectorAll('#informations input');
 		inputs.forEach((input) => {
-			input.disabled = false;
+			input.disabled = !isEditing;
 		});
 	}
 
@@ -19,16 +19,17 @@
 	}
 
 	async function handleUpdateInfo() {
-		isEditing = false;
-		const inputs = document.querySelectorAll('#informations input');
-		inputs.forEach((input) => {
-			input.disabled = true;
-		});
-
 		if (!validatePhoneNumber(phone.value)) {
+			// TODO: own design to notification
 			alert('Not valid phone number pattern');
 			return;
 		}
+
+		isEditing = false;
+		const inputs = document.querySelectorAll('#informations input');
+		inputs.forEach((input) => {
+			input.disabled = !isEditing;
+		});
 
 		const response = await fetch('/api/user/change/personal-information', {
 			method: 'POST',
@@ -42,6 +43,10 @@
 				phone_number: phone.value
 			})
 		});
+		const data = await response.json();
+
+		// TODO: own design to notification
+		alert(data);
 	}
 
 	let isEditing = $state(false);

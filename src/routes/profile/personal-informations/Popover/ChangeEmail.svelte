@@ -12,9 +12,11 @@
 		});
 		const data = await response.json();
 		if (response.ok) {
+			// TODO: own design to notification
 			alert('Email changed successfully!');
 			event.target.hidePopover();
 		} else {
+			// TODO: own design to notification
 			alert(data);
 		}
 	}

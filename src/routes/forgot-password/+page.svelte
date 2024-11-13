@@ -12,9 +12,10 @@
 			body: JSON.stringify({ email })
 		});
 		if (res.ok) {
+			// TODO: own design to notification
 			alert('Password reset email sent');
-			// window.location.href = `/sign-in`;
 		} else {
+			// TODO: own design to notification
 			alert('Failed to send password reset email');
 		}
 	}
@@ -35,7 +36,7 @@
 					name="email"
 					id="email"
 					type="email"
-					class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
+					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					required
 				/>
 			</div>
@@ -43,7 +44,7 @@
 			<div class="text-center">
 				<button
 					type="submit"
-					class="bg-primary-800 hover:bg-primary-700 rounded-lg px-8 py-2 text-white transition-all duration-300"
+					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 				>
 					Reset Password
 				</button>

@@ -13,12 +13,14 @@
 		console.log(data);
 
 		if (response.ok) {
+			// TODO: own design to notification
 			alert('Account successfully deleted');
 
 			// Sign out and redirect to main page
 			localStorage.clear();
 			window.location.href = '/';
 		} else {
+			// TODO: own design to notification
 			alert(data);
 		}
 	}

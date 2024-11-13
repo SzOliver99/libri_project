@@ -11,12 +11,10 @@
 			body: JSON.stringify({ username: username.value })
 		});
 		const data = await response.json();
-		if (response.ok) {
-			alert('Username changed successfully!');
-			event.target.hidePopover();
-		} else {
-			alert(data);
-		}
+
+		// TODO: own design to notification
+		alert(data);
+		event.target.hidePopover();
 	}
 </script>
 

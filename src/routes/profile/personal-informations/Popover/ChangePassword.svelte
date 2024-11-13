@@ -9,6 +9,7 @@
 		};
 
 		if (new_password !== confirm_password) {
+			// TODO: own design to notification
 			alert('New passwords do not match!');
 			return;
 		}
@@ -22,12 +23,10 @@
 			body: JSON.stringify({ old_password, new_password })
 		});
 		const data = await response.json();
-		if (response.ok) {
-			alert('Password changed successfully!');
-			event.target.hidePopover();
-		} else {
-			alert(data);
-		}
+
+		// TODO: own design to notification
+		alert(data);
+		event.target.hidePopover();
 	}
 </script>
 

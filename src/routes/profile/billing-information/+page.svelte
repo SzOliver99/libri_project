@@ -1,11 +1,12 @@
 <script>
 	import { getUserInfo, getUserToken } from '$lib/api';
+	import { json } from '@sveltejs/kit';
 
 	const handleUpdateInfo = async () => {
 		isEditing = false;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
-			input.disabled = true;
+			input.disabled = !isEditing;
 		});
 
 		const response = await fetch('/api/user/change/billing-information', {
@@ -21,14 +22,17 @@
 				postal_code: postalCode.value
 			})
 		});
-		console.log(await response.json());
+		const data = await response.json();
+
+		// TODO: own design to notification
+		alert(data);
 	};
 
 	const handleEditInfo = () => {
 		isEditing = true;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
-			input.disabled = false;
+			input.disabled = !isEditing;
 		});
 	};
 
