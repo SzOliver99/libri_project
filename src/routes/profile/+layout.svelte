@@ -12,9 +12,9 @@
 	};
 
 	const list = [
-		{ href: '/profile/history', title: 'Purchase History', icon: History },
 		{ href: '/profile/personal-informations', title: 'Personal Informations', icon: FileUser },
 		{ href: '/profile/billing-information', title: 'Billing Information', icon: CreditCard },
+		{ href: '/profile/history', title: 'Purchase History', icon: History },
 		{ title: 'Sign Out', icon: LogOut }
 	];
 
@@ -27,7 +27,7 @@
 <section>
 	{#if loggedIn === true}
 		<div
-			class="m-5 mx-auto hidden h-[calc(100vh-7rem)] overflow-hidden rounded-lg bg-slate-200 p-6 md:flex"
+			class="m-5 mx-auto hidden h-[calc(100vh-6.5rem)] overflow-hidden rounded-lg bg-slate-200 p-6 md:flex"
 		>
 			<div class="flex min-w-56 flex-col">
 				<h1 class="mb-4 text-2xl font-bold">Profile</h1>

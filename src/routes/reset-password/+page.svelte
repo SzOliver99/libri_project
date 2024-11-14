@@ -1,33 +1,33 @@
 <script>
-	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 
 	let token = $page.url.searchParams.get('token');
 
-	async function handleSubmit(e) {
-		const formData = new FormData(e.currentTarget);
-		const password = formData.get('password');
-		if (password !== formData.get('repeat_password')) {
+	async function handleSubmit(event) {
+		event.preventDefault();
+
+		if (newPassword.value !== repeatPassword.value) {
 			// TODO: own design to notification
 			alert('Passwords do not match');
 			return;
 		}
 
-		let res = await fetch(`/api/user/reset-password?token=${token}`, {
+		const response = await fetch(`/api/user/reset-password?token=${token}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ password })
+			body: JSON.stringify({ password: newPassword.value })
 		});
+		const data = await response.json();
 
-		if (res.ok) {
+		if (response.ok) {
 			// TODO: own design to notification
-			alert('Password reset successful');
+			alert(data);
 			window.location.href = `/sign-in`;
 		} else {
 			// TODO: own design to notification
-			alert('Password reset failed');
+			alert(data);
 		}
 	}
 </script>
@@ -40,13 +40,12 @@
 			<h1 class="text-2xl font-bold text-gray-700">Reset Password</h1>
 		</div>
 
-		<form on:submit={handleSubmit}>
+		<form onsubmit={handleSubmit}>
 			<div class="mb-4">
 				<label for="password">Password</label>
 				<input
-					name="password"
-					id="password"
 					type="password"
+					id="newPassword"
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					required
 				/>
@@ -54,9 +53,8 @@
 			<div class="mb-4">
 				<label for="token">Repeat Password</label>
 				<input
-					name="repeat_password"
-					id="repeat_password"
 					type="password"
+					id="repeatPassword"
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					required
 				/>

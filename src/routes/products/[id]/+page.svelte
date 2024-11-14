@@ -3,10 +3,8 @@
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems } from '$lib/api';
 
-	const handleAddToCart = async (e) => {
-		e.preventDefault();
-		const formData = new FormData(e.currentTarget);
-		const productId = +formData.get('productId');
+	async function handleSubmit(event) {
+		event.preventDefault();
 
 		const userToken = getUserToken();
 		if (!userToken) {
@@ -14,12 +12,12 @@
 			return;
 		}
 
-		const success = await updateCartItem(userToken, productId, 1);
+		const success = await updateCartItem(userToken, +data.productId, 1);
 		if (success) {
 			$itemCount += 1;
 			await refreshCartItems(userToken);
 		}
-	};
+	}
 
 	const refreshCartItems = async (userToken) => {
 		try {
@@ -77,11 +75,10 @@
 			<p class="ml-2 mt-4 text-xl font-bold text-slate-900">
 				{product.price} Ft
 			</p>
-			<form on:submit={handleAddToCart} class="w-full">
-				<input type="hidden" value={data.productId} name="productId" />
+			<form onsubmit={handleSubmit} class="w-full">
 				<button
 					type="submit"
-					class="bg-primary-800 hover:bg-primary-700 flex w-full justify-center gap-2 rounded-lg px-3 py-2 text-white transition-all duration-300"
+					class="flex w-full justify-center gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 				>
 			</form>

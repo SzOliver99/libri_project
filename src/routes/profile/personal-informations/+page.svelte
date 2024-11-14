@@ -18,7 +18,7 @@
 		return phoneNumberRegex.test(phoneNumber);
 	}
 
-	async function handleUpdateInfo() {
+	async function handleSubmit() {
 		if (!validatePhoneNumber(phone.value)) {
 			// TODO: own design to notification
 			alert('Not valid phone number pattern');
@@ -56,7 +56,7 @@
 	<h2 class="mb-6 text-2xl font-bold">Personal Information</h2>
 
 	{#await getUserInfo() then userInfo}
-		<form id="informations" onsubmit={handleUpdateInfo} class="space-y-6 rounded-lg bg-white p-3">
+		<form id="informations" onsubmit={handleSubmit} class="space-y-6 rounded-lg bg-white p-3">
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 				<div>
 					<label for="firstName" class="block text-sm font-medium text-gray-700">First Name*</label>
@@ -119,61 +119,61 @@
 				{/if}
 			</div>
 		</form>
+
+		<!-- Change Password Section -->
+		<div class="mt-10">
+			<h3 class="mb-4 text-xl font-semibold">Security</h3>
+			<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
+				<div>
+					<p class="font-medium">Username</p>
+					<p class="text-sm text-gray-500">{userInfo.username}</p>
+				</div>
+
+				<button
+					class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+					popovertarget="change-username"
+				>
+					Change
+				</button>
+			</div>
+			<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
+				<div>
+					<p class="font-medium">Email</p>
+					<p class="text-sm text-gray-500">{userInfo.email}</p>
+				</div>
+				<button
+					class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+					popovertarget="change-email"
+				>
+					Change
+				</button>
+			</div>
+			<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
+				<div>
+					<p class="font-medium">Password</p>
+					<p class="text-sm text-gray-500">Last changed 3 months ago</p>
+				</div>
+				<button
+					class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+					popovertarget="change-password"
+				>
+					Change
+				</button>
+			</div>
+			<div class="flex items-center justify-between rounded-lg bg-gray-50 p-3">
+				<div>
+					<p class="font-medium">Delete Account</p>
+					<p class="text-sm text-gray-500">It will delete your account permanently!</p>
+				</div>
+				<button
+					class="rounded-lg bg-red-950 px-4 py-2 text-white transition-all duration-300 hover:bg-red-900"
+					popovertarget="delete-account"
+				>
+					Delete
+				</button>
+			</div>
+		</div>
 	{/await}
-
-	<!-- Change Password Section -->
-	<div class="mt-10">
-		<h3 class="mb-4 text-xl font-semibold">Security</h3>
-		<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
-			<div>
-				<p class="font-medium">Username</p>
-				<p class="text-sm text-gray-500">szoliver</p>
-			</div>
-
-			<button
-				class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-				popovertarget="change-username"
-			>
-				Change
-			</button>
-		</div>
-		<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
-			<div>
-				<p class="font-medium">Email</p>
-				<p class="text-sm text-gray-500">oliver.szvetnyik@gmail.com</p>
-			</div>
-			<button
-				class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-				popovertarget="change-email"
-			>
-				Change
-			</button>
-		</div>
-		<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
-			<div>
-				<p class="font-medium">Password</p>
-				<p class="text-sm text-gray-500">Last changed 3 months ago</p>
-			</div>
-			<button
-				class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-				popovertarget="change-password"
-			>
-				Change
-			</button>
-		</div>
-		<div class="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-			<div>
-				<p class="font-medium">Delete Account</p>
-				<p class="text-sm text-gray-500">It will delete your account permanently!</p>
-			</div>
-			<button
-				class="rounded-lg bg-red-950 px-4 py-2 text-white transition-all duration-300 hover:bg-red-900"
-				popovertarget="delete-account"
-			>
-				Delete
-			</button>
-		</div>
-	</div>
 	<!-- Popovers -->
 	<div>
 		<ChangeUsername />
