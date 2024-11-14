@@ -2,6 +2,8 @@
 	import { getUserToken } from '$lib/api';
 
 	async function handleChangePassword(event) {
+		event.preventDefault();
+
 		const { old_password, new_password, confirm_password } = {
 			old_password: oldPassword.value,
 			new_password: newPassword.value,

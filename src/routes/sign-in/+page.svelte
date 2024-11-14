@@ -9,23 +9,22 @@
 	// 	{ name: 'Twitter', img: twitter_img, method: 'twitter', disabled: true }
 	// ];
 
-	const handleSubmit = async (e) => {
-		const formData = new FormData(e.currentTarget);
-		const { username, password } = Object.fromEntries(formData.entries());
-		const res = await fetch(`/api/user/sign-in`, {
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const response = await fetch(`/api/user/sign-in`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ username, password })
+			body: JSON.stringify({ username: username.value, password: password.value })
 		});
 
-		if (!res.ok) {
+		if (!response.ok) {
 			alert('Invalid username or password');
 			return;
 		}
 
-		const data = await res.json();
+		const data = await response.json();
 		localStorage.setItem('AuthorizationToken', `${data.token}`);
 		window.location.href = '/';
 	};
@@ -42,14 +41,14 @@
 		</div>
 
 		<!-- Login form -->
-		<form on:submit|preventDefault={handleSubmit}>
+		<form onsubmit={handleSubmit}>
 			<div class="mb-4">
 				<label for="username">Username</label>
 				<input
 					name="username"
 					id="username"
 					type="text"
-					class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
+					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					autocomplete="off"
 					required
 				/>
@@ -61,7 +60,7 @@
 					name="password"
 					id="password"
 					type="password"
-					class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
+					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					required
 				/>
 			</div>
@@ -73,7 +72,7 @@
 			<div class="text-center">
 				<button
 					type="submit"
-					class="bg-primary-800 hover:bg-primary-700 rounded-lg px-8 py-2 text-white transition-all duration-300"
+					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 				>
 					Sign in
 				</button>

@@ -1,15 +1,14 @@
 <script>
-	async function handleSubmit(e) {
+	async function handleSubmit(event) {
+		event.preventDefault();
 		// Implement password reset logic here
-		const formData = new FormData(e.currentTarget);
-		const email = formData.get('email');
 
 		let res = await fetch(`/api/user/forgot-password`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email })
+			body: JSON.stringify({ email: email.value })
 		});
 		if (res.ok) {
 			// TODO: own design to notification
@@ -33,9 +32,8 @@
 			<div class="mb-4">
 				<label for="email">Email</label>
 				<input
-					name="email"
-					id="email"
 					type="email"
+					id="email"
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					required
 				/>

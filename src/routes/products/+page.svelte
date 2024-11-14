@@ -1,5 +1,4 @@
 <script>
-	import { base } from '$app/paths';
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems, fetchProducts } from '$lib/api';
@@ -71,7 +70,7 @@
 			class="flex h-full flex-col rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1"
 			data-sveltekit-preload-data="tap"
 		>
-			<a href={`${base}/products/${product.id}`}>
+			<a href={`/products/${product.id}`}>
 				<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
 					<img
 						src={product.image_src}

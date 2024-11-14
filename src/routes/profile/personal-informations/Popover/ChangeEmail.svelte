@@ -2,6 +2,8 @@
 	import { getUserToken } from '$lib/api';
 
 	async function handleChangeEmail(event) {
+		event.preventDefault();
+
 		const response = await fetch(`/api/user/change-email`, {
 			method: 'POST',
 			headers: {

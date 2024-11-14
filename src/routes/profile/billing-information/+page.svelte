@@ -2,8 +2,10 @@
 	import { getUserInfo, getUserToken } from '$lib/api';
 	import { json } from '@sveltejs/kit';
 
-	const handleUpdateInfo = async () => {
-		isEditing = false;
+	async function handleSubmit(event) {
+		event.preventDefault();
+
+		isEditing = !isEditing;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
 			input.disabled = !isEditing;
@@ -26,10 +28,10 @@
 
 		// TODO: own design to notification
 		alert(data);
-	};
+	}
 
 	const handleEditInfo = () => {
-		isEditing = true;
+		isEditing = !isEditing;
 		const inputs = document.querySelectorAll('input');
 		inputs.forEach((input) => {
 			input.disabled = !isEditing;
@@ -43,7 +45,7 @@
 	<!-- Billing Section -->
 	<h1 class="mb-6 text-2xl font-bold">Billing Information</h1>
 	{#await getUserInfo() then userInfo}
-		<form onsubmit={handleUpdateInfo} class="space-y-6 rounded-lg bg-white p-3">
+		<form onsubmit={handleSubmit} class="space-y-6 rounded-lg bg-white p-3">
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 				<!-- Billing Address -->
 				<div>
@@ -118,7 +120,7 @@
 					<button
 						type="button"
 						class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-						onclick={() => handleEditInfo()}
+						onclick={handleEditInfo}
 					>
 						Edit Information
 					</button>

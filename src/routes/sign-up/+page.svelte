@@ -1,23 +1,25 @@
 <script>
-	import { base } from '$app/paths';
-
-	const handleSubmit = async (e) => {
-		const formData = new FormData(e.currentTarget);
-		const { email, username, password } = Object.fromEntries(formData.entries());
-
-		const res = await fetch(`/api/user/sign-up`, {
+	const handleSubmit = async (event) => {
+		const response = await fetch(`/api/user/sign-up`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email, username, password })
-		}).then((res) => res.json());
+			body: JSON.stringify({
+				email: email.value,
+				username: username.value,
+				password: password.value
+			})
+		});
+		const data = await response.json();
 
-		if (res.ok) {
-			window.location.href = `${base}/sign-in`;
+		if (response.ok) {
+			// TODO: own design to notification
+			alert(data);
+			window.location.href = `/sign-in`;
 		} else {
 			// TODO: own design to notification
-			alert('Failed to sign up');
+			alert(data);
 		}
 	};
 </script>
@@ -31,13 +33,12 @@
 		</div>
 
 		<!-- Registration form -->
-		<form on:submit|preventDefault={handleSubmit}>
+		<form onsubmit={handleSubmit}>
 			<div class="mb-4">
 				<label for="email" class="block text-gray-700">Email</label>
 				<input
-					name="email"
-					id="email"
 					type="email"
+					id="email"
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					autocomplete="off"
 				/>
@@ -46,9 +47,8 @@
 			<div class="mb-4">
 				<label for="username" class="block text-gray-700">Username</label>
 				<input
-					name="username"
-					id="username"
 					type="text"
+					id="username"
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 					autocomplete="off"
 				/>
@@ -57,9 +57,8 @@
 			<div class="mb-6">
 				<label for="password" class="block text-gray-700">Password</label>
 				<input
-					name="password"
-					id="password"
 					type="password"
+					id="password"
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 				/>
 			</div>
