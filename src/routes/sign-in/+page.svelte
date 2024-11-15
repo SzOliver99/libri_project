@@ -69,7 +69,7 @@
 				<a href="/forgot-password">Forgot Password?</a>
 			</div>
 
-			<div class="text-center">
+			<div class="mb-5 text-center">
 				<button
 					type="submit"
 					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
@@ -98,6 +98,7 @@
 					</button>
 				{/each}
 			</div> -->
+			<a href="/verify-code" class="flex justify-center text-sm">Login with Email verification</a>
 		</form>
 	</div>
 </section>
