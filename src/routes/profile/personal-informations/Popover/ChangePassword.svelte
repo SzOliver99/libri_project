@@ -16,8 +16,8 @@
 			return;
 		}
 
-		const response = await fetch(`/api/user/change-password`, {
-			method: 'POST',
+		const response = await fetch(`/api/user/change/password`, {
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `${getUserToken()}`
