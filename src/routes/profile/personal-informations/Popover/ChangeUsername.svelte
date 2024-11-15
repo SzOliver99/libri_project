@@ -3,14 +3,14 @@
 
 	async function handleChangeUsername(event) {
 		event.preventDefault();
-
-		const response = await fetch(`/api/user/change-username`, {
-			method: 'POST',
+		1;
+		const response = await fetch(`/api/user/change/username`, {
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `${getUserToken()}`
 			},
-			body: JSON.stringify({ username: username.value })
+			body: JSON.stringify({ new_username: username.value })
 		});
 		const data = await response.json();
 

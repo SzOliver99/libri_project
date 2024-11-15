@@ -4,13 +4,13 @@
 	async function handleChangeEmail(event) {
 		event.preventDefault();
 
-		const response = await fetch(`/api/user/change-email`, {
-			method: 'POST',
+		const response = await fetch(`/api/user/change/email`, {
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `${getUserToken()}`
 			},
-			body: JSON.stringify({ old_email: oldEmail.value, new_email: newEmail.value })
+			body: JSON.stringify({ new_email: newEmail.value, password: verifyPassword.value })
 		});
 		const data = await response.json();
 		if (response.ok) {
@@ -28,19 +28,21 @@
 	<h3 class="pb-3 font-bold">Change Password</h3>
 	<div class="popover-content">
 		<div class="mb-3">
-			<label for="oldEmail" class="block text-sm font-medium text-gray-700">Old Email</label>
+			<label for="newEmail" class="block text-sm font-medium text-gray-700">New Email</label>
 			<input
 				type="email"
-				id="oldEmail"
+				id="newEmail"
 				required
 				class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 			/>
 		</div>
 		<div class="mb-3">
-			<label for="newEmail" class="block text-sm font-medium text-gray-700">New Email</label>
+			<label for="verifyPassword" class="block text-sm font-medium text-gray-700"
+				>Verify Password</label
+			>
 			<input
-				type="email"
-				id="newEmail"
+				type="password"
+				id="verifyPassword"
 				required
 				class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 			/>
