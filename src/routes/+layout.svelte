@@ -7,6 +7,8 @@
 	const { children } = $props();
 	let loggedIn = $state(false);
 	$effect(async () => {
+		console.log('Reload');
+
 		const token = localStorage.getItem('AuthorizationToken');
 		if (token !== null)
 			await fetch('/api/user/protected', {
@@ -29,6 +31,10 @@
 			});
 	});
 </script>
+
+<svelte:head>
+	<title>Home</title>
+</svelte:head>
 
 <div id="app">
 	<Navbar />
