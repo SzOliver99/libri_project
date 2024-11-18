@@ -47,6 +47,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Product - {product.title}</title>
+</svelte:head>
+
 <section
 	class="group relative grid grid-cols-1 gap-6 rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1 md:grid-cols-2"
 >
