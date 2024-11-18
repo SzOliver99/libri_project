@@ -63,6 +63,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Products Page</title>
+</svelte:head>
+
 <SearchBar on:update={handleUpdate} />
 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
 	{#each products as product}

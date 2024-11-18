@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { CreditCard, History, FileUser, Trash2, LogOut } from 'lucide-svelte';
 	import { render } from 'svelte/server';
+	import { page } from '$app/stores';
 
 	const { children } = $props();
 
@@ -17,12 +18,21 @@
 		{ href: '/profile/history', title: 'Purchase History', icon: History },
 		{ title: 'Sign Out', icon: LogOut }
 	];
+	let currentPage = $state(list[0]);
 
 	let loggedIn = $state();
 	$effect(async () => {
 		loggedIn = getUserToken() ? true : false;
 	});
+
+	$effect.pre(() => {
+		currentPage = list.find((item) => item.href === $page.url.pathname);
+	});
 </script>
+
+<svelte:head>
+	<title>Profile {$page.url.pathname !== '/profile' ? '- ' + currentPage.title : 'Page'}</title>
+</svelte:head>
 
 <section>
 	{#if loggedIn === true}
