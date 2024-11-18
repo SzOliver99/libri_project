@@ -71,13 +71,12 @@
 			<p class="ml-2 mt-4 text-xl font-bold text-slate-900">
 				{product.price} Ft
 			</p>
-			<form onsubmit={handleSubmit} class="w-full">
+			<div class="w-full">
 				<button
-					type="submit"
 					class="flex w-full justify-center gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-					><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
+					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 				>
-			</form>
+			</div>
 		</div>
 	</div>
 </section>
