@@ -12,7 +12,7 @@
 			return;
 		}
 
-		const success = await updateCartItem(userToken, +data.productId, 1);
+		const success = await updateCartItem(userToken, +data.bookData.id, 1);
 		if (success) {
 			$itemCount += 1;
 			await refreshCartItems(userToken);
@@ -37,17 +37,13 @@
 	};
 
 	let { data } = $props();
-	let product = $state([]);
+	let product = $state(data.bookData);
 
 	$effect(async () => {
 		const userToken = getUserToken();
 		if (userToken) {
 			await refreshCartItems(userToken);
 		}
-	});
-
-	$effect(async () => {
-		product = await fetch(`/api/books/${data.productId}`).then((res) => res.json());
 	});
 </script>
 

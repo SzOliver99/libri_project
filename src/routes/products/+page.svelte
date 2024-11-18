@@ -52,7 +52,7 @@
 		products = event.detail.list;
 	}
 
-	let products = $state([]);
+	let products = $state();
 	$effect(async () => {
 		const userToken = getUserToken();
 		if (userToken) {
