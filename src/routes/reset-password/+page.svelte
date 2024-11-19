@@ -1,35 +1,39 @@
 <script>
-	// import { page } from '$app/stores';
+	import { page } from '$app/stores';
 
 	// const token = $page.url.searchParams.get('token');
 
-	// async function handleSubmit(event) {
-	// 	event.preventDefault();
+	async function handleSubmit(event) {
+		event.preventDefault();
 
-	// 	if (newPassword.value !== repeatPassword.value) {
-	// 		// TODO: own design to notification
-	// 		alert('Passwords do not match');
-	// 		return;
-	// 	}
+		if (newPassword.value !== repeatPassword.value) {
+			// TODO: own design to notification
+			alert('Passwords do not match');
+			return;
+		}
 
-	// 	const response = await fetch(`/api/user/reset-password?token=${token}`, {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		},
-	// 		body: JSON.stringify({ password: newPassword.value })
-	// 	});
-	// 	const data = await response.json();
+		const response = await fetch(`/api/user/reset-password?token=${token}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ password: newPassword.value })
+		});
+		const data = await response.json();
 
-	// 	if (response.ok) {
-	// 		// TODO: own design to notification
-	// 		alert(data);
-	// 		window.location.href = `/sign-in`;
-	// 	} else {
-	// 		// TODO: own design to notification
-	// 		alert(data);
-	// 	}
-	// }
+		if (response.ok) {
+			// TODO: own design to notification
+			alert(data);
+			window.location.href = `/sign-in`;
+		} else {
+			// TODO: own design to notification
+			alert(data);
+		}
+	}
+	let token = $state();
+	$effect(() => {
+		token = $page.url.searchParams.get('token') || '';
+	});
 </script>
 
 <svelte:head>
