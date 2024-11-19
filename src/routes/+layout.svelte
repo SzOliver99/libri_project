@@ -3,6 +3,7 @@
 	import Navbar from '../components/Navbar/Navbar.svelte';
 	import CartButton from '../components/CartButton.svelte';
 	import { page } from '$app/stores';
+	import { isAdmin } from '$lib/store';
 
 	const { children } = $props();
 	let loggedIn = $state(false);
@@ -14,8 +15,17 @@
 				headers: {
 					Authorization: token
 				}
-			}).then((response) => {
+			}).then(async (response) => {
 				if (response.ok) {
+					// Check if user is Admin
+					$isAdmin = await fetch('/api/user/is-admin', {
+						method: 'GET',
+						headers: {
+							Authorization: token
+						}
+					}).then((response) => response.json());
+					console.log($isAdmin);
+
 					console.log('Logged in');
 					loggedIn = response.ok;
 				} else {
