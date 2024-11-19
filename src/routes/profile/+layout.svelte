@@ -13,7 +13,7 @@
 	};
 
 	const list = [
-		{ href: '/profile/personal-informations', title: 'Personal Informations', icon: FileUser },
+		{ href: '/profile', title: 'Personal Informations', icon: FileUser },
 		{ href: '/profile/billing-information', title: 'Billing Information', icon: CreditCard },
 		{ href: '/profile/history', title: 'Purchase History', icon: History },
 		{ title: 'Sign Out', icon: LogOut }
@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>Profile {$page.url.pathname !== '/profile' ? '- ' + currentPage.title : 'Page'}</title>
+	<title>Profile - {currentPage.title}</title>
 </svelte:head>
 
 <section>
