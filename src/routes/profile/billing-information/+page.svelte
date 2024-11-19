@@ -12,7 +12,7 @@
 		});
 
 		const response = await fetch('/api/user/change/billing-information', {
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `${getUserToken()}`
