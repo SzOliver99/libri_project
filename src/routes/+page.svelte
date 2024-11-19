@@ -7,5 +7,4 @@
 
 <section>
 	Main Page
-	<a href="/reset-password">asdasdasdasd</a>
 </section>
