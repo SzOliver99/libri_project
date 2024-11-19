@@ -1,9 +1,9 @@
 <script>
 	import { getUserInfo, getUserToken } from '$lib/api';
-	import ChangeUsername from './Popover/ChangeUsername.svelte';
-	import ChangeEmail from './Popover/ChangeEmail.svelte';
-	import ChangePassword from './Popover/ChangePassword.svelte';
-	import DeleteAccount from './Popover/DeleteAccount.svelte';
+	import ChangeUsername from '../../components/Popover/ChangeUsername.svelte';
+	import ChangeEmail from '../../components/Popover/ChangeEmail.svelte';
+	import ChangePassword from '../../components/Popover/ChangePassword.svelte';
+	import DeleteAccount from '../../components/Popover/DeleteAccount.svelte';
 
 	function handleEditInfo() {
 		isEditing = true;
