@@ -44,4 +44,5 @@
 			<CartButton />
 		{/if}
 	</main>
+	<a href="/reset-password" class="hidden">a</a>
 </div>

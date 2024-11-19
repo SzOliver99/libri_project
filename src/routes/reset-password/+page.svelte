@@ -74,5 +74,4 @@
 			</div>
 		</form>
 	</div>
-	<a href="/reset-password" class="hidden">a</a>
 </section>
