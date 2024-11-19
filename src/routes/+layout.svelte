@@ -24,7 +24,6 @@
 							Authorization: token
 						}
 					}).then((response) => response.json());
-					console.log($isAdmin);
 
 					console.log('Logged in');
 					loggedIn = response.ok;
