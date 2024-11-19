@@ -5,4 +5,7 @@
 	<title>Home Page</title>
 </svelte:head>
 
-<section>Main Page</section>
+<section>
+	Main Page
+	<a href="/reset-password">asdasdasdasd</a>
+</section>
