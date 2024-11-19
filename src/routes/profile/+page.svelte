@@ -14,7 +14,7 @@
 	}
 
 	function validatePhoneNumber(phoneNumber) {
-		const phoneNumberRegex = /^\+36 \d{2} \d{3} \d{4}$/; // Only hungarian number
+		const phoneNumberRegex = /^\+36 \d{2} \d{3} \d{3,4}$/; // Only hungarian number
 		return phoneNumberRegex.test(phoneNumber);
 	}
 
@@ -32,7 +32,7 @@
 		});
 
 		const response = await fetch('/api/user/change/personal-information', {
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `${getUserToken()}`
