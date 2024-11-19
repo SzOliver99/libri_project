@@ -36,6 +36,11 @@
 					window.location.href = '/';
 				}
 			});
+		else {
+			if (['/profile'].includes($page.url.pathname)) {
+				window.location.href = '/';
+			}
+		}
 	});
 </script>
 
