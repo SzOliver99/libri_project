@@ -1,7 +1,7 @@
 <script>
-	import google_img from '$lib/images/google_img.png';
-	import facebook_img from '$lib/images/facebook_img.png';
-	import twitter_img from '$lib/images/twitter_img.png';
+	// import google_img from '$lib/images/google_img.png';
+	// import facebook_img from '$lib/images/facebook_img.png';
+	// import twitter_img from '$lib/images/twitter_img.png';
 
 	// let different_methods = [
 	// 	{ name: 'Google', img: google_img, method: 'google', disabled: false },

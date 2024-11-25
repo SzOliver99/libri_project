@@ -118,7 +118,7 @@
 	{#if purchases.length === 0}
 		<p class="py-8 text-center text-gray-500">No purchase history available</p>
 	{:else}
-		<div class="grid grid-cols-2 gap-6 lg:grid-cols-3">
+		<div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
 			{#each purchases as purchase}
 				<div class="h-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
 					<div class="mb-4 flex items-center justify-between">
