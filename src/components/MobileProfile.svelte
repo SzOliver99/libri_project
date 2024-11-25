@@ -11,10 +11,10 @@
 		isActive = !isActive;
 	}
 
-	let isActive = $state(false);
+	let isActive = $state(true);
 </script>
 
-<button onclick={toggleMenu}>
+<button popovertarget="mobile-profile" onclick={toggleMenu}>
 	{#if isActive !== true}
 		<Menu />
 	{:else}
@@ -23,8 +23,10 @@
 </button>
 
 {#if isActive === true}
-	<div
-		class="absolute left-0 top-12 flex w-full flex-col items-start gap-3 rounded-b-lg bg-slate-100 p-4"
+	<form
+		id="mobile-profile"
+		popover
+		class="absolute top-32 flex w-full flex-col items-start gap-3 rounded-b-lg bg-slate-100 p-4"
 	>
 		{#each list as item, index}
 			<a href={item.href} class="flex flex-row align-middle">
@@ -35,5 +37,5 @@
 				<div class="w-full border-b-2"></div>
 			{/if}
 		{/each}
-	</div>
+	</form>
 {/if}
