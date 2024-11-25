@@ -37,7 +37,7 @@
 				}
 			});
 		else {
-			if (['/profile'].includes($page.url.pathname)) {
+			if (['/profile'].includes($page.url.pathname) && window.innerWidth > 768) {
 				window.location.href = '/';
 			}
 		}
