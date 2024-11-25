@@ -3,6 +3,7 @@
 	import { BookOpen, HouseIcon, Info, UserIcon } from 'lucide-svelte';
 	import NavMarker from './NavMarker.svelte';
 	import { getUserToken } from '$lib/api';
+	import MobileProfile from '../MobileProfile.svelte';
 
 	let navContainer = $state();
 
@@ -97,9 +98,10 @@
 				>
 			</div>
 		</div>
-	{:else if $page.url.pathname === '/profile' && loggedIn === true}
-		<div class="flex items-center justify-end md:hidden">
-			<button onclick={handleSignOut} class="rounded-lg px-4 py-3">Sign Out</button>
+	{:else if $page.url.pathname.includes("/profile") && loggedIn === true}
+		<div class="flex items-center justify-between px-4 md:hidden">
+			<MobileProfile />
+			<button onclick={handleSignOut} class="rounded-lg py-3">Sign Out</button>
 		</div>
 	{/if}
 	<div
