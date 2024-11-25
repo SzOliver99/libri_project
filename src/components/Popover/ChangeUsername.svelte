@@ -1,9 +1,11 @@
 <script>
 	import { getUserToken } from '$lib/api';
 
+	const { username } = $props();
+
 	async function handleChangeUsername(event) {
 		event.preventDefault();
-		1;
+
 		const response = await fetch(`/api/user/change/username`, {
 			method: 'PUT',
 			headers: {
@@ -19,6 +21,20 @@
 		event.target.hidePopover();
 	}
 </script>
+
+<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
+	<div>
+		<p class="font-medium">Username</p>
+		<p class="text-sm text-gray-500">{username}</p>
+	</div>
+
+	<button
+		class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+		popovertarget="change-username"
+	>
+		Change
+	</button>
+</div>
 
 <form
 	onsubmit={handleChangeUsername}

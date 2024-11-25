@@ -37,9 +37,9 @@
 <section>
 	{#if loggedIn === true}
 		<div
-			class="m-5 mx-auto hidden h-[calc(100vh-6.5rem)] overflow-hidden rounded-lg bg-slate-200 p-6 md:flex"
+			class="m-5 mx-auto flex h-full overflow-hidden rounded-lg bg-slate-200 p-6 md:h-[calc(100vh-6.5rem)]"
 		>
-			<div class="flex min-w-56 flex-col">
+			<div class="hidden min-w-56 flex-col md:flex">
 				<h1 class="mb-4 text-2xl font-bold">Profile</h1>
 				<div class="flex h-full flex-col gap-4">
 					{#each list as item}
@@ -63,7 +63,7 @@
 					{/each}
 				</div>
 			</div>
-			<div class="mx-4 h-full border-l-2 border-slate-300"></div>
+			<div class="mx-4 hidden h-full border-l-2 border-slate-300 md:block"></div>
 			<div class="w-full overflow-y-auto">
 				{@render children()}
 			</div>
