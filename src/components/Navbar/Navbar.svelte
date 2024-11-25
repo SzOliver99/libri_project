@@ -98,7 +98,7 @@
 				>
 			</div>
 		</div>
-	{:else if $page.url.pathname.includes("/profile") && loggedIn === true}
+	{:else if $page.url.pathname.includes('/profile') && loggedIn === true}
 		<div class="flex items-center justify-between px-4 md:hidden">
 			<MobileProfile />
 			<button onclick={handleSignOut} class="rounded-lg py-3">Sign Out</button>
