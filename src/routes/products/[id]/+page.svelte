@@ -38,7 +38,6 @@
 
 	let { data } = $props();
 	let product = $state(data.bookData);
-	console.log(product);
 
 	$effect(async () => {
 		const userToken = getUserToken();
@@ -83,7 +82,7 @@
 			<div class="mb-2 w-full">
 				<button
 					class="flex w-full justify-center gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
+					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Add to cart</button
 				>
 			</div>
 			<p class="ml-2 text-sm text-slate-800">ISBN: {product.isbn}</p>
