@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	const handleSubmit = async (event) => {
 		const response = await fetch(`/api/user/sign-up`, {
 			method: 'POST',
@@ -16,7 +18,7 @@
 		if (response.ok) {
 			// TODO: own design to notification
 			alert(data);
-			window.location.href = `/sign-in`;
+			goto('/sign-in');
 		} else {
 			// TODO: own design to notification
 			alert(data);
