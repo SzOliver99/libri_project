@@ -10,7 +10,6 @@
 			}
 		});
 		const data = await response.json();
-		console.log(data);
 
 		if (response.ok) {
 			// TODO: own design to notification
