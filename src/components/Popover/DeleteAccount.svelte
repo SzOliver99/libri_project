@@ -50,8 +50,7 @@
 	<div class="mt-2 flex justify-center text-white">
 		<button
 			class="me-5 w-20 rounded-lg bg-red-950 py-2 hover:scale-105 hover:bg-red-900"
-			onclick={handleDeleteAction}
-			id="">Yes</button
+			onclick={handleDeleteAction}>Yes</button
 		>
 		<button
 			class="w-20 rounded-lg bg-primary-700 hover:scale-105 hover:bg-primary-600"
