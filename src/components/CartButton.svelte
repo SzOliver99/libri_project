@@ -74,7 +74,7 @@
 {#if showModal}
 	<div
 		transition:fade={{ duration: 200 }}
-		class="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50"
+		class="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-5 md:p-0"
 	>
 		<div
 			transition:fade={{ duration: 200 }}
