@@ -51,6 +51,10 @@
 	let codeSent = $state(false);
 </script>
 
+<svelte:head>
+	<title>Sign-in via Email</title>
+</svelte:head>
+
 <section class="flex h-[calc(100vh-8rem)] items-center justify-center sm:mt-8 sm:h-auto">
 	<div
 		class="w-full max-w-md rounded-lg p-6 shadow-lg transition-all duration-300 hover:-translate-y-1"
