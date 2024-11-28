@@ -87,7 +87,7 @@
 <input
 	name="numberInput"
 	type="text"
-	class="h-14 w-14 appearance-none rounded border border-transparent bg-slate-100 p-4 text-center text-2xl font-extrabold text-slate-900 outline-none hover:border-slate-200 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+	class="h-10 w-10 appearance-none rounded border border-transparent bg-slate-100 p-4 text-center text-2xl font-extrabold text-slate-900 outline-none hover:border-slate-200 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
 	pattern="\d*"
 	maxlength="1"
 	required
