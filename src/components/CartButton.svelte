@@ -3,6 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, fetchCartItems, updateCartItem } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 
 	let showModal = $state(false);
 	function toggleModal() {

@@ -2,13 +2,14 @@
 	import { ShoppingBasketIcon } from 'lucide-svelte';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems } from '$lib/api';
+	import { notify } from '$lib/utils/notify.js';
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
 		const userToken = getUserToken();
 		if (!userToken) {
-			console.error('Please login to add to cart');
+			notify.warning('Please login to add to cart');
 			return;
 		}
 

@@ -1,5 +1,6 @@
 <script>
 	import { getUserInfo, getUserToken } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 	import { json } from '@sveltejs/kit';
 
 	async function handleSubmit(event) {
@@ -25,9 +26,12 @@
 			})
 		});
 		const data = await response.json();
+		if (!response.ok) {
+			notify.error(data);
+			return;
+		}
 
-		// TODO: own design to notification
-		alert(data);
+		notify.success(data);
 	}
 
 	const handleEditInfo = () => {

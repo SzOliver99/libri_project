@@ -1,22 +1,23 @@
 <script>
+	import { notify } from '$lib/utils/notify';
+
 	async function handleSubmit(event) {
 		event.preventDefault();
-		// Implement password reset logic here
 
-		let res = await fetch(`/api/user/forgot-password`, {
+		let response = await fetch(`/api/user/forgot-password`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ email: email.value })
 		});
-		if (res.ok) {
-			// TODO: own design to notification
-			alert('Password reset email sent');
-		} else {
-			// TODO: own design to notification
-			alert('Failed to send password reset email');
+		let data = await response.json();
+		if (!response.ok) {
+			notify.error(data);
+			return;
 		}
+
+		notify.success(data);
 	}
 </script>
 
