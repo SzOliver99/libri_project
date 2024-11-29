@@ -1,5 +1,6 @@
 <script>
 	import { getUserToken } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 
 	const { username } = $props();
 
@@ -10,14 +11,18 @@
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
+				Authorization: getUserToken()
 			},
 			body: JSON.stringify({ new_username: username.value })
 		});
-		const data = await response.json();
 
-		// TODO: own design to notification
-		alert(data);
+		const data = await response.json();
+		if (response.ok) {
+			notify.success(data);
+			event.target.hidePopover();
+		} else {
+			notify.error(data);
+		}
 		event.target.hidePopover();
 	}
 </script>

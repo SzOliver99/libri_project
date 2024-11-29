@@ -4,6 +4,7 @@
 	import ChangeEmail from '../../components/Popover/ChangeEmail.svelte';
 	import ChangePassword from '../../components/Popover/ChangePassword.svelte';
 	import DeleteAccount from '../../components/Popover/DeleteAccount.svelte';
+	import { notify } from '$lib/utils/notify';
 
 	function handleEditInfo() {
 		isEditing = true;
@@ -20,8 +21,7 @@
 
 	async function handleSubmit() {
 		if (!validatePhoneNumber(phone.value)) {
-			// TODO: own design to notification
-			alert('Not valid phone number pattern');
+			notify.error('Not valid phone number pattern');
 			return;
 		}
 
@@ -44,9 +44,12 @@
 			})
 		});
 		const data = await response.json();
+		if (!response.ok) {
+			notify.error(data);
+			return;
+		}
 
-		// TODO: own design to notification
-		alert(data);
+		notify.success(data);
 	}
 
 	let isEditing = $state(false);

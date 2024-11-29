@@ -1,14 +1,14 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-
-	// const token = $page.url.searchParams.get('token');
+	import { notify } from '$lib/utils/notify';
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
 		if (newPassword.value !== repeatPassword.value) {
 			// TODO: own design to notification
-			alert('Passwords do not match');
+			notify.error('Passwords do not match');
 			return;
 		}
 
@@ -21,14 +21,13 @@
 		});
 		const data = await response.json();
 
-		if (response.ok) {
-			// TODO: own design to notification
-			alert(data);
-			window.location.href = `/sign-in`;
-		} else {
-			// TODO: own design to notification
-			alert(data);
+		if (!response.ok) {
+			notify.error(data);
+			return;
 		}
+
+		notify.success(data);
+		goto('/sign-in');
 	}
 	let token = $state();
 	$effect(() => {
@@ -50,7 +49,7 @@
 
 		<form>
 			<div class="mb-4">
-				<label for="password">Password</label>
+				<label for="newPassword">Password</label>
 				<input
 					type="password"
 					id="newPassword"
@@ -59,7 +58,7 @@
 				/>
 			</div>
 			<div class="mb-4">
-				<label for="token">Repeat Password</label>
+				<label for="repeatPassword">Repeat Password</label>
 				<input
 					type="password"
 					id="repeatPassword"
@@ -72,6 +71,7 @@
 				<button
 					type="submit"
 					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+					onclick={handleSubmit}
 				>
 					Reset Password
 				</button>

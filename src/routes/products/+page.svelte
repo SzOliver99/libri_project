@@ -3,6 +3,7 @@
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, updateCartItem, fetchCartItems, fetchProducts } from '$lib/api';
 	import SearchBar from '../../components/SearchBar.svelte';
+	import { notify } from '$lib/utils/notify';
 
 	const refreshCartItems = async (userToken) => {
 		try {
@@ -23,17 +24,22 @@
 		return $cartItems.find((item) => item.title === title);
 	};
 
-	async function incrementQuantity(product) {
+	async function incrementQuantity(e, product) {
+		e.preventDefault();
 		await updateQuantity(product, 1);
 	}
 
-	async function decrementQuantity(product) {
+	async function decrementQuantity(e, product) {
+		e.preventDefault();
 		await updateQuantity(product, -1);
 	}
 
 	async function updateQuantity(product, change) {
 		const userToken = getUserToken();
-		if (!userToken) return;
+		if (!userToken) {
+			notify.warning('Please login to add to cart');
+			return;
+		}
 
 		const item = getObjectByTitle(product.title) || product;
 		try {
@@ -89,8 +95,7 @@
 			</a>
 			<div class="mt-auto flex flex-col justify-between md:flex-row md:items-center">
 				<p class="text-lg font-bold text-slate-900 md:text-xl">{product.price} Ft</p>
-				<form onsubmit={() => incrementQuantity(product)}>
-					<input type="hidden" value={product.id} name="productId" />
+				<form onsubmit={(e) => incrementQuantity(e, product)}>
 					{#if !$cartItems.some((item) => item.title === product.title)}
 						<button
 							type="submit"
@@ -107,7 +112,7 @@
 							<button
 								class="rounded-l-lg bg-slate-300 px-3 py-2 font-semibold transition-colors duration-200 hover:bg-slate-400 active:bg-slate-200"
 								type="button"
-								onclick={() => decrementQuantity(product)}
+								onclick={(e) => decrementQuantity(e, product)}
 							>
 								-
 							</button>

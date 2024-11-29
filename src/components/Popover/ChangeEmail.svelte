@@ -1,5 +1,6 @@
 <script>
 	import { getUserToken } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 
 	const { email } = $props();
 
@@ -10,18 +11,17 @@
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
+				Authorization: getUserToken()
 			},
 			body: JSON.stringify({ new_email: newEmail.value, password: verifyPassword.value })
 		});
+
 		const data = await response.json();
 		if (response.ok) {
-			// TODO: own design to notification
-			alert('Email changed successfully!');
+			notify.success(data);
 			event.target.hidePopover();
 		} else {
-			// TODO: own design to notification
-			alert(data);
+			notify.error(data);
 		}
 	}
 </script>

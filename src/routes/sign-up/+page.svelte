@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { notify } from '$lib/utils/notify';
 
 	const handleSubmit = async (event) => {
 		const response = await fetch(`/api/user/sign-up`, {
@@ -13,16 +14,15 @@
 				password: password.value
 			})
 		});
-		const data = await response.json();
 
-		if (response.ok) {
-			// TODO: own design to notification
-			alert(data);
-			goto('/sign-in');
-		} else {
-			// TODO: own design to notification
-			alert(data);
+		const data = await response.json();
+		if (!response.ok) {
+			notify.error(data);
+			return;
 		}
+
+		notify.success(data);
+		goto('/sign-in');
 	};
 </script>
 

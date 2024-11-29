@@ -1,5 +1,6 @@
 <script>
 	import { getUserToken } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 	import NumberInput from '../../components/NumberInput.svelte';
 
 	async function handleSendCodeSubmit(event) {
@@ -13,7 +14,7 @@
 		let data = await response.json();
 
 		if (!response.ok) {
-			console.log(data);
+			notify.error(data);
 			return;
 		}
 
