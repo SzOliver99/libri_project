@@ -1,13 +1,5 @@
 <script>
-	// import google_img from '$lib/images/google_img.png';
-	// import facebook_img from '$lib/images/facebook_img.png';
-	// import twitter_img from '$lib/images/twitter_img.png';
-
-	// let different_methods = [
-	// 	{ name: 'Google', img: google_img, method: 'google', disabled: false },
-	// 	{ name: 'Facebook', img: facebook_img, method: 'facebook', disabled: true },
-	// 	{ name: 'Twitter', img: twitter_img, method: 'twitter', disabled: true }
-	// ];
+	import { notify } from '$lib/utils/notify';
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -19,12 +11,12 @@
 			body: JSON.stringify({ username: username.value, password: password.value })
 		});
 
+		const data = await response.json();
 		if (!response.ok) {
-			alert('Invalid username or password');
+			notify.error(data);
 			return;
 		}
 
-		const data = await response.json();
 		localStorage.setItem('AuthorizationToken', `${data.token}`);
 		window.location.href = '/';
 	};
@@ -81,38 +73,7 @@
 					Sign in
 				</button>
 			</div>
-
-			<!-- <div class="text-center mt-5 mb-2">
-				<p>or</p>
-			</div>
-
-			<div id="different_auths" class="flex justify-center gap-5">
-				{#each different_methods as method}
-					<button
-						type="button"
-						on:click={() => {
-							if (method.disabled) method.method;
-						}}
-					>
-						<img
-							src={method.img}
-							alt={method.name}
-							class={`${method.disabled ? 'grayscale' : ''}`}
-						/>
-					</button>
-				{/each}
-			</div> -->
 			<a href="/verify-code" class="flex justify-center text-sm">Login with Email verification</a>
 		</form>
 	</div>
 </section>
-
-<!-- <style lang="postcss">
-	#different_auths img {
-		width: 30px;
-	}
-
-	#different_auths img.grayscale {
-		cursor: default;
-	}
-</style> -->

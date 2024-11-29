@@ -4,6 +4,7 @@
 	import CartButton from '../components/CartButton.svelte';
 	import { page } from '$app/stores';
 	import { isAdmin } from '$lib/store';
+	import Notification from '../components/Notification/Notification.svelte';
 
 	const { children } = $props();
 	let loggedIn = $state(false);
@@ -46,6 +47,7 @@
 
 <div id="app">
 	<Navbar />
+	<Notification />
 	<main
 		class="mx-auto max-w-7xl px-6 pb-24 {$page.url.pathname.includes('/profile')
 			? 'md:pb-0'
