@@ -20,8 +20,6 @@
 		localStorage.setItem('AuthorizationToken', `${data.token}`);
 		window.location.href = '/';
 	};
-
-	async function signInWithGoogle() {}
 </script>
 
 <svelte:head>
