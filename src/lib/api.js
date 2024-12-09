@@ -62,7 +62,7 @@ export const fetchProducts = async () => {
   }
 };
 
-export function fetchPurchases() {
+export async function fetchPurchases() {
   const userToken = getUserToken();
 
   return fetch(`/api/user/history/get-all`, {
