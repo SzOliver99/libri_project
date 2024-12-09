@@ -1,6 +1,4 @@
-export const getUserToken = () => {
-  return localStorage.getItem('AuthorizationToken');
-};
+export const getUserToken = () => localStorage.getItem('AuthorizationToken');
 
 export async function getUserInfo() {
   try {
@@ -16,7 +14,7 @@ export async function getUserInfo() {
   }
 }
 
-export const updateCartItem = async (userToken, productId, change) => {
+export async function updateCartItem() {
   try {
     const response = await fetch(`/api/cart/book/`, {
       method: change === 1 ? 'PUT' : 'DELETE',
@@ -35,7 +33,7 @@ export const updateCartItem = async (userToken, productId, change) => {
   }
 };
 
-export const fetchCartItems = async (userToken) => {
+export async function fetchCartItems(userToken) {
   try {
     const response = await fetch(`/api/user/cart`, {
       headers: {
@@ -50,7 +48,7 @@ export const fetchCartItems = async (userToken) => {
   }
 };
 
-export const fetchProducts = async () => {
+export async function fetchProducts() {
   try {
     const response = await fetch('/api/books/');
     if (!response.ok) throw new Error('Failed to fetch products');
