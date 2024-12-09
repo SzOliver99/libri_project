@@ -124,7 +124,7 @@
 							<button
 								class="rounded-r-lg bg-slate-300 px-3 py-2 font-semibold transition-colors duration-200 hover:bg-slate-400 active:bg-slate-200"
 								type="button"
-								onclick={() => incrementQuantity(product)}
+								onclick={(e) => incrementQuantity(e, product)}
 							>
 								+
 							</button>
