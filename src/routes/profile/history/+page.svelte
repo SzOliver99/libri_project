@@ -1,20 +1,20 @@
 <script>
-    import { getUserToken, fetchPurchases } from '$lib/api';
-    import { notify } from '$lib/utils/notify';
+	import { getUserToken, fetchPurchases } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 
-    async function refreshPurchases(userToken) {
-      try {
-        purchases = await fetchPurchases(userToken);
-      } catch (error) {
-        console.error('Error refreshing purchases:', error);
-      }
-    };
+	async function refreshPurchases(userToken) {
+		try {
+			purchases = await fetchPurchases(userToken);
+		} catch (error) {
+			console.error('Error refreshing purchases:', error);
+		}
+	}
 
-    let purchases = $state([]);
+	let purchases = $state([]);
 	$effect(async () => {
 		const userToken = getUserToken();
 		if (userToken) {
-		  refreshPurchases(userToken);
+			refreshPurchases(userToken);
 		}
 	});
 </script>
@@ -25,7 +25,7 @@
 	{#if purchases.length === 0}
 		<p class="py-8 text-center text-gray-500">No purchase history available</p>
 	{:else}
-		<div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+		<div class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
 			{#each purchases as purchase}
 				<div class="h-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
 					<div class="mb-4 flex items-center justify-between">
@@ -49,14 +49,14 @@
 									<p class="font-medium">{item.title}</p>
 									<p class="text-sm text-gray-500">Quantity: {item.quantity}</p>
 								</div>
-								<p class="font-medium">${item.price * item.quantity}</p>
+								<p class="whitespace-nowrap font-medium">{item.price * (item.quantity || 1)} Ft</p>
 							</div>
 						{/each}
 					</div>
 
 					<div class="mt-auto flex items-center justify-between border-gray-200 pt-4">
 						<p class="font-medium">Total</p>
-						<p class="text-lg font-bold">${purchase.price}</p>
+						<p class="text-lg font-bold">{purchase.price} Ft</p>
 					</div>
 				</div>
 			{/each}
