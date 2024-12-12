@@ -50,7 +50,7 @@ export async function fetchCartItems(userToken) {
 
 export async function fetchProducts() {
 	try {
-		const response = await fetch('/api/books/');
+		const response = await fetch('/api/book/get-all');
 		if (!response.ok) throw new Error('Failed to fetch products');
 
 		return await response.json();
