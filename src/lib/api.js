@@ -14,7 +14,7 @@ export async function getUserInfo() {
 	}
 }
 
-export async function updateCartItem() {
+export async function updateCartItem(userToken, productId, change) {
 	try {
 		const response = await fetch(`/api/cart/book/`, {
 			method: change === 1 ? 'PUT' : 'DELETE',
