@@ -55,9 +55,9 @@
 <section
 	class="group relative grid grid-cols-1 gap-6 rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1 md:grid-cols-2"
 >
-	<div class="aspect-square w-1/2 overflow-hidden rounded-lg bg-gray-200 md:w-full">
+	<div class="aspect-square overflow-hidden rounded-lg bg-gray-200 md:w-full">
 		<img
-			class="h-full w-full object-contain lg:h-full lg:w-full"
+			class="h-full object-contain lg:h-full lg:w-full"
 			src={product.image_src}
 			alt={product.title}
 		/>
