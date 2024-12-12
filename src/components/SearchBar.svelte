@@ -4,7 +4,7 @@
 
 	let filteredList = $state([]);
 	async function searchHandle(event) {
-		const res = await fetch('/api/books/filter-by', {
+		const res = await fetch('/api/book/filter-by', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -22,7 +22,7 @@
 	<input
 		type="search"
 		onkeyup={searchHandle}
-		class="focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full rounded-md border border-gray-300 px-3 py-3 pl-6 shadow-sm focus:outline-none sm:text-sm"
+		class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-3 pl-6 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 		placeholder="Search products or authors..."
 	/>
 </div>
