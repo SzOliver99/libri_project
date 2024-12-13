@@ -13,17 +13,23 @@
 				'Content-Type': 'application/json',
 				Authorization: getUserToken()
 			},
-			body: JSON.stringify({ new_username: username.value })
+			body: JSON.stringify({ new_username: newUsername.value })
 		});
 
 		const data = await response.json();
 		if (response.ok) {
 			notify.success(data);
-			event.target.hidePopover();
+			window.location.href = '/profile';
 		} else {
 			notify.error(data);
 		}
-		event.target.hidePopover();
+
+		toggleModal();
+	}
+
+	let showModal = $state(false);
+	function toggleModal() {
+		showModal = !showModal;
 	}
 </script>
 
@@ -37,33 +43,42 @@
 
 	<button
 		class="mt-2 rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700 sm:mt-0"
-		popovertarget="change-username"
+		onclick={toggleModal}
 	>
 		Change
 	</button>
 </div>
 
-<form
-	onsubmit={handleChangeUsername}
-	popover
-	id="change-username"
-	class="rounded-lg p-10 shadow-lg"
->
-	<h3 class="pb-3 font-bold">Change Username</h3>
-	<div class="popover-content">
-		<div class="mb-3">
-			<label for="username" class="block text-sm font-medium text-gray-700">New Username</label>
-			<input
-				type="text"
-				id="username"
-				required
-				class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-			/>
-		</div>
+{#if showModal}
+	<div class="absolute left-0 top-0 h-full w-full overflow-hidden">
 		<button
-			type="submit"
-			class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-			>Change</button
+			class="h-full w-full cursor-default bg-black bg-opacity-50"
+			onclick={toggleModal}
+			aria-label="Close modal"
+		></button>
+		<form
+			onsubmit={handleChangeUsername}
+			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-10 shadow-lg"
 		>
+			<h3 class="pb-3 font-bold">Change Username</h3>
+			<div class="popover-content">
+				<div class="mb-3">
+					<label for="newUsername" class="block text-sm font-medium text-gray-700"
+						>New Username</label
+					>
+					<input
+						type="text"
+						id="newUsername"
+						required
+						class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
+					/>
+				</div>
+				<button
+					type="submit"
+					class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+					>Change</button
+				>
+			</div>
+		</form>
 	</div>
-</form>
+{/if}
