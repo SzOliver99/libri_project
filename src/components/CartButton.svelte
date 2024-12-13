@@ -3,12 +3,6 @@
 	import { fade } from 'svelte/transition';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, fetchCartItems, updateCartItem, fetchBuyCart } from '$lib/api';
-	import { notify } from '$lib/utils/notify';
-
-	let showModal = $state(false);
-	function toggleModal() {
-		showModal = !showModal;
-	}
 
 	async function incrementQuantity(index) {
 		await updateQuantity(index, 1);
@@ -60,6 +54,11 @@
 	$effect(() => {
 		$itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);
 	});
+
+	let showModal = $state(false);
+	function toggleModal() {
+		showModal = !showModal;
+	}
 </script>
 
 <button
@@ -75,13 +74,14 @@
 </button>
 
 {#if showModal}
-	<div
-		transition:fade={{ duration: 200 }}
-		class="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-5 md:p-0"
-	>
+	<div transition:fade={{ duration: 200 }} class="fixed left-0 top-0 h-full w-full">
+		<button
+			class="h-full w-full cursor-default bg-black bg-opacity-50"
+			onclick={toggleModal}
+			aria-label="Close modal"
+		></button>
 		<div
-			transition:fade={{ duration: 200 }}
-			class="relative max-h-[80vh] w-full max-w-md overflow-y-auto rounded-lg bg-white p-4 sm:rounded-lg"
+			class="absolute left-1/2 top-1/2 h-[60%] w-3/4 -translate-x-1/2 -translate-y-[60%] overflow-y-scroll rounded-lg bg-white p-4 shadow-lg md:h-auto md:w-[35rem] md:-translate-y-1/2 md:overflow-hidden"
 		>
 			<h2 class="mb-3 text-xl font-bold">Your Cart</h2>
 			{#if $cartItems.length === 0}
@@ -89,25 +89,25 @@
 			{:else}
 				<ul class="divide-y divide-gray-200">
 					{#each $cartItems as item, index}
-						<li class="flex items-center justify-between py-2">
+						<li class="flex flex-col justify-between py-2 sm:flex-row sm:items-center">
 							<span class="font-medium">{item.title}</span>
-							<div class="flex items-center">
-								<button
-									onclick={() => decrementQuantity(index)}
-									class="rounded-l-lg bg-gray-200 px-2 py-1 transition-colors duration-200 hover:bg-gray-300"
-								>
-									-
-								</button>
-								<span class="bg-gray-100 px-3 py-1">{item.quantity}</span>
-								<button
-									onclick={() => incrementQuantity(index)}
-									class="rounded-r-lg bg-gray-200 px-2 py-1 transition-colors duration-200 hover:bg-gray-300"
-								>
-									+
-								</button>
-								<span class="ml-4 text-primary-800"
-									>{(item.price * item.quantity).toFixed(2)} Ft</span
-								>
+							<div class="flex items-center justify-between sm:gap-3">
+								<span class="text-primary-800">{(item.price * item.quantity).toFixed(2)} Ft</span>
+								<div class="flex items-center">
+									<button
+										onclick={() => decrementQuantity(index)}
+										class="rounded-l-lg bg-gray-200 px-2 py-1 transition-colors duration-200 hover:bg-gray-300"
+									>
+										-
+									</button>
+									<span class="bg-gray-100 px-3 py-1">{item.quantity}</span>
+									<button
+										onclick={() => incrementQuantity(index)}
+										class="rounded-r-lg bg-gray-200 px-2 py-1 transition-colors duration-200 hover:bg-gray-300"
+									>
+										+
+									</button>
+								</div>
 							</div>
 						</li>
 					{/each}

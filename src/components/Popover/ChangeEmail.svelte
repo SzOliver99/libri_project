@@ -1,5 +1,6 @@
 <script>
 	import { getUserToken } from '$lib/api';
+	import { fade } from 'svelte/transition';
 	import { notify } from '$lib/utils/notify';
 
 	const { email } = $props();
@@ -19,7 +20,7 @@
 		const data = await response.json();
 		if (response.ok) {
 			notify.success(data);
-			window.location.href = '/profile';
+			window.location.reload();
 		} else {
 			notify.error(data);
 		}
@@ -36,7 +37,7 @@
 >
 	<div>
 		<p class="font-medium">Email</p>
-		<p class="text-sm text-gray-500">{email}</p>
+		<p class="w-full overflow-hidden overflow-ellipsis text-sm text-gray-500">{email}</p>
 	</div>
 	<button
 		onclick={toggleModal}
@@ -47,7 +48,7 @@
 </div>
 
 {#if showModal}
-	<div class="absolute left-0 top-0 h-full w-full overflow-hidden">
+	<div transition:fade={{ duration: 200 }} class="fixed left-0 top-0 h-full w-full overflow-hidden">
 		<button
 			class="h-full w-full cursor-default bg-black bg-opacity-50"
 			onclick={toggleModal}
@@ -55,7 +56,7 @@
 		></button>
 		<form
 			onsubmit={handleChangeEmail}
-			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-10 shadow-lg"
+			class="absolute left-1/2 top-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-3 shadow-lg sm:w-auto"
 		>
 			<h3 class="pb-3 font-bold">Change Email</h3>
 			<div class="popover-content">
