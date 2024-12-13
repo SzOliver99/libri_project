@@ -27,7 +27,7 @@
 	}
 </script>
 
-<div class="mb-5 flex items-center justify-between rounded-lg bg-gray-50 p-3">
+<div class="mb-5 flex flex-col sm:flex sm:flex-row sm:items-center justify-between rounded-lg bg-gray-50 p-3">
 	<div>
 		<p class="font-medium">Username</p>
 		<p class="text-sm text-gray-500">{username}</p>
