@@ -2,7 +2,7 @@
 	import { ShoppingCartIcon } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
 	import { itemCount, cartItems } from '$lib/store';
-	import { getUserToken, fetchCartItems, updateCartItem } from '$lib/api';
+	import { getUserToken, fetchCartItems, updateCartItem, fetchBuyCart } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
 	let showModal = $state(false);
@@ -19,12 +19,11 @@
 	}
 
 	async function updateQuantity(index, change) {
-		const userToken = getUserToken();
-		if (!userToken) return;
+		if (!getUserToken()) return;
 
 		const item = $cartItems[index];
 		try {
-			const success = await updateCartItem(userToken, item.id, change);
+			const success = await updateCartItem(item.id, change);
 
 			if (success) {
 				const newQuantity = Math.max(0, item.quantity + change);
@@ -40,18 +39,21 @@
 		}
 	}
 
+	async function handleBuyCart() {
+		await fetchBuyCart();
+	}
+
 	$effect(async () => {
-		const userToken = getUserToken();
-		if (userToken) {
-			const cartData = await fetchCartItems(userToken);
-			if (cartData) {
-				$cartItems = cartData.books.map((book) => ({
-					id: book.id,
-					title: book.title,
-					price: book.price,
-					quantity: book.quantity || 1
-				}));
-			}
+		if (!getUserToken()) return;
+
+		const cartData = await fetchCartItems();
+		if (cartData) {
+			$cartItems = cartData.books.map((book) => ({
+				id: book.id,
+				title: book.title,
+				price: book.price,
+				quantity: book.quantity || 1
+			}));
 		}
 	});
 
@@ -127,6 +129,7 @@
 					Close
 				</button>
 				<button
+					onclick={handleBuyCart}
 					class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-colors duration-200 hover:bg-primary-700"
 				>
 					Checkout
