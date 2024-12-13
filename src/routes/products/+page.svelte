@@ -5,19 +5,19 @@
 	import SearchBar from '../../components/SearchBar.svelte';
 	import { notify } from '$lib/utils/notify';
 
-	const refreshCartItems = async (userToken) => {
-		try {
-			const cartData = await fetchCartItems(userToken);
-			$cartItems = cartData.books.map((book) => ({
-				id: book.id,
-				title: book.title,
-				price: book.price,
-				quantity: book.quantity
-			}));
-			$itemCount = cartData.books.reduce((total, book) => total + book.quantity, 0);
-		} catch (error) {
-			console.error('Error refreshing cart items:', error);
-		}
+	const refreshCartItems = async () => {
+		// try {
+		const cartData = await fetchCartItems();
+		$cartItems = cartData.books.map((book) => ({
+			id: book.id,
+			title: book.title,
+			price: book.price,
+			quantity: book.quantity
+		}));
+		$itemCount = cartData.books.reduce((total, book) => total + book.quantity, 0);
+		// } catch (error) {
+		// 	console.error('Error refreshing cart items:', error);
+		// }
 	};
 
 	const getObjectByTitle = (title) => {
@@ -35,17 +35,16 @@
 	}
 
 	async function updateQuantity(product, change) {
-		const userToken = getUserToken();
-		if (!userToken) {
+		if (!getUserToken()) {
 			notify.warning('Please login to add to cart');
 			return;
 		}
 
 		const item = getObjectByTitle(product.title) || product;
 		try {
-			const success = await updateCartItem(userToken, item.id, change);
+			const success = await updateCartItem(item.id, change);
 			if (success) {
-				await refreshCartItems(userToken);
+				await refreshCartItems();
 				item.quantity = Math.max(0, item.quantity + change);
 				$cartItems = [...$cartItems];
 			}
@@ -60,9 +59,8 @@
 
 	let products = $state();
 	$effect(async () => {
-		const userToken = getUserToken();
-		if (userToken) {
-			await refreshCartItems(userToken);
+		if (getUserToken()) {
+			await refreshCartItems();
 		}
 
 		products = await fetchProducts();
@@ -95,6 +93,7 @@
 			</a>
 			<div class="mt-auto flex flex-col justify-between md:flex-row md:items-center">
 				<p class="text-lg font-bold text-slate-900 md:text-xl">{product.price} Ft</p>
+				<input type="hidden" id="product" value={product} />
 				<form onsubmit={(e) => incrementQuantity(e, product)}>
 					{#if !$cartItems.some((item) => item.title === product.title)}
 						<button
