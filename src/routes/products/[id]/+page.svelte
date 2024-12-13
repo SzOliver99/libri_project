@@ -7,22 +7,21 @@
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		const userToken = getUserToken();
-		if (!userToken) {
+		if (!getUserToken()) {
 			notify.warning('Please login to add to cart');
 			return;
 		}
 
-		const success = await updateCartItem(userToken, +data.bookData.id, 1);
+		const success = await updateCartItem(+data.bookData.id, 1);
 		if (success) {
 			$itemCount += 1;
-			await refreshCartItems(userToken);
+			await refreshCartItems();
 		}
 	}
 
-	const refreshCartItems = async (userToken) => {
+	const refreshCartItems = async () => {
 		try {
-			const cartData = await fetchCartItems(userToken);
+			const cartData = await fetchCartItems();
 			if (cartData) {
 				$cartItems = cartData.books.map((book) => ({
 					id: book.id,
@@ -41,10 +40,9 @@
 	let product = $state(data.bookData);
 
 	$effect(async () => {
-		const userToken = getUserToken();
-		if (userToken) {
-			await refreshCartItems(userToken);
-		}
+		if (!getUserToken()) return;
+
+		await refreshCartItems();
 	});
 </script>
 
@@ -57,7 +55,7 @@
 >
 	<div class="aspect-square overflow-hidden rounded-lg bg-gray-200 md:w-full">
 		<img
-			class="h-full object-contain lg:h-full lg:w-full"
+			class="h-full w-full object-contain lg:h-full lg:w-full"
 			src={product.image_src}
 			alt={product.title}
 		/>
@@ -80,7 +78,7 @@
 			<p class="ml-2 mt-4 text-xl font-bold text-slate-900">
 				{product.price} Ft
 			</p>
-			<div class="mb-2 w-full">
+			<div class="my-2 w-full">
 				<button
 					class="flex w-full justify-center gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Add to cart</button
