@@ -7,7 +7,6 @@
 		event.preventDefault();
 
 		if (newPassword.value !== repeatPassword.value) {
-			// TODO: own design to notification
 			notify.error('Passwords do not match');
 			return;
 		}
