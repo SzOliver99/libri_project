@@ -27,14 +27,16 @@
 	}
 </script>
 
-<div class="mb-5 flex flex-col sm:flex sm:flex-row sm:items-center justify-between rounded-lg bg-gray-50 p-3">
+<div
+	class="mb-5 flex flex-col justify-between rounded-lg bg-gray-50 p-3 sm:flex sm:flex-row sm:items-center"
+>
 	<div>
 		<p class="font-medium">Username</p>
 		<p class="text-sm text-gray-500">{username}</p>
 	</div>
 
 	<button
-		class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+		class="mt-2 rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700 sm:mt-0"
 		popovertarget="change-username"
 	>
 		Change
