@@ -2,20 +2,15 @@
 	import { getUserToken, fetchPurchases } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
-	async function refreshPurchases(userToken) {
-		try {
-			purchases = await fetchPurchases(userToken);
-		} catch (error) {
-			console.error('Error refreshing purchases:', error);
-		}
+	async function refreshPurchases() {
+		purchases = await fetchPurchases();
 	}
 
 	let purchases = $state([]);
 	$effect(async () => {
-		const userToken = getUserToken();
-		if (userToken) {
-			refreshPurchases(userToken);
-		}
+		if (!getUserToken()) return;
+
+		refreshPurchases();
 	});
 </script>
 
@@ -31,7 +26,7 @@
 					<div class="mb-4 flex items-center justify-between">
 						<div>
 							<p class="text-sm text-gray-500">Order #{purchase.id}</p>
-							<p class="text-sm text-gray-500">{purchase.date}</p>
+							<p class="text-sm text-gray-500">{purchase.purchase_date}</p>
 						</div>
 						<span
 							class="rounded-full px-3 py-1 text-sm {purchase.status === 'Delivered'
