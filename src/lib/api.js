@@ -1,3 +1,5 @@
+import { notify } from './utils/notify';
+
 export const getUserToken = () => localStorage.getItem('AuthorizationToken');
 
 export async function getUserInfo() {
@@ -10,17 +12,17 @@ export async function getUserInfo() {
 		const data = await response.json();
 		return data;
 	} catch {
-		console.log('asd');
+		console.log('Error getting user informations');
 	}
 }
 
-export async function updateCartItem(userToken, productId, change) {
+export async function updateCartItem(productId, change) {
 	try {
 		const response = await fetch(`/api/cart/book/`, {
 			method: change === 1 ? 'PUT' : 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: userToken
+				Authorization: getUserToken()
 			},
 			body: JSON.stringify({ book_id: productId })
 		});
@@ -33,14 +35,15 @@ export async function updateCartItem(userToken, productId, change) {
 	}
 }
 
-export async function fetchCartItems(userToken) {
+export async function fetchCartItems() {
 	try {
 		const response = await fetch(`/api/user/cart`, {
 			headers: {
-				Authorization: userToken
+				Authorization: getUserToken()
 			}
 		});
 		if (!response.ok) throw new Error('Failed to fetch cart items');
+
 		return await response.json();
 	} catch (error) {
 		console.error('Error fetching cart items:', error);
@@ -61,12 +64,30 @@ export async function fetchProducts() {
 }
 
 export async function fetchPurchases() {
-	const userToken = getUserToken();
+	try {
+		return await fetch(`/api/user/history/get-all`, {
+			method: 'GET',
+			headers: {
+				Authorization: getUserToken()
+			}
+		}).then(async (response) => await response.json());
+	} catch (error) {
+		console.error('Error fetching products:', error);
+	}
+}
 
-	return fetch(`/api/user/history/get-all`, {
-		method: 'GET',
-		headers: {
-			Authorization: userToken
-		}
-	}).then(async (response) => await response.json());
+export async function fetchBuyCart() {
+	try {
+		let response = await fetch('/api/cart/purchase', {
+			method: 'POST',
+			headers: {
+				Authorization: getUserToken()
+			}
+		});
+		if (!response.ok) throw new Error('Failed to fetch cart items');
+
+		notify.success("We got your order we'll send you email for more informations.");
+	} catch (error) {
+		console.error('Error fetching cart items:', error);
+	}
 }
