@@ -1,7 +1,6 @@
 <script>
 	import { getUserInfo, getUserToken } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
-	import { json } from '@sveltejs/kit';
 
 	async function handleSubmit(event) {
 		event.preventDefault();

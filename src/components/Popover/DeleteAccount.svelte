@@ -1,8 +1,9 @@
 <script>
 	import { getUserToken } from '$lib/api';
+	import { fade } from 'svelte/transition';
 	import { notify } from '$lib/utils/notify';
 
-	async function handleDeleteAction(event) {
+	async function handleDeleteAction() {
 		const response = await fetch('/api/user/delete-account', {
 			method: 'DELETE',
 			headers: {
@@ -21,10 +22,6 @@
 		// Sign out and redirect to main page
 		localStorage.clear();
 		window.location.href = '/';
-	}
-
-	function handleCancelAction() {
-		toggleModal();
 	}
 
 	let showModal = $state(false);
@@ -49,14 +46,14 @@
 </div>
 
 {#if showModal}
-	<div class="absolute left-0 top-0 h-full w-full overflow-hidden">
+	<div transition:fade={{ duration: 200 }} class="fixed left-0 top-0 h-full w-full overflow-hidden">
 		<button
 			class="h-full w-full cursor-default bg-black bg-opacity-50"
 			onclick={toggleModal}
 			aria-label="Close modal"
 		></button>
 		<div
-			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center rounded-lg bg-white p-10 text-center shadow-lg"
+			class="absolute left-1/2 top-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg sm:w-auto"
 		>
 			<p>Are you sure you wanna to delete your account?</p>
 			<p>The account will be deleted permanently!</p>
@@ -67,7 +64,7 @@
 				>
 				<button
 					class="w-20 rounded-lg bg-primary-700 hover:scale-105 hover:bg-primary-600"
-					onclick={handleCancelAction}>No!</button
+					onclick={toggleModal}>No!</button
 				>
 			</div>
 		</div>
