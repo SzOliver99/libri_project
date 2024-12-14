@@ -35,6 +35,9 @@
 
 	async function handleBuyCart() {
 		await fetchBuyCart();
+
+		$cartItems = [];
+		total = 0;
 	}
 
 	$effect(async () => {
@@ -53,6 +56,10 @@
 
 	$effect(() => {
 		$itemCount = $cartItems.reduce((total, item) => total + item.quantity, 0);
+	});
+	let total = $state(0);
+	$effect(() => {
+		total = $cartItems.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
 	});
 
 	let showModal = $state(false);
@@ -115,9 +122,7 @@
 				<div class="mt-4 flex justify-between border-t border-gray-200 pt-2 font-bold">
 					<span>Total:</span>
 					<span>
-						{$cartItems
-							.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0)
-							.toFixed(2)} Ft
+						{total} Ft
 					</span>
 				</div>
 			{/if}
