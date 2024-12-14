@@ -77,17 +77,17 @@ export async function fetchPurchases() {
 }
 
 export async function fetchBuyCart() {
-	try {
-		let response = await fetch('/api/cart/purchase', {
-			method: 'POST',
-			headers: {
-				Authorization: getUserToken()
-			}
-		});
-		if (!response.ok) throw new Error('Failed to fetch cart items');
-
-		notify.success("We got your order we'll send you email for more informations.");
-	} catch (error) {
-		console.error('Error fetching cart items:', error);
-	}
+	await fetch('/api/cart/purchase', {
+		method: 'POST',
+		headers: {
+			Authorization: getUserToken()
+		}
+	}).then(async (response) => {
+		const data = await response.json();
+		if (!response.ok) {
+			notify.error(data);
+			return response;
+		}
+		notify.success(data);
+	});
 }
