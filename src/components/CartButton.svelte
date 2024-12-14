@@ -3,6 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import { itemCount, cartItems } from '$lib/store';
 	import { getUserToken, fetchCartItems, updateCartItem, fetchBuyCart } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
 
 	async function incrementQuantity(index) {
 		await updateQuantity(index, 1);
@@ -34,6 +35,12 @@
 	}
 
 	async function handleBuyCart() {
+		if (!getUserToken()) return;
+		if ($itemCount === 0) {
+			notify.warning('You have no items in your cart.');
+			return;
+		}
+
 		await fetchBuyCart();
 
 		$cartItems = [];
@@ -88,7 +95,7 @@
 			aria-label="Close modal"
 		></button>
 		<div
-			class="absolute left-1/2 top-1/2 h-[60%] w-3/4 -translate-x-1/2 -translate-y-[60%] overflow-y-scroll rounded-lg bg-white p-4 shadow-lg md:h-auto md:w-[35rem] md:-translate-y-1/2 md:overflow-hidden"
+			class="overflow-y-scrolauto'} absolute left-1/2 top-1/2 h-auto max-h-[60%] w-3/4 w-3/4 -translate-x-1/2 -translate-x-1/2 -translate-y-[60%] -translate-y-[60%] overflow-y-scroll rounded-lg bg-white p-4 shadow-lg md:w-[35rem] md:-translate-y-1/2"
 		>
 			<h2 class="mb-3 text-xl font-bold">Your Cart</h2>
 			{#if $cartItems.length === 0}
