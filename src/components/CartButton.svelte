@@ -36,15 +36,13 @@
 
 	async function handleBuyCart() {
 		if (!getUserToken()) return;
-		if ($itemCount === 0) {
-			notify.warning('You have no items in your cart.');
-			return;
-		}
 
-		await fetchBuyCart();
+		await fetchBuyCart().then((response) => {
+			if (!response.ok) return;
 
-		$cartItems = [];
-		total = 0;
+			$cartItems = [];
+			total = 0;
+		});
 	}
 
 	$effect(async () => {
