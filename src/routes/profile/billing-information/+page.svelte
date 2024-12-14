@@ -111,7 +111,7 @@
 			</div>
 
 			<!-- Submit Button -->
-			<div class="flex justify-end">
+			<div class="flex flex-col">
 				{#if isEditing}
 					<button
 						type="submit"
