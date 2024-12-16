@@ -4,7 +4,9 @@ export default {
 	theme: {
 		extend: {
 			screens: {
-				xsm: '375px'
+				xsm: '375px',
+				xmd: '900px',
+				lg: '1200px'
 			},
 			colors: {
 				transparent: 'transparent',
