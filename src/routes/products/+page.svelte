@@ -72,7 +72,7 @@
 </svelte:head>
 
 <SearchBar on:update={handleUpdate} />
-<section class="xsm:grid-cols-2 grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
+<section class="xmd:grid-cols-3 grid grid-cols-1 gap-6 xsm:grid-cols-2 lg:grid-cols-4">
 	{#each products as product}
 		<div
 			class="flex h-full flex-col rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1"
