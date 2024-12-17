@@ -77,7 +77,7 @@ export async function fetchPurchases() {
 }
 
 export async function fetchBuyCart() {
-	await fetch('/api/cart/purchase', {
+	let response = await fetch('/api/cart/purchase', {
 		method: 'POST',
 		headers: {
 			Authorization: getUserToken()
@@ -89,5 +89,7 @@ export async function fetchBuyCart() {
 			return response;
 		}
 		notify.success(data);
+		return response;
 	});
+	return response;
 }
