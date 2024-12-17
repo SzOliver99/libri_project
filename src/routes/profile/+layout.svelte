@@ -70,7 +70,7 @@
 		</div>
 	{:else}
 		<div class="flex h-[calc(100vh-7rem)] flex-col items-center justify-center">
-			<h1 class="text-2xl font-bold">You are not logged in!</h1>
+			<h1 class="text-center text-2xl font-bold">You are not logged in!</h1>
 		</div>
 	{/if}
 </section>
