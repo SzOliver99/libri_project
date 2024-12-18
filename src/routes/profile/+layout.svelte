@@ -37,7 +37,7 @@
 <section>
 	{#if loggedIn === true}
 		<div
-			class="m-5 mx-auto flex h-full overflow-hidden rounded-lg bg-slate-200 p-6 md:h-[calc(100vh-6.5rem)]"
+			class="m-5 mx-auto flex h-full overflow-hidden rounded-lg bg-slate-200 px-2 py-4 xsm:px-6 xsm:py-6 md:h-[calc(100vh-6.5rem)]"
 		>
 			<div class="hidden min-w-56 flex-col md:flex">
 				<h1 class="mb-4 text-2xl font-bold">Profile</h1>
