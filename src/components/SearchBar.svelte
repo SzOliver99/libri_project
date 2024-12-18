@@ -43,7 +43,7 @@
 	/>
 	{#if showIcon}
 		<X
-			class="absolute right-4 top-[1.8rem] -translate-y-1/2 md:top-[1.7rem] {isFocused
+			class="absolute right-4 top-[1.8rem] -translate-y-1/2 cursor-pointer md:top-[1.7rem] {isFocused
 				? 'text-primary-500'
 				: 'text-gray-300'}"
 			onclick={() => {
