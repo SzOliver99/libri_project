@@ -37,13 +37,13 @@
 		onkeyup={searchHandle}
 		onfocus={handleFocus}
 		onblur={handleBlur}
-		class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-3 pl-6 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 md:text-sm"
+		class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-3 pl-6 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 md:text-sm transition-colors duration-300"
 		placeholder="Search products or authors..."
 		oninput={(e) => (filteredList = e.target.value ? filteredList : [])}
 	/>
 	{#if showIcon}
 		<X
-			class="absolute right-4 top-[1.8rem] -translate-y-1/2 cursor-pointer md:top-[1.7rem] {isFocused
+			class="absolute right-4 top-[1.8rem] -translate-y-1/2 cursor-pointer transition-all duration-300 md:top-[1.7rem] {isFocused
 				? 'text-primary-500'
 				: 'text-gray-300'}"
 			onclick={() => {
