@@ -47,7 +47,6 @@
 >
 	<div>
 		<p class="font-medium">Password</p>
-		<p class="text-sm text-gray-500">Last changed 3 months ago</p>
 	</div>
 	<button
 		class="mt-2 rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700 sm:mt-0"
