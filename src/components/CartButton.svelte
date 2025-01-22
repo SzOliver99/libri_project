@@ -93,16 +93,16 @@
 			aria-label="Close modal"
 		></button>
 		<div
-			class="overflow-y-scrolauto'} absolute left-1/2 top-1/2 h-auto max-h-[60%] w-3/4 w-3/4 -translate-x-1/2 -translate-x-1/2 -translate-y-[60%] -translate-y-[60%] overflow-y-scroll rounded-lg bg-white p-4 shadow-lg md:w-[35rem] md:-translate-y-1/2"
+			class="absolute left-1/2 top-1/2 h-auto max-h-[60%] w-3/4 -translate-x-1/2 -translate-y-[60%] overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-[35rem] md:-translate-y-1/2"
 		>
-			<h2 class="mb-3 text-xl font-bold">Your Cart</h2>
+			<h2 class="mb-3 text-xl font-bold text-primary-800">Your Cart</h2>
 			{#if $cartItems.length === 0}
-				<p class="text-gray-500">Your cart is empty.</p>
+				<p class="text-primary-900">Your cart is empty.</p>
 			{:else}
 				<ul class="divide-y divide-gray-200">
 					{#each $cartItems as item, index}
 						<li class="flex flex-col justify-between py-2 sm:flex-row sm:items-center">
-							<span class="font-medium">{item.title}</span>
+							<span class="font-medium text-primary-800">{item.title}</span>
 							<div class="flex items-center justify-between sm:gap-3">
 								<span class="text-primary-800">{(item.price * item.quantity).toFixed(2)} Ft</span>
 								<div class="flex items-center">
@@ -124,7 +124,9 @@
 						</li>
 					{/each}
 				</ul>
-				<div class="mt-4 flex justify-between border-t border-gray-200 pt-2 font-bold">
+				<div
+					class="mt-4 flex justify-between border-t border-gray-200 pt-2 font-bold text-primary-900"
+				>
 					<span>Total:</span>
 					<span>
 						{total} Ft
