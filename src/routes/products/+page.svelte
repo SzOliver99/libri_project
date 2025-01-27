@@ -6,7 +6,6 @@
 	import { notify } from '$lib/utils/notify';
 
 	const refreshCartItems = async () => {
-		// try {
 		const cartData = await fetchCartItems();
 		$cartItems = cartData.books.map((book) => ({
 			id: book.id,
@@ -15,9 +14,6 @@
 			quantity: book.quantity
 		}));
 		$itemCount = cartData.books.reduce((total, book) => total + book.quantity, 0);
-		// } catch (error) {
-		// 	console.error('Error refreshing cart items:', error);
-		// }
 	};
 
 	const getObjectByTitle = (title) => {
@@ -72,7 +68,7 @@
 </svelte:head>
 
 <SearchBar on:update={handleUpdate} />
-<section class="xmd:grid-cols-3 grid grid-cols-1 gap-6 xsm:grid-cols-2 lg:grid-cols-4">
+<section class="grid grid-cols-1 gap-6 xsm:grid-cols-2 xmd:grid-cols-3 lg:grid-cols-4">
 	{#each products as product}
 		<div
 			class="flex h-full flex-col rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1"
@@ -87,12 +83,12 @@
 					/>
 				</div>
 				<div class="break-word mb-2 mt-4 overflow-hidden">
-					<h3 class="text-base font-bold text-slate-900 md:text-lg">{product.title}</h3>
-					<p class="text-xs text-slate-700 md:text-sm">{product.author}</p>
+					<h3 class="text-base font-bold text-primary-800 md:text-lg">{product.title}</h3>
+					<p class="text-xs text-primary-900 md:text-sm">{product.author}</p>
 				</div>
 			</a>
 			<div class="mt-auto flex flex-col justify-between md:flex-row md:items-center">
-				<p class="text-lg font-bold text-slate-900 md:text-xl">{product.price} Ft</p>
+				<p class="text-lg font-bold text-primary-900 md:text-xl">{product.price} Ft</p>
 				<input type="hidden" id="product" value={product} />
 				<form onsubmit={(e) => incrementQuantity(e, product)}>
 					{#if !$cartItems.some((item) => item.title === product.title)}
