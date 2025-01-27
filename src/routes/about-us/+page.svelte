@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>About-Us Page</title>
+	<title>Rólunk</title>
 </svelte:head>
 
 <section class="container mx-auto px-4 py-10">

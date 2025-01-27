@@ -56,13 +56,13 @@
 </script>
 
 <section class="w-full max-w-2xl px-4">
-	<h2 class="mb-6 text-2xl font-bold">Personal Information</h2>
+	<h2 class="mb-6 text-2xl font-bold">Személyes adatok</h2>
 
 	{#await getUserInfo() then userInfo}
 		<form id="informations" onsubmit={handleSubmit} class="space-y-6 rounded-lg bg-white p-3">
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 				<div>
-					<label for="firstName" class="block text-sm font-medium text-gray-700">First Name*</label>
+					<label for="firstName" class="block text-sm font-medium text-gray-700">Keresztnév*</label>
 					<input
 						type="text"
 						id="firstName"
@@ -75,7 +75,7 @@
 					/>
 				</div>
 				<div>
-					<label for="lastName" class="block text-sm font-medium text-gray-700">Last Name*</label>
+					<label for="lastName" class="block text-sm font-medium text-gray-700">Vezetéknév*</label>
 					<input
 						type="text"
 						id="lastName"
@@ -88,7 +88,7 @@
 					/>
 				</div>
 				<div>
-					<label for="phone" class="block text-sm font-medium text-gray-700">Phone Number*</label>
+					<label for="phone" class="block text-sm font-medium text-gray-700">Telefonszám*</label>
 					<input
 						type="tel"
 						id="phone"
@@ -109,7 +109,7 @@
 						type="submit"
 						class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					>
-						Save Changes
+						Változtatások mentése
 					</button>
 				{:else}
 					<button
@@ -117,7 +117,7 @@
 						class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 						onclick={handleEditInfo}
 					>
-						Edit Information
+						Adatok szerkesztése
 					</button>
 				{/if}
 			</div>
@@ -125,7 +125,7 @@
 
 		<!-- Change Password Section -->
 		<div class="mt-10">
-			<h3 class="mb-4 text-xl font-semibold">Security</h3>
+			<h3 class="mb-4 text-xl font-semibold">Biztonság</h3>
 
 			<ChangeUsername username={userInfo.username} />
 			<ChangeEmail email={userInfo.email} />

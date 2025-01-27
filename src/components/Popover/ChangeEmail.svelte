@@ -43,7 +43,7 @@
 		onclick={toggleModal}
 		class="mt-2 rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700 sm:mt-0"
 	>
-		Change
+		Módosítás
 	</button>
 </div>
 
@@ -58,10 +58,10 @@
 			onsubmit={handleChangeEmail}
 			class="absolute left-1/2 top-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-3 shadow-lg sm:w-auto"
 		>
-			<h3 class="pb-3 font-bold">Change Email</h3>
+			<h3 class="pb-3 font-bold">Email módosítása</h3>
 			<div class="popover-content">
 				<div class="mb-3">
-					<label for="newEmail" class="block text-sm font-medium text-gray-700">New Email</label>
+					<label for="newEmail" class="block text-sm font-medium text-gray-700">Új email</label>
 					<input
 						type="email"
 						id="newEmail"
@@ -71,7 +71,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="verifyPassword" class="block text-sm font-medium text-gray-700"
-						>Verify Password</label
+						>Jelszó megerősítése</label
 					>
 					<input
 						type="password"
@@ -83,7 +83,7 @@
 				<button
 					type="submit"
 					class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-					>Change</button
+					>Módosítás</button
 				>
 			</div>
 		</form>

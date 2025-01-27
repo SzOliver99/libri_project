@@ -4,9 +4,9 @@
 	import { CreditCard, FileUser, History, Menu, X } from 'lucide-svelte';
 
 	const list = [
-		{ href: '/profile', title: 'Personal Informations', icon: FileUser },
-		{ href: '/profile/billing-information', title: 'Billing Information', icon: CreditCard },
-		{ href: '/profile/history', title: 'Purchase History', icon: History }
+		{ href: '/profile', title: 'Személyes adatok', icon: FileUser },
+		{ href: '/profile/billing-information', title: 'Számlázási adatok', icon: CreditCard },
+		{ href: '/profile/history', title: 'Vásárlási előzmények', icon: History }
 	];
 	function handleButton(event, href) {
 		goto(href, { replaceState: true });

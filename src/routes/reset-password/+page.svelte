@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Reset password Page</title>
+	<title>Jelszó visszaállítás</title>
 </svelte:head>
 
 <section class="flex h-[calc(100vh-8rem)] items-center justify-center sm:mt-8 sm:h-auto">
@@ -43,12 +43,12 @@
 		class="w-full max-w-md rounded-lg p-6 shadow-lg transition-all duration-300 hover:-translate-y-1"
 	>
 		<div class="mb-6 flex items-center justify-between">
-			<h1 class="text-2xl font-bold text-gray-700">Reset Password</h1>
+			<h1 class="text-2xl font-bold text-gray-700">Jelszó visszaállítás</h1>
 		</div>
 
 		<form>
 			<div class="mb-4">
-				<label for="newPassword">Password</label>
+				<label for="newPassword">Jelszó</label>
 				<input
 					type="password"
 					id="newPassword"
@@ -57,7 +57,7 @@
 				/>
 			</div>
 			<div class="mb-4">
-				<label for="repeatPassword">Repeat Password</label>
+				<label for="repeatPassword">Jelszó megerősítése</label>
 				<input
 					type="password"
 					id="repeatPassword"
@@ -72,7 +72,7 @@
 					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					onclick={handleSubmit}
 				>
-					Reset Password
+					Jelszó visszaállítása
 				</button>
 			</div>
 		</form>

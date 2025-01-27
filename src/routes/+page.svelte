@@ -28,7 +28,9 @@
 </svelte:head>
 
 <section class="container mx-auto px-4 py-10">
-	<h1 class="mb-8 text-center text-4xl font-bold text-primary-500">Welcome to Library Basement</h1>
+	<h1 class="mb-8 text-center text-4xl font-bold text-primary-500">
+		Üdvözöljük a Library Basement-en!
+	</h1>
 
 	<div class="relative w-full overflow-hidden">
 		<div

@@ -46,14 +46,14 @@
 	class="mb-5 flex flex-col justify-between rounded-lg bg-gray-50 p-3 sm:flex sm:flex-row sm:items-center"
 >
 	<div>
-		<p class="font-medium">Password</p>
-		<p class="text-sm text-gray-500">Last changed 3 months ago</p>
+		<p class="font-medium">Jelszó</p>
+		<!-- <p class="text-sm text-gray-500">Last changed 3 months ago</p> -->
 	</div>
 	<button
 		class="mt-2 rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700 sm:mt-0"
 		onclick={toggleModal}
 	>
-		Change
+		Módosítás
 	</button>
 </div>
 
@@ -68,11 +68,11 @@
 			onsubmit={handleChangePassword}
 			class="absolute left-1/2 top-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-3 shadow-lg sm:w-auto"
 		>
-			<h3 class="pb-3 font-bold">Change Password</h3>
+			<h3 class="pb-3 font-bold">Jelszó módosítása</h3>
 			<div class="popover-content">
 				<div class="mb-3">
 					<label for="oldPassword" class="block text-sm font-medium text-gray-700"
-						>Old Password</label
+						>Régi jelszó</label
 					>
 					<input
 						type="password"
@@ -82,9 +82,7 @@
 					/>
 				</div>
 				<div class="mb-3">
-					<label for="newPassword" class="block text-sm font-medium text-gray-700"
-						>New Password</label
-					>
+					<label for="newPassword" class="block text-sm font-medium text-gray-700">Új jelszó</label>
 					<input
 						type="password"
 						id="newPassword"
@@ -94,7 +92,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="confirmPassword" class="block text-sm font-medium text-gray-700"
-						>Confirm New Password</label
+						>Új jelszó megerősítése</label
 					>
 					<input
 						type="password"
@@ -106,7 +104,7 @@
 				<button
 					type="submit"
 					class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-					>Change</button
+					>Módosítás</button
 				>
 			</div>
 		</form>

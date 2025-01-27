@@ -39,7 +39,7 @@
 		onfocus={handleFocus}
 		onblur={handleBlur}
 		class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-3 pl-6 shadow-sm transition-colors duration-300 focus:border-primary-500 focus:outline-none focus:ring-primary-500 md:text-sm"
-		placeholder="Search products or authors..."
+		placeholder="Keresés termékek vagy szerzők között..."
 		oninput={(e) => (filteredList = e.target.value ? filteredList : [])}
 	/>
 	{#if showIcon}

@@ -46,14 +46,14 @@
 
 <section class="w-full max-w-2xl px-4">
 	<!-- Billing Section -->
-	<h1 class="mb-6 text-2xl font-bold">Billing Information</h1>
+	<h1 class="mb-6 text-2xl font-bold">Számlázási információk</h1>
 	{#await getUserInfo() then userInfo}
 		<form onsubmit={handleSubmit} class="space-y-6 rounded-lg bg-white p-3">
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 				<!-- Billing Address -->
 				<div>
 					<label for="billingAddress" class="block text-sm font-medium text-gray-700">
-						Billing Address*</label
+						Számlázási cím*</label
 					>
 					<input
 						type="text"
@@ -68,7 +68,7 @@
 
 				<!-- City -->
 				<div>
-					<label for="cityAddress" class="block text-sm font-medium text-gray-700">City*</label>
+					<label for="cityAddress" class="block text-sm font-medium text-gray-700">Város*</label>
 					<input
 						type="text"
 						id="cityAddress"
@@ -82,7 +82,7 @@
 
 				<!-- State/Province -->
 				<div>
-					<label for="state" class="block text-sm font-medium text-gray-700">State/Province</label>
+					<label for="state" class="block text-sm font-medium text-gray-700">Állam/tartomány</label>
 					<input
 						type="text"
 						id="state"
@@ -96,7 +96,7 @@
 				<!-- Postal Code -->
 				<div>
 					<label for="postalCode" class="block text-sm font-medium text-gray-700"
-						>Postal Code*</label
+						>Irányítószám*</label
 					>
 					<input
 						type="text"
@@ -117,7 +117,7 @@
 						type="submit"
 						class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					>
-						Save Changes
+						Változtatások mentése
 					</button>
 				{:else}
 					<button
@@ -125,7 +125,7 @@
 						class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 						onclick={handleEditInfo}
 					>
-						Edit Information
+						Adatok szerkesztése
 					</button>
 				{/if}
 			</div>

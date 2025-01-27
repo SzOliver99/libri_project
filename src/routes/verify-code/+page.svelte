@@ -61,14 +61,14 @@
 		class="w-full max-w-md rounded-lg p-6 shadow-lg transition-all duration-300 hover:-translate-y-1"
 	>
 		<div class="mb-6 flex items-center justify-between">
-			<h1 class="text-2xl font-bold text-gray-700">Login with Email verification</h1>
+			<h1 class="text-2xl font-bold text-gray-700">Bejelentkezés e-mail azonósítóval</h1>
 		</div>
 
 		{#if codeSent === true}
 			<form id="verifyCode" onsubmit={handleLoginSubmit}>
 				<header class="mb-8">
 					<p class="text-[15px] text-slate-500">
-						Enter the 6-digit verification code that was sent to your email address.
+						Adja meg az e-mail címére küldött 6 számjegyű ellenőrző kódot.
 					</p>
 				</header>
 				<div class="mb-10 flex items-center justify-center gap-3">
@@ -83,7 +83,7 @@
 						type="submit"
 						class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					>
-						Send verification code
+						Ellenőrző kód küldése
 					</button>
 				</div>
 			</form>
@@ -104,7 +104,7 @@
 						type="submit"
 						class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					>
-						Send verification code
+						Ellenőrző kód küldése
 					</button>
 				</div>
 			</form>

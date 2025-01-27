@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign-in Page</title>
+	<title>Bejelentkezés - Library Basement</title>
 </svelte:head>
 
 <section class="flex h-[calc(100vh-8rem)] items-center justify-center sm:mt-8 sm:h-auto">
@@ -31,13 +31,13 @@
 		class="w-full max-w-md rounded-lg p-6 shadow-lg transition-all duration-300 hover:-translate-y-1"
 	>
 		<div class="mb-6 flex items-center justify-between">
-			<h1 class="text-2xl font-bold text-gray-700">Login</h1>
+			<h1 class="text-2xl font-bold text-gray-700">Bejelentkezés</h1>
 		</div>
 
 		<!-- Login form -->
 		<form onsubmit={handleSubmit}>
 			<div class="mb-4">
-				<label for="username">Username</label>
+				<label for="username">Felhasználónév</label>
 				<input
 					name="username"
 					id="username"
@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="mb-6">
-				<label for="password">Password</label>
+				<label for="password">Jelszó</label>
 				<input
 					name="password"
 					id="password"
@@ -60,7 +60,7 @@
 			</div>
 
 			<div class="mb-2 mt-6 text-center">
-				<a href="/forgot-password">Forgot Password?</a>
+				<a href="/forgot-password">Elfelejtetted a jelszavad?</a>
 			</div>
 
 			<div class="mb-5 text-center">
@@ -68,10 +68,10 @@
 					type="submit"
 					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 				>
-					Sign in
+					Bejelentkezés
 				</button>
 			</div>
-			<a href="/verify-code" class="flex justify-center text-sm">Login with Email verification</a>
+			<a href="/verify-code" class="flex justify-center text-sm">Bejelentkezés e-mail azonósítóval</a>
 		</form>
 	</div>
 </section>
