@@ -1,3 +1,7 @@
+<script>
+	import image from '$lib/images/Pannonhalmi-Konyvtar-1024x576.jpg';
+</script>
+
 <svelte:head>
 	<title>About-Us Page</title>
 </svelte:head>
@@ -8,11 +12,7 @@
 	<div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
 		<!-- Image Section -->
 		<div class="flex justify-center">
-			<img
-				src="https://3dorszagjaro.hu/wp-content/uploads/2020/12/Pannonhalmi-Konyvtar-1024x576.jpg"
-				alt="Library Basement"
-				class="rounded-lg shadow-lg"
-			/>
+			<img src={image} alt="Library Basement" class="rounded-lg shadow-lg" />
 		</div>
 
 		<!-- Text Section -->
