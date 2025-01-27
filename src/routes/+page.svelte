@@ -3,17 +3,10 @@
 	import { onMount } from 'svelte';
 
 	let currentIndex = 0;
-	const books = [
-		{
-			image: 'https://www.libri.hu/images/upload/banner/kekesteto_1216x480_360x440prima_.png'
-		},
-		{
-			image: 'https://www.libri.hu/images/upload/banner/a_vedelmezo_1216x480_360x440prim.png'
-		},
-		{
-			image: 'https://www.libri.hu/images/upload/banner/het_negyzetmeter_1216x480_360x44.png'
-		}
-	];
+	import image1 from '$lib/images/a_vedelmezo_1216x480_360x440prim.png';
+	import image2 from '$lib/images/het_negyzetmeter_1216x480_360x44.png';
+	import image3 from '$lib/images/kekesteto_1216x480_360x440prima_.png';
+	const books = [image1, image2, image3];
 
 	const nextSlide = () => {
 		currentIndex = (currentIndex + 1) % books.length;
@@ -45,7 +38,7 @@
 			{#each books as book}
 				<div class="min-w-full">
 					<div class="flex h-full flex-col items-center rounded-lg bg-primary-100 text-center">
-						<img src={book.image} alt="" />
+						<img src={book} alt="" />
 					</div>
 				</div>
 			{/each}
