@@ -13,10 +13,10 @@
 	};
 
 	const list = [
-		{ href: '/profile', title: 'Personal Informations', icon: FileUser },
-		{ href: '/profile/billing-information', title: 'Billing Information', icon: CreditCard },
-		{ href: '/profile/history', title: 'Purchase History', icon: History },
-		{ title: 'Sign Out', icon: LogOut }
+		{ href: '/profile', title: 'Személyes adatok', icon: FileUser },
+		{ href: '/profile/billing-information', title: 'Számlázási adatok', icon: CreditCard },
+		{ href: '/profile/history', title: 'Vásárlási előzmények', icon: History },
+		{ title: 'Kijelentkezés', icon: LogOut }
 	];
 	let currentPage = $state(list[0]);
 
@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>Profile - {currentPage.title}</title>
+	<title>Profil - {currentPage.title}</title>
 </svelte:head>
 
 <section>
@@ -40,16 +40,16 @@
 			class="m-5 mx-auto flex h-full overflow-hidden rounded-lg bg-slate-200 px-2 py-4 xsm:px-6 xsm:py-6 md:h-[calc(100vh-6.5rem)]"
 		>
 			<div class="hidden min-w-56 flex-col md:flex">
-				<h1 class="mb-4 text-2xl font-bold">Profile</h1>
+				<h1 class="mb-4 text-2xl font-bold">Profil</h1>
 				<div class="flex h-full flex-col gap-4">
 					{#each list as item}
-						{#if item.title === 'Sign Out'}
+						{#if item.icon === LogOut}
 							<button
 								class="mt-auto flex items-center rounded-lg bg-red-950 px-3 py-3 text-sm text-white transition-all duration-300 hover:scale-105 hover:bg-red-900"
 								onclick={handleSignOut}
 							>
 								<item.icon class="me-2" />
-								<p>Sign out</p>
+								<p>Kijelentkezés</p>
 							</button>
 						{:else}
 							<a
@@ -70,7 +70,7 @@
 		</div>
 	{:else}
 		<div class="flex h-[calc(100vh-7rem)] flex-col items-center justify-center">
-			<h1 class="text-center text-2xl font-bold">You are not logged in!</h1>
+			<h1 class="text-center text-2xl font-bold">Nincs bejelentkezve!</h1>
 		</div>
 	{/if}
 </section>

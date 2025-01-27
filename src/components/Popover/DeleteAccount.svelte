@@ -34,14 +34,14 @@
 	class="mb-5 flex flex-col justify-between rounded-lg bg-gray-50 p-3 sm:flex sm:flex-row sm:items-center"
 >
 	<div>
-		<p class="font-medium">Delete Account</p>
-		<p class="text-sm text-gray-500">It will delete your account permanently!</p>
+		<p class="font-medium">Fiók törlése</p>
+		<p class="text-sm text-gray-500">Ez a folyamat véglegesen törli a fiókod!</p>
 	</div>
 	<button
 		class="mt-2 rounded-lg bg-red-950 px-4 py-2 text-white transition-all duration-300 hover:bg-red-900 sm:mt-0"
 		onclick={toggleModal}
 	>
-		Delete
+		Törlés
 	</button>
 </div>
 

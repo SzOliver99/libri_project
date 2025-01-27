@@ -64,10 +64,10 @@
 		<div class="mt-4">
 			<h3 class="mb-2 text-2xl font-bold text-primary-800">{product.title}</h3>
 			<div class="ml-2">
-				<p class="mb-2 text-sm text-primary-900">Author: {product.author}</p>
-				<p class="mb-2 text-sm text-primary-900">Published Date: {product.published_date}</p>
+				<p class="mb-2 text-sm text-primary-900">Szerző: {product.author}</p>
+				<p class="mb-2 text-sm text-primary-900">Közzététel dátuma: {product.published_date}</p>
 				<div class="text-sm text-primary-900">
-					<p class="font-bold">Description:</p>
+					<p class="font-bold">Leírás:</p>
 					<p class="ml-4">
 						{product.description}
 					</p>
@@ -81,7 +81,7 @@
 			<div class="my-2 w-full">
 				<button
 					class="flex w-full justify-center gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700"
-					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Add to cart</button
+					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 				>
 			</div>
 			<p class="ml-2 text-sm text-primary-900">ISBN: {product.isbn}</p>

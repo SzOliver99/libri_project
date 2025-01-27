@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<title>Forgot Password Page</title>
+	<title>Jelszó módosítás</title>
 </svelte:head>
 
 <section class="flex h-[calc(100vh-8rem)] items-center justify-center sm:mt-8 sm:h-auto">
@@ -30,7 +30,7 @@
 		class="w-full max-w-md rounded-lg p-6 shadow-lg transition-all duration-300 hover:-translate-y-1"
 	>
 		<div class="mb-6 flex items-center justify-between">
-			<h1 class="text-2xl font-bold text-gray-700">Forgot Password</h1>
+			<h1 class="text-2xl font-bold text-gray-700">Jelszó módosítás</h1>
 		</div>
 
 		<form onsubmit={handleSubmit}>
@@ -49,7 +49,7 @@
 					type="submit"
 					class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 				>
-					Reset Password
+					Jelszó visszaállítása
 				</button>
 			</div>
 		</form>

@@ -8,10 +8,10 @@
 	let navContainer = $state();
 
 	const navLinks = [
-		{ href: `/`, title: 'Home', icon: HouseIcon },
-		{ href: `/products`, title: 'Books', icon: BookOpen },
-		{ href: `/about-us`, title: 'About Us', icon: Info },
-		{ href: `/profile`, title: 'Profile', icon: UserIcon }
+		{ href: `/`, title: 'Kezdőlap', icon: HouseIcon },
+		{ href: `/products`, title: 'Könyvek', icon: BookOpen },
+		{ href: `/about-us`, title: 'Rólunk', icon: Info },
+		{ href: `/profile`, title: 'Profil', icon: UserIcon }
 	];
 
 	const handleSignOut = () => {
@@ -28,7 +28,7 @@
 <nav class="sticky top-0 z-50 w-full bg-white text-slate-900 shadow">
 	<div class="mx-auto hidden max-w-5xl items-center justify-center gap-4 p-3 md:flex">
 		{#each navLinks as link}
-			{#if link.title !== 'Profile'}
+			{#if link.href !== '/profile'}
 				<a
 					href={link.href}
 					class="flex rounded-lg px-3 py-2 transition-all duration-300 hover:text-primary-700 {$page
@@ -52,7 +52,7 @@
 							: 'text-slate-900'}"
 					>
 						<UserIcon stroke-width={1.5} class="md:me-2" />
-						<p>Profile</p>
+						<p>Profil</p>
 					</a>
 				{:else}
 					<p class="flex items-center">
@@ -62,7 +62,7 @@
 							class="transition-all duration-300 hover:text-primary-700 {$page.url.pathname ===
 							`/sign-in`
 								? 'text-primary-700'
-								: 'text-slate-900'}">Login</a
+								: 'text-slate-900'}">Bejelentkezés</a
 						>
 						/
 						<a
@@ -70,7 +70,7 @@
 							class="transition-all duration-300 hover:text-primary-700 {$page.url.pathname ===
 							`/sign-up`
 								? 'text-primary-700'
-								: 'text-slate-900'}">Register</a
+								: 'text-slate-900'}">Regisztráció</a
 						>
 					</p>
 				{/if}
@@ -86,7 +86,7 @@
 					class="transition-all duration-300 hover:text-primary-700 {$page.url.pathname ===
 					`/sign-in`
 						? 'text-primary-700'
-						: 'text-slate-900'}">Login</a
+						: 'text-slate-900'}">Bejelentkezés</a
 				>
 				/
 				<a
@@ -94,14 +94,14 @@
 					class="transition-all duration-300 hover:text-primary-700 {$page.url.pathname ===
 					`/sign-up`
 						? 'text-primary-700'
-						: 'text-slate-900'}">Register</a
+						: 'text-slate-900'}">Regisztráció</a
 				>
 			</div>
 		</div>
 	{:else if $page.url.pathname.includes('/profile') && loggedIn === true}
 		<div class="flex items-center justify-between px-4 md:hidden">
 			<MobileProfile />
-			<button onclick={handleSignOut} class="rounded-lg py-3">Sign Out</button>
+			<button onclick={handleSignOut} class="rounded-lg py-3">Kijelentkezés</button>
 		</div>
 	{/if}
 	<div

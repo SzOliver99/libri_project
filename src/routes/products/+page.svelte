@@ -95,7 +95,7 @@
 						<button
 							type="submit"
 							class="hidden gap-2 rounded-lg bg-primary-800 px-3 py-2 text-white transition-all duration-300 hover:bg-primary-700 md:flex"
-							><ShoppingBasketIcon stroke-width={1.5} />Add to cart</button
+							><ShoppingBasketIcon stroke-width={1.5} />Kosárba</button
 						>
 						<button
 							type="submit"

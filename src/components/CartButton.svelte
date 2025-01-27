@@ -95,9 +95,9 @@
 		<div
 			class="absolute left-1/2 top-1/2 h-auto max-h-[60%] w-3/4 -translate-x-1/2 -translate-y-[60%] overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-[35rem] md:-translate-y-1/2"
 		>
-			<h2 class="mb-3 text-xl font-bold text-primary-800">Your Cart</h2>
+			<h2 class="mb-3 text-xl font-bold text-primary-800">Kosarad</h2>
 			{#if $cartItems.length === 0}
-				<p class="text-primary-900">Your cart is empty.</p>
+				<p class="text-primary-900">A kosarad üres.</p>
 			{:else}
 				<ul class="divide-y divide-gray-200">
 					{#each $cartItems as item, index}
@@ -127,7 +127,7 @@
 				<div
 					class="mt-4 flex justify-between border-t border-gray-200 pt-2 font-bold text-primary-900"
 				>
-					<span>Total:</span>
+					<span>Összesen:</span>
 					<span>
 						{total} Ft
 					</span>
@@ -138,13 +138,13 @@
 					onclick={toggleModal}
 					class="mr-2 rounded-lg bg-gray-200 px-4 py-2 text-gray-800 transition-colors duration-200 hover:bg-gray-300"
 				>
-					Close
+					Bezárás
 				</button>
 				<button
 					onclick={handleBuyCart}
 					class="rounded-lg bg-primary-800 px-4 py-2 text-white transition-colors duration-200 hover:bg-primary-700"
 				>
-					Checkout
+					Vásárlás
 				</button>
 			</div>
 		</div>
