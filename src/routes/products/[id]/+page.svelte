@@ -51,7 +51,7 @@
 </svelte:head>
 
 <section
-	class="group relative grid grid-cols-1 gap-6 rounded-2xl p-3 shadow transition-all duration-300 hover:-translate-y-1 md:grid-cols-2"
+	class="hover:-tranprimary-y-1 group relative grid grid-cols-1 gap-6 rounded-2xl p-3 shadow transition-all duration-300 md:grid-cols-2"
 >
 	<div class="aspect-square overflow-hidden rounded-lg bg-gray-200 md:w-full">
 		<img
@@ -62,11 +62,11 @@
 	</div>
 	<div class="flex h-[calc(100%-1rem)] flex-col">
 		<div class="mt-4">
-			<h3 class="mb-2 text-2xl font-bold text-slate-900">{product.title}</h3>
+			<h3 class="mb-2 text-2xl font-bold text-primary-800">{product.title}</h3>
 			<div class="ml-2">
-				<p class="mb-2 text-sm text-slate-800">Author: {product.author}</p>
-				<p class="mb-2 text-sm text-slate-800">Published Date: {product.published_date}</p>
-				<div class="text-sm text-slate-800">
+				<p class="mb-2 text-sm text-primary-900">Author: {product.author}</p>
+				<p class="mb-2 text-sm text-primary-900">Published Date: {product.published_date}</p>
+				<div class="text-sm text-primary-900">
 					<p class="font-bold">Description:</p>
 					<p class="ml-4">
 						{product.description}
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div class="mt-auto">
-			<p class="ml-2 mt-4 text-xl font-bold text-slate-900">
+			<p class="ml-2 mt-4 text-xl font-bold text-primary-900">
 				{product.price} Ft
 			</p>
 			<div class="my-2 w-full">
@@ -84,7 +84,7 @@
 					onclick={handleSubmit}><ShoppingBasketIcon stroke-width={1.5} />Add to cart</button
 				>
 			</div>
-			<p class="ml-2 text-sm text-slate-800">ISBN: {product.isbn}</p>
+			<p class="ml-2 text-sm text-primary-900">ISBN: {product.isbn}</p>
 		</div>
 	</div>
 </section>
