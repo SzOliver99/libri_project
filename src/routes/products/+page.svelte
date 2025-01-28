@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Products Page</title>
+	<title>Termékek oldal</title>
 </svelte:head>
 
 <SearchBar on:update={handleUpdate} />

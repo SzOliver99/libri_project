@@ -53,7 +53,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign-in via Email</title>
+	<title>Bejelentkezés e-mailben</title>
 </svelte:head>
 
 <section class="flex h-[calc(100vh-8rem)] items-center justify-center sm:mt-8 sm:h-auto">
