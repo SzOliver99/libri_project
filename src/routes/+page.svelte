@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-	<title>Home Page</title>
+	<title>Kezdőlap</title>
 </svelte:head>
 
 <section class="container mx-auto px-4 py-10">
