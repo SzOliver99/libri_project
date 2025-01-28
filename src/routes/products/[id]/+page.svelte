@@ -8,7 +8,7 @@
 		event.preventDefault();
 
 		if (!getUserToken()) {
-			notify.warning('Please login to add to cart');
+			notify.warning('Kérjük, jelentkezzen be a vásárláshoz');
 			return;
 		}
 
