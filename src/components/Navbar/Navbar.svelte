@@ -106,7 +106,7 @@
 	{/if}
 	<div
 		bind:this={navContainer}
-		class="z-1 fixed bottom-0 left-0 flex w-full items-stretch justify-between gap-4 overflow-hidden rounded-t-2xl bg-white p-3 shadow md:hidden"
+		class="z-1 fixed bottom-0 left-0 flex w-full items-stretch justify-between gap-2 overflow-hidden rounded-t-2xl bg-white p-3 shadow md:hidden"
 	>
 		<NavMarker {navLinks} {navContainer} />
 		{#each navLinks as link}
