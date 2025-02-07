@@ -2,8 +2,6 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	// export let navLinks;
-	// export let navContainer;
 	const { navLinks, navContainer } = $props();
 	let marker;
 	let activeIndex = $state(-1);
@@ -19,8 +17,11 @@
 				const containerRect = navContainer.getBoundingClientRect();
 				const linkRect = activeLink.getBoundingClientRect();
 
-				navContainer.style.setProperty('--marker-width', `${linkRect.width}px`);
-				navContainer.style.setProperty('--marker-left', `${linkRect.left - containerRect.left}px`);
+				navContainer.style.setProperty('--marker-width', `${linkRect.width - 10}px`);
+				navContainer.style.setProperty(
+					'--marker-left',
+					`${linkRect.left - containerRect.left + 5}px`
+				);
 			}
 		}
 	}
@@ -51,7 +52,7 @@
 
 <svelte:window on:resize={handleResize} />
 
-<div bind:this={marker} id="marker" class="bg-primary-700 absolute top-0 h-1 rounded-b-lg"></div>
+<div bind:this={marker} id="marker" class="absolute top-0 h-1 rounded-b-lg bg-primary-700"></div>
 
 <style lang="postcss">
 	#marker {
