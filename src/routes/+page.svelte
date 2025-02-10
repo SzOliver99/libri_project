@@ -32,7 +32,7 @@
 			<p class="mb-8 text-2xl">Fedezze fel következő kedvenc könyvét hangulatos menedékünkben</p>
 			<a
 				href="/products"
-				class="text-nowrap rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+				class="text-nowrap rounded-lg bg-primary-800 px-8 py-3 text-white transition-all duration-300 hover:bg-primary-700"
 				>Könyvek megtekintése
 			</a>
 		</div>
@@ -67,9 +67,9 @@
 			<p class="mb-8 text-xl">Könyvek vásárlásához regisztráció szükséges.</p>
 			<a
 				href="/sign-up"
-				class="bg-primary text-primary-foreground hover:bg-primary-dark rounded-full px-8 py-3 text-lg font-semibold transition duration-300"
-				>Regisztráció</a
-			>
+				class="text-nowrap rounded-lg bg-primary-800 px-8 py-3 text-white transition-all duration-300 hover:bg-primary-700"
+				>Regisztráció
+			</a>
 		</div>
 	</section>
 </main>
