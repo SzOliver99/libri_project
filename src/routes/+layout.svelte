@@ -46,7 +46,10 @@
 </script>
 
 <div id="app">
-	<Navbar />
+	<header>
+		<Navbar />
+	</header>
+
 	<Notification />
 	<main
 		class="mx-auto max-w-7xl px-6 pb-24 {$page.url.pathname.includes('/profile')
@@ -60,4 +63,14 @@
 			<CartButton />
 		{/if}
 	</main>
+
+	{#if !['/sign-in', '/sign-up'].includes($page.url.pathname)}
+		<footer class="bg-gray-800 py-12 text-white">
+			<div class="container mx-auto px-4 text-center">
+				<h2 class="mb-4 text-2xl font-semibold">Library Basement</h2>
+				<p class="mb-4">Hangulatos könyves menedéked a város szívében.</p>
+				<p class="mt-8">&copy; 2025 Library Basement. Minden jog fenntartva.</p>
+			</div>
+		</footer>
+	{/if}
 </div>
