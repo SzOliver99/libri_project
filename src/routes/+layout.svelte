@@ -66,7 +66,7 @@
 	</main>
 
 	{#if !['/sign-in', '/sign-up'].includes($page.url.pathname) && innerWidth.current >= 768}
-		<footer class="bg-gray-800 py-12 text-white">
+		<footer class="bg-primary-500 py-12 text-white">
 			<div class="container mx-auto px-4 text-center">
 				<h2 class="mb-4 text-2xl font-semibold">Library Basement</h2>
 				<p class="mb-4">Hangulatos könyves menedéked a város szívében.</p>
