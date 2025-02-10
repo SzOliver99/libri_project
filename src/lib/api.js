@@ -257,3 +257,13 @@ export async function fetchDeleteAccount() {
 		}
 	});
 }
+
+export async function fetchFilterBy(content) {
+	return fetch('/api/book/filter-by', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ content })
+	});
+}
