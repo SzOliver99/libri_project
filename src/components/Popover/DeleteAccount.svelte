@@ -11,7 +11,7 @@
 			notify.error(data);
 		}
 
-		notify.success('Account successfully deleted');
+		notify.success(data);
 
 		// Sign out and redirect to main page
 		localStorage.clear();
