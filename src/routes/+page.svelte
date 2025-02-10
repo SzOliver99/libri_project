@@ -1,24 +1,12 @@
 <script>
+	import { fetchBestSellers } from '$lib/api';
 	import { onMount } from 'svelte';
 
-	let featuredBooks = [
-		{
-			title: 'The Great Gatsby',
-			author: 'F. Scott Fitzgerald',
-			cover: 'https://placehold.co/300x200'
-		},
-		{
-			title: 'To Kill a Mockingbird',
-			author: 'Harper Lee',
-			cover: 'https://placehold.co/300x200'
-		},
-		{ title: '1984', author: 'George Orwell', cover: 'https://placehold.co/300x200' },
-		{
-			title: 'Pride and Prejudice',
-			author: 'Jane Austen',
-			cover: 'https://placehold.co/300x200'
-		}
-	];
+	let featuredBooks = $state([]);
+	onMount(async () => {
+		featuredBooks = await fetchBestSellers();
+		console.log(featuredBooks);
+	});
 </script>
 
 <svelte:head>
@@ -47,9 +35,9 @@
 						class="book-card transform overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105"
 					>
 						<img
-							src={book.cover || '/placeholder.svg'}
+							src={book.image_src || '/placeholder.svg'}
 							alt={book.title}
-							class="h-64 w-full object-cover"
+							class="h-64 w-full object-contain"
 						/>
 						<div class="p-4">
 							<h3 class="mb-1 text-lg font-semibold">{book.title}</h3>
