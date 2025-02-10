@@ -216,3 +216,44 @@ export async function fetchVerifyCode(code) {
 		body: JSON.stringify({ code })
 	});
 }
+
+export async function fetchChangeEmail(new_email, password) {
+	return fetch(`/api/user/change/email`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: getUserToken()
+		},
+		body: JSON.stringify({ new_email, password })
+	});
+}
+
+export async function fetchChangeUsername(new_username) {
+	return fetch(`/api/user/change/username`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: getUserToken()
+		},
+		body: JSON.stringify({ new_username })
+	});
+}
+export async function fetchChangePassword(old_password, new_password) {
+	return fetch(`/api/user/change/password`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: getUserToken()
+		},
+		body: JSON.stringify({ old_password, new_password })
+	});
+}
+export async function fetchDeleteAccount() {
+	return fetch('/api/user/delete-account', {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: getUserToken()
+		}
+	});
+}

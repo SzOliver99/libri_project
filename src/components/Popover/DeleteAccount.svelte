@@ -1,16 +1,10 @@
 <script>
-	import { getUserToken } from '$lib/api';
+	import { fetchDeleteAccount, getUserToken } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { notify } from '$lib/utils/notify';
 
 	async function handleDeleteAction() {
-		const response = await fetch('/api/user/delete-account', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
-			}
-		});
+		const response = await fetchDeleteAccount();
 		const data = await response.json();
 
 		if (!response.ok) {
