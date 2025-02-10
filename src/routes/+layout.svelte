@@ -3,6 +3,7 @@
 	import Navbar from '../components/Navbar/Navbar.svelte';
 	import CartButton from '../components/CartButton.svelte';
 	import { page } from '$app/stores';
+	import { innerWidth } from 'svelte/reactivity/window';
 	import { isAdmin } from '$lib/store';
 	import Notification from '../components/Notification/Notification.svelte';
 
@@ -64,7 +65,7 @@
 		{/if}
 	</main>
 
-	{#if !['/sign-in', '/sign-up'].includes($page.url.pathname)}
+	{#if !['/sign-in', '/sign-up'].includes($page.url.pathname) && innerWidth.current >= 768}
 		<footer class="bg-gray-800 py-12 text-white">
 			<div class="container mx-auto px-4 text-center">
 				<h2 class="mb-4 text-2xl font-semibold">Library Basement</h2>
