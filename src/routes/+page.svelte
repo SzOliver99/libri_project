@@ -32,15 +32,15 @@
 			<p class="mb-8 text-2xl">Fedezze fel következő kedvenc könyvét hangulatos menedékünkben</p>
 			<a
 				href="/products"
-				class="text-primary rounded-full bg-white px-8 py-3 text-lg font-semibold transition duration-300 hover:bg-gray-100"
-				>Könyvek megtekintése</a
-			>
+				class="text-nowrap rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
+				>Könyvek megtekintése
+			</a>
 		</div>
 	</section>
 
 	<section class="featured-books py-16">
 		<div class="container mx-auto px-4">
-			<h2 class="mb-12 text-center text-3xl font-semibold text-gray-800">Featured Books</h2>
+			<h2 class="mb-12 text-center text-3xl font-semibold text-gray-800">Kiemelt könyvek</h2>
 			<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 				{#each featuredBooks as book}
 					<div
@@ -64,9 +64,7 @@
 	<section class="cta bg-secondary text-secondary-foreground py-16">
 		<div class="container mx-auto px-4 text-center">
 			<h2 class="mb-4 text-3xl font-semibold">Csatlakozz a könyvek világába</h2>
-			<p class="mb-8 text-xl">
-				Könyvek vásárlásához regisztráció szükséges.
-			</p>
+			<p class="mb-8 text-xl">Könyvek vásárlásához regisztráció szükséges.</p>
 			<a
 				href="/sign-up"
 				class="bg-primary text-primary-foreground hover:bg-primary-dark rounded-full px-8 py-3 text-lg font-semibold transition duration-300"
