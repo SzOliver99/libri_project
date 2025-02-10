@@ -1,16 +1,11 @@
 <script>
+	import { fetchForgotPassword } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		let response = await fetch(`/api/user/forgot-password`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ email: email.value })
-		});
+		let response = await fetchForgotPassword(email.value);
 		let data = await response.json();
 		if (!response.ok) {
 			notify.error(data);

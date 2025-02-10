@@ -62,6 +62,29 @@ export async function fetchProducts() {
 		return [];
 	}
 }
+export async function fetchProductById(productId) {
+	try {
+		const response = await fetch(`/api/book/get/${productId}`);
+		if (!response.ok) throw new Error('Failed to fetch products');
+
+		return response.json();
+	} catch (error) {
+		console.error('Error fetching products:', error);
+		return [];
+	}
+}
+
+export async function fetchBestSellers() {
+	try {
+		const response = await fetch('/api/book/get-best');
+		if (!response.ok) throw new Error('Failed to fetch products');
+
+		return await response.json();
+	} catch (error) {
+		console.error('Error fetching products:', error);
+		return [];
+	}
+}
 
 export async function fetchPurchases() {
 	try {
@@ -92,4 +115,104 @@ export async function fetchBuyCart() {
 		return response;
 	});
 	return response;
+}
+
+export async function fetchForgotPassword(email) {
+	return fetch(`/api/user/forgot-password`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ email })
+	});
+}
+
+export async function fetchChangeBillingInformations(
+	billing_address,
+	city,
+	state_province,
+	postal_code
+) {
+	return fetch('/api/user/change/billing-information', {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `${getUserToken()}`
+		},
+		body: JSON.stringify({
+			billing_address,
+			city,
+			state_province,
+			postal_code
+		})
+	});
+}
+
+export async function fetchChangePersonalInformations(first_name, last_name, phone_number) {
+	return fetch('/api/user/change/personal-information', {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `${getUserToken()}`
+		},
+		body: JSON.stringify({
+			first_name,
+			last_name,
+			phone_number
+		})
+	});
+}
+
+export async function fetchResetPassword(token, password) {
+	return fetch(`/api/user/reset-password?token=${token}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ password })
+	});
+}
+
+export async function fetchSignIn(username, password) {
+	return fetch(`/api/user/sign-in`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ username, password })
+	});
+}
+
+export async function fetchSignUp(email, username, password) {
+	return fetch(`/api/user/sign-up`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			email,
+			username,
+			password
+		})
+	});
+}
+
+export async function fetchSendVerifyCode(email) {
+	return fetch('/api/user/send-code/email', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ email })
+	});
+}
+
+export async function fetchVerifyCode(code) {
+	return fetch('/api/user/sign-in/email', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ code })
+	});
 }

@@ -1,5 +1,5 @@
 <script>
-	import { getUserInfo, getUserToken } from '$lib/api';
+	import { fetchChangePersonalInformations, getUserInfo, getUserToken } from '$lib/api';
 	import ChangeUsername from '../../components/Popover/ChangeUsername.svelte';
 	import ChangeEmail from '../../components/Popover/ChangeEmail.svelte';
 	import ChangePassword from '../../components/Popover/ChangePassword.svelte';
@@ -31,18 +31,11 @@
 			input.disabled = !isEditing;
 		});
 
-		const response = await fetch('/api/user/change/personal-information', {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
-			},
-			body: JSON.stringify({
-				first_name: firstName.value,
-				last_name: lastName.value,
-				phone_number: phone.value
-			})
-		});
+		const response = await fetchChangePersonalInformations(
+			firstName.value,
+			lastName.value,
+			phone.value
+		);
 		const data = await response.json();
 		if (!response.ok) {
 			notify.error(data);

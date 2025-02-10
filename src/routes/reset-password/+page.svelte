@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { fetchResetPassword } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
 	async function handleSubmit(event) {
@@ -11,13 +12,7 @@
 			return;
 		}
 
-		const response = await fetch(`/api/user/reset-password?token=${token}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ password: newPassword.value })
-		});
+		const response = await fetchResetPassword(token, newPassword.value);
 		const data = await response.json();
 
 		if (!response.ok) {

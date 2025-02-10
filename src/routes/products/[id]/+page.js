@@ -1,8 +1,10 @@
+import { fetchProductById } from "$lib/api";
+
 export const prerender = false;
 
 export async function load({ params, fetch }) {
 	const productId = params.id;
-	const bookData = await fetch(`/api/book/get/${productId}`).then((data) => data.json());
+	const bookData = await fetchProductById(productId);
 
 	return {
 		bookData

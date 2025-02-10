@@ -75,7 +75,7 @@
 			data-sveltekit-preload-data="tap"
 		>
 			<a href={`/products/${product.id}`}>
-				<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
+				<div class="aspect-square w-full overflow-hidden rounded-lg">
 					<img
 						src={product.image_src}
 						alt={product.title}

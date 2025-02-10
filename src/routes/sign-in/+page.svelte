@@ -1,15 +1,10 @@
 <script>
+	import { fetchSignIn } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const response = await fetch(`/api/user/sign-in`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ username: username.value, password: password.value })
-		});
+		const response = await fetchSignIn(username.value, password.value);
 
 		const data = await response.json();
 		if (!response.ok) {
@@ -71,7 +66,9 @@
 					Bejelentkezés
 				</button>
 			</div>
-			<a href="/verify-code" class="flex justify-center text-sm">Bejelentkezés e-mail azonósítóval</a>
+			<a href="/verify-code" class="flex justify-center text-sm"
+				>Bejelentkezés e-mail azonósítóval</a
+			>
 		</form>
 	</div>
 </section>

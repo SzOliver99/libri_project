@@ -1,5 +1,5 @@
 <script>
-	import { getUserInfo, getUserToken } from '$lib/api';
+	import { fetchChangeBillingInformations, getUserInfo, getUserToken } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
 	async function handleSubmit(event) {
@@ -11,19 +11,12 @@
 			input.disabled = !isEditing;
 		});
 
-		const response = await fetch('/api/user/change/billing-information', {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
-			},
-			body: JSON.stringify({
-				billing_address: billingAddress.value,
-				city: cityAddress.value,
-				state_province: state.value,
-				postal_code: postalCode.value
-			})
-		});
+		const response = await fetchChangeBillingInformations(
+			billingAddress.value,
+			cityAddress.value,
+			state.value,
+			postalCode.value
+		);
 		const data = await response.json();
 		if (!response.ok) {
 			notify.error(data);
