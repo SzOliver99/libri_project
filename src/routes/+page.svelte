@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<title>Bejelentkezés e-mailben</title>
+	<title>Főoldal</title>
 </svelte:head>
 
 <main class="min-h-screen">
