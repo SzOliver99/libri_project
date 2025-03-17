@@ -1,24 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-
-	let featuredBooks = [
-		{
-			title: 'The Great Gatsby',
-			author: 'F. Scott Fitzgerald',
-			cover: 'https://placehold.co/300x200'
-		},
-		{
-			title: 'To Kill a Mockingbird',
-			author: 'Harper Lee',
-			cover: 'https://placehold.co/300x200'
-		},
-		{ title: '1984', author: 'George Orwell', cover: 'https://placehold.co/300x200' },
-		{
-			title: 'Pride and Prejudice',
-			author: 'Jane Austen',
-			cover: 'https://placehold.co/300x200'
-		}
-	];
 </script>
 
 <svelte:head>
