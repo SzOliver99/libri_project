@@ -12,7 +12,7 @@
 	$effect(async () => {
 		const token = localStorage.getItem('AuthorizationToken');
 		if (token !== null)
-			await fetch('https://libri-backend.fly.dev/user/protected', {
+			await fetch('/api/user/protected', {
 				method: 'GET',
 				headers: {
 					Authorization: token
@@ -20,7 +20,7 @@
 			}).then(async (response) => {
 				if (response.ok) {
 					// Check if user is Admin
-					$isAdmin = await fetch('https://libri-backend.fly.dev/user/is-admin', {
+					$isAdmin = await fetch('/api/user/is-admin', {
 						method: 'GET',
 						headers: {
 							Authorization: token
