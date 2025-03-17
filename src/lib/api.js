@@ -1,8 +1,4 @@
 import { notify } from './utils/notify';
-import { fetch } from '@tauri-apps/plugin-http';
-
-// const proxy = 'http://0.0.0.0:8080';
-// const proxy = 'https://libri-backend.fly.dev';
 
 export const getUserToken = () => localStorage.getItem('AuthorizationToken');
 
