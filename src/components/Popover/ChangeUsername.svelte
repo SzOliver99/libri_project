@@ -1,5 +1,5 @@
 <script>
-	import { getUserToken } from '$lib/api';
+	import { fetchChangeUsername, getUserToken } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { notify } from '$lib/utils/notify';
 
@@ -8,24 +8,16 @@
 	async function handleChangeUsername(event) {
 		event.preventDefault();
 
-		const response = await fetch(`/api/user/change/username`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: getUserToken()
-			},
-			body: JSON.stringify({ new_username: newUsername.value })
-		});
-
+		const response = await fetchChangeUsername(newUsername.value);
 		const data = await response.json();
-		if (response.ok) {
-			notify.success(data);
-			window.location.reload();
-		} else {
+
+		if (!response.ok) {
 			notify.error(data);
+			return;
 		}
 
-		toggleModal();
+		notify.success(data);
+		window.location.reload();
 	}
 
 	let showModal = $state(false);

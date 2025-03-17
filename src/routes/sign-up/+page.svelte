@@ -1,19 +1,11 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { fetchSignUp } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 
 	const handleSubmit = async (event) => {
-		const response = await fetch(`/api/user/sign-up`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: email.value,
-				username: username.value,
-				password: password.value
-			})
-		});
+		event.preventDefault();
+		const response = await fetchSignUp(email.value, username.value, password.value);
 
 		const data = await response.json();
 		if (!response.ok) {

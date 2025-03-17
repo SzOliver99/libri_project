@@ -1,16 +1,10 @@
 <script>
-	import { getUserToken } from '$lib/api';
+	import { fetchSendVerifyCode, fetchVerifyCode, getUserToken } from '$lib/api';
 	import { notify } from '$lib/utils/notify';
 	import NumberInput from '../../components/NumberInput.svelte';
 
 	async function handleSendCodeSubmit(event) {
-		let response = await fetch('/api/user/send-code/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ email: email.value })
-		});
+		let response = await fetchSendVerifyCode(email.value);
 		let data = await response.json();
 
 		if (!response.ok) {
@@ -28,13 +22,7 @@
 			.map((input) => input.value)
 			.join('');
 
-		let response = await fetch('/api/user/sign-in/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ code })
-		});
+		let response = await fetchVerifyCode(code);
 		let data = await response.json();
 		if (!response.ok) {
 			console.log(data);

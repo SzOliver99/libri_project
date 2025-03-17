@@ -1,30 +1,16 @@
 <script>
-	import { getUserToken } from '$lib/api';
+	import { fetchChangePassword, getUserToken } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { notify } from '$lib/utils/notify';
 
 	async function handleChangePassword(event) {
 		event.preventDefault();
-
-		const { old_password, new_password, confirm_password } = {
-			old_password: oldPassword.value,
-			new_password: newPassword.value,
-			confirm_password: confirmPassword.value
-		};
-
-		if (new_password !== confirm_password) {
-			notify.warning('New passwords do not match!');
+		if (newPassword.value !== confirmPassword.value) {
+			notify.warning('A jelszavak nem egyeznek!');
 			return;
 		}
 
-		const response = await fetch(`/api/user/change/password`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
-			},
-			body: JSON.stringify({ old_password, new_password })
-		});
+		const response = await fetchChangePassword(oldPassword.value, newPassword.value);
 		const data = await response.json();
 
 		if (!response.ok) {

@@ -12,7 +12,7 @@
 	$effect(async () => {
 		const token = localStorage.getItem('AuthorizationToken');
 		if (token !== null)
-			await fetch('/api/user/protected', {
+			await fetch('https://libri-backend.fly.dev/user/protected', {
 				method: 'GET',
 				headers: {
 					Authorization: token
@@ -20,7 +20,7 @@
 			}).then(async (response) => {
 				if (response.ok) {
 					// Check if user is Admin
-					$isAdmin = await fetch('/api/user/is-admin', {
+					$isAdmin = await fetch('https://libri-backend.fly.dev/user/is-admin', {
 						method: 'GET',
 						headers: {
 							Authorization: token
@@ -61,11 +61,12 @@
 		<!-- <slot /> -->
 		{@render children()}
 		{#if loggedIn === true && !$page.url.pathname.includes('/profile')}
+			{console.log('asd')}
 			<CartButton />
 		{/if}
 	</main>
 
-	{#if !['/sign-in', '/sign-up'].includes($page.url.pathname) && innerWidth.current >= 768}
+	{#if ['/', '/products', '/about-us'].includes($page.url.pathname) && innerWidth.current >= 768}
 		<footer class="bg-primary-500 py-12 text-white">
 			<div class="container mx-auto px-4 text-center">
 				<h2 class="mb-4 text-2xl font-semibold">Library Basement</h2>

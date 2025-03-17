@@ -1,5 +1,11 @@
 <script>
+	import { fetchBestSellers } from '$lib/api';
 	import { onMount } from 'svelte';
+
+	let featuredBooks = $state([]);
+	onMount(async () => {
+		featuredBooks = await fetchBestSellers();
+	});
 </script>
 
 <svelte:head>
@@ -28,9 +34,9 @@
 						class="book-card transform overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105"
 					>
 						<img
-							src={book.cover || '/placeholder.svg'}
+							src={book.image_src || '/placeholder.svg'}
 							alt={book.title}
-							class="h-64 w-full object-cover"
+							class="h-64 w-full object-contain"
 						/>
 						<div class="p-4">
 							<h3 class="mb-1 text-lg font-semibold">{book.title}</h3>

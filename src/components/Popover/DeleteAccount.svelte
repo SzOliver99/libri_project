@@ -1,23 +1,17 @@
 <script>
-	import { getUserToken } from '$lib/api';
+	import { fetchDeleteAccount, getUserToken } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { notify } from '$lib/utils/notify';
 
 	async function handleDeleteAction() {
-		const response = await fetch('/api/user/delete-account', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `${getUserToken()}`
-			}
-		});
+		const response = await fetchDeleteAccount();
 		const data = await response.json();
 
 		if (!response.ok) {
 			notify.error(data);
 		}
 
-		notify.success('Account successfully deleted');
+		notify.success(data);
 
 		// Sign out and redirect to main page
 		localStorage.clear();
@@ -55,8 +49,8 @@
 		<div
 			class="absolute left-1/2 top-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg sm:w-auto"
 		>
-			<p>Are you sure you wanna to delete your account?</p>
-			<p>The account will be deleted permanently!</p>
+			<p>Biztos vagy benne hogy kitörlöd a profilod?</p>
+			<p>A profil véglegesen törölve lesz!</p>
 			<div class="mt-2 flex justify-center text-white">
 				<button
 					class="me-5 w-20 rounded-lg bg-red-950 py-2 hover:scale-105 hover:bg-red-900"

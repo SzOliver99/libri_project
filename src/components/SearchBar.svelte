@@ -2,6 +2,7 @@
 	import { X } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher, onMount } from 'svelte';
+	import { fetchFilterBy } from '$lib/api';
 	const dispatch = createEventDispatcher();
 
 	let filteredList = $state([]);
@@ -17,14 +18,8 @@
 
 	async function searchHandle(event) {
 		showIcon = event.target.value.length > 0;
-		const res = await fetch('/api/book/filter-by', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ content: event.target.value })
-		});
-		filteredList = await res.json();
+		const response = await fetchFilterBy(event.target.value);
+		filteredList = await response.json();
 	}
 	$effect(() => {
 		dispatch('update', { list: filteredList });
