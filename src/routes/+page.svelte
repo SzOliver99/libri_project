@@ -30,8 +30,9 @@
 			<h2 class="mb-12 text-center text-3xl font-semibold text-gray-800">Kiemelt könyvek</h2>
 			<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 				{#each featuredBooks as book}
-					<div
-						class="book-card transform overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105"
+					<a
+						href={`/products/${book.id}`}
+					class="book-card transform overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105"
 					>
 						<img
 							src={book.image_src || '/placeholder.svg'}
@@ -42,7 +43,7 @@
 							<h3 class="mb-1 text-lg font-semibold">{book.title}</h3>
 							<p class="text-gray-600">{book.author}</p>
 						</div>
-					</div>
+					</a>
 				{/each}
 			</div>
 		</div>
