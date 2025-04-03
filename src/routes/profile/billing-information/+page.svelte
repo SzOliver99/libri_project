@@ -1,40 +1,44 @@
 <script>
-	import { fetchChangeBillingInformations, getUserInfo, getUserToken } from '$lib/api';
-	import { notify } from '$lib/utils/notify';
+import {
+	fetchChangeBillingInformations,
+	getUserInfo,
+	getUserToken,
+} from "$lib/api";
+import { notify } from "$lib/utils/notify";
 
-	async function handleSubmit(event) {
-		event.preventDefault();
+async function handleSubmit(event) {
+	event.preventDefault();
 
-		isEditing = !isEditing;
-		const inputs = document.querySelectorAll('input');
-		inputs.forEach((input) => {
-			input.disabled = !isEditing;
-		});
-
-		const response = await fetchChangeBillingInformations(
-			billingAddress.value,
-			cityAddress.value,
-			state.value,
-			postalCode.value
-		);
-		const data = await response.json();
-		if (!response.ok) {
-			notify.error(data);
-			return;
-		}
-
-		notify.success(data);
+	isEditing = !isEditing;
+	const inputs = document.querySelectorAll("input");
+	for (const input in inputs) {
+		input.disabled = !isEditing;
 	}
 
-	const handleEditInfo = () => {
-		isEditing = !isEditing;
-		const inputs = document.querySelectorAll('input');
-		inputs.forEach((input) => {
-			input.disabled = !isEditing;
-		});
-	};
+	const response = await fetchChangeBillingInformations(
+		billingAddress.value,
+		cityAddress.value,
+		state.value,
+		postalCode.value,
+	);
+	const data = await response.json();
+	if (!response.ok) {
+		notify.error(data);
+		return;
+	}
 
-	let isEditing = $state(false);
+	notify.success(data);
+}
+
+const handleEditInfo = () => {
+	isEditing = !isEditing;
+	const inputs = document.querySelectorAll("input");
+	for (const input in inputs) {
+		input.disabled = !isEditing;
+	}
+};
+
+let isEditing = $state(false);
 </script>
 
 <section class="w-full max-w-2xl px-4">
