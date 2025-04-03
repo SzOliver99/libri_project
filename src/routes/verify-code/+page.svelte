@@ -1,45 +1,43 @@
 <script>
-import { fetchSendVerifyCode, fetchVerifyCode, getUserToken } from "$lib/api";
-import { notify } from "$lib/utils/notify";
-import NumberInput from "../../components/NumberInput.svelte";
+	import { fetchSendVerifyCode, fetchVerifyCode, getUserToken } from '$lib/api';
+	import { notify } from '$lib/utils/notify';
+	import NumberInput from '../../components/NumberInput.svelte';
 
-async function handleSendCodeSubmit(event) {
-	const response = await fetchSendVerifyCode(email.value);
-	const data = await response.json();
+	async function handleSendCodeSubmit(event) {
+		let response = await fetchSendVerifyCode(email.value);
+		let data = await response.json();
 
-	if (!response.ok) {
-		notify.error(data);
-		return;
+		if (!response.ok) {
+			notify.error(data);
+			return;
+		}
+
+		toggleForm();
 	}
 
-	toggleForm();
-}
+	async function handleLoginSubmit(event) {
+		event.preventDefault();
 
-async function handleLoginSubmit(event) {
-	event.preventDefault();
+		const code = Array.from(document.querySelectorAll('input[name="numberInput"]'))
+			.map((input) => input.value)
+			.join('');
 
-	const code = Array.from(
-		document.querySelectorAll('input[name="numberInput"]'),
-	)
-		.map((input) => input.value)
-		.join("");
+		let response = await fetchVerifyCode(code);
+		let data = await response.json();
+		if (!response.ok) {
+			console.log(data);
+			return;
+		}
 
-	const response = await fetchVerifyCode(code);
-	const data = await response.json();
-	if (!response.ok) {
-		console.log(data);
-		return;
+		localStorage.setItem('AuthorizationToken', `${data.token}`);
+		window.location.href = '/';
 	}
 
-	localStorage.setItem("AuthorizationToken", `${data.token}`);
-	window.location.href = "/";
-}
+	function toggleForm() {
+		codeSent = !codeSent;
+	}
 
-function toggleForm() {
-	codeSent = !codeSent;
-}
-
-let codeSent = $state(true);
+	let codeSent = $state(true);
 </script>
 
 <svelte:head>
@@ -69,7 +67,7 @@ let codeSent = $state(true);
 
 				<div class="text-center">
 					<button
-					id="submitCode"
+						id="submitCode"
 						type="submit"
 						class="rounded-lg bg-primary-800 px-8 py-2 text-white transition-all duration-300 hover:bg-primary-700"
 					>
