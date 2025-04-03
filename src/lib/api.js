@@ -1,10 +1,13 @@
 import { notify } from './utils/notify';
 
+const isBuildingToPhone = true;
+export const proxy = isBuildingToPhone ? 'https://libri-backend.fly.dev' : '/api';
+
 export const getUserToken = () => localStorage.getItem('AuthorizationToken');
 
 export async function getUserInfo() {
 	try {
-		const response = await fetch(`/api/user/info`, {
+		const response = await fetch(`${proxy}/user/info`, {
 			headers: {
 				Authorization: getUserToken()
 			}
@@ -18,7 +21,7 @@ export async function getUserInfo() {
 
 export async function updateCartItem(productId, change) {
 	try {
-		const response = await fetch(`/api/cart/book/`, {
+		const response = await fetch(`${proxy}/cart/book/`, {
 			method: change === 1 ? 'PUT' : 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -37,7 +40,7 @@ export async function updateCartItem(productId, change) {
 
 export async function fetchCartItems() {
 	try {
-		const response = await fetch(`/api/user/cart`, {
+		const response = await fetch(`${proxy}/user/cart`, {
 			headers: {
 				Authorization: getUserToken()
 			}
@@ -53,7 +56,7 @@ export async function fetchCartItems() {
 
 export async function fetchProducts() {
 	try {
-		const response = await fetch(`/api/book/get-all`);
+		const response = await fetch(`${proxy}/book/get-all`);
 		if (!response.ok) throw new Error('Failed to fetch products');
 
 		return await response.json();
@@ -64,7 +67,7 @@ export async function fetchProducts() {
 }
 export async function fetchProductById(productId) {
 	try {
-		const response = await fetch(`/api/book/get/${productId}`);
+		const response = await fetch(`${proxy}/book/get/${productId}`);
 		if (!response.ok) throw new Error('Failed to fetch products');
 
 		return response.json();
@@ -76,7 +79,7 @@ export async function fetchProductById(productId) {
 
 export async function fetchBestSellers() {
 	try {
-		const response = await fetch(`/api/book/get-best`);
+		const response = await fetch(`${proxy}/book/get-best`);
 		if (!response.ok) throw new Error('Failed to fetch products');
 
 		return await response.json();
@@ -88,7 +91,7 @@ export async function fetchBestSellers() {
 
 export async function fetchPurchases() {
 	try {
-		return await fetch(`/api/user/history/get-all`, {
+		return await fetch(`${proxy}/user/history/get-all`, {
 			method: 'GET',
 			headers: {
 				Authorization: getUserToken()
@@ -100,7 +103,7 @@ export async function fetchPurchases() {
 }
 
 export async function fetchBuyCart() {
-	let response = await fetch(`/api/cart/purchase`, {
+	let response = await fetch(`${proxy}/cart/purchase`, {
 		method: 'POST',
 		headers: {
 			Authorization: getUserToken()
@@ -118,7 +121,7 @@ export async function fetchBuyCart() {
 }
 
 export async function fetchForgotPassword(email) {
-	return fetch(`/api/user/forgot-password`, {
+	return fetch(`${proxy}/user/forgot-password`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -133,7 +136,7 @@ export async function fetchChangeBillingInformations(
 	state_province,
 	postal_code
 ) {
-	return fetch(`/api/user/change/billing-information`, {
+	return fetch(`${proxy}/user/change/billing-information`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -149,7 +152,7 @@ export async function fetchChangeBillingInformations(
 }
 
 export async function fetchChangePersonalInformations(first_name, last_name, phone_number) {
-	return fetch(`/api/user/change/personal-information`, {
+	return fetch(`${proxy}/user/change/personal-information`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -164,7 +167,7 @@ export async function fetchChangePersonalInformations(first_name, last_name, pho
 }
 
 export async function fetchResetPassword(token, password) {
-	return fetch(`/api/user/reset-password?token=${token}`, {
+	return fetch(`${proxy}/user/reset-password?token=${token}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -174,7 +177,7 @@ export async function fetchResetPassword(token, password) {
 }
 
 export async function fetchSignIn(username, password) {
-	return fetch(`/api/user/sign-in`, {
+	return fetch(`${proxy}/user/sign-in`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -184,7 +187,7 @@ export async function fetchSignIn(username, password) {
 }
 
 export async function fetchSignUp(email, username, password) {
-	return fetch(`/api/user/sign-up`, {
+	return fetch(`${proxy}/user/sign-up`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -198,7 +201,7 @@ export async function fetchSignUp(email, username, password) {
 }
 
 export async function fetchSendVerifyCode(email) {
-	return fetch(`/api/user/send-code/email`, {
+	return fetch(`${proxy}/user/send-code/email`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -208,7 +211,7 @@ export async function fetchSendVerifyCode(email) {
 }
 
 export async function fetchVerifyCode(code) {
-	return fetch(`/api/user/sign-in/email`, {
+	return fetch(`${proxy}/user/sign-in/email`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -218,7 +221,7 @@ export async function fetchVerifyCode(code) {
 }
 
 export async function fetchChangeEmail(new_email, password) {
-	return fetch(`/api/user/change/email`, {
+	return fetch(`${proxy}/user/change/email`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -229,7 +232,7 @@ export async function fetchChangeEmail(new_email, password) {
 }
 
 export async function fetchChangeUsername(new_username) {
-	return fetch(`/api/user/change/username`, {
+	return fetch(`${proxy}/user/change/username`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -239,7 +242,7 @@ export async function fetchChangeUsername(new_username) {
 	});
 }
 export async function fetchChangePassword(old_password, new_password) {
-	return fetch(`/api/user/change/password`, {
+	return fetch(`${proxy}/user/change/password`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -249,7 +252,7 @@ export async function fetchChangePassword(old_password, new_password) {
 	});
 }
 export async function fetchDeleteAccount() {
-	return fetch('/api/user/delete-account', {
+	return fetch('${proxy}/user/delete-account', {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
@@ -259,7 +262,7 @@ export async function fetchDeleteAccount() {
 }
 
 export async function fetchFilterBy(content) {
-	return fetch(`/api/book/filter-by`, {
+	return fetch(`${proxy}/book/filter-by`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

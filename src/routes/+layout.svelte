@@ -6,13 +6,14 @@
 	import { innerWidth } from 'svelte/reactivity/window';
 	import { isAdmin } from '$lib/store';
 	import Notification from '../components/Notification/Notification.svelte';
+	import { notify } from '$lib/utils/notify';
 
 	const { children } = $props();
 	let loggedIn = $state(false);
 	$effect(async () => {
 		const token = localStorage.getItem('AuthorizationToken');
 		if (token !== null)
-			await fetch('/api/user/protected', {
+			await fetch(`${proxy}/user/protected`, {
 				method: 'GET',
 				headers: {
 					Authorization: token
@@ -20,21 +21,19 @@
 			}).then(async (response) => {
 				if (response.ok) {
 					// Check if user is Admin
-					$isAdmin = await fetch('/api/user/is-admin', {
+					$isAdmin = await fetch(`${proxy}/user/is-admin`, {
 						method: 'GET',
 						headers: {
 							Authorization: token
 						}
 					}).then((response) => response.json());
 
-					console.log('Logged in');
 					loggedIn = response.ok;
 				} else {
 					// remove everything if user not logged in
 					localStorage.clear();
 
-					console.log('Your session expired please relogin');
-					// TODO: Implement relogin
+					notify.error('Your session expired please relogin');
 					window.location.href = '/';
 				}
 			});
@@ -61,7 +60,6 @@
 		<!-- <slot /> -->
 		{@render children()}
 		{#if loggedIn === true && !$page.url.pathname.includes('/profile')}
-			{console.log('asd')}
 			<CartButton />
 		{/if}
 	</main>
