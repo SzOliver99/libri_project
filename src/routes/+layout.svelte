@@ -7,6 +7,7 @@
 	import { isAdmin } from '$lib/store';
 	import Notification from '../components/Notification/Notification.svelte';
 	import { notify } from '$lib/utils/notify';
+	import { proxy } from '$lib/api';
 
 	const { children } = $props();
 	let loggedIn = $state(false);

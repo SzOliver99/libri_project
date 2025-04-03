@@ -252,7 +252,7 @@ export async function fetchChangePassword(old_password, new_password) {
 	});
 }
 export async function fetchDeleteAccount() {
-	return fetch('${proxy}/user/delete-account', {
+	return fetch(`${proxy}/user/delete-account`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
