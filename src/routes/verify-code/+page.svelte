@@ -37,7 +37,7 @@
 		codeSent = !codeSent;
 	}
 
-	let codeSent = $state(true);
+	let codeSent = $state(false);
 </script>
 
 <svelte:head>
